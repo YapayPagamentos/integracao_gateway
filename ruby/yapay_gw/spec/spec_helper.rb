@@ -14,6 +14,7 @@ require_relative '../lib/yapay_gw/models/transaction'
 require_relative '../lib/yapay_gw/models/transaction_data'
 require_relative '../lib/yapay_gw/models/transaction_extra_field'
 require_relative '../lib/yapay_gw/models/transaction_charging_data'
+require_relative '../lib/yapay_gw/communication/base_url'
 
 RSpec.configure do |config|
 

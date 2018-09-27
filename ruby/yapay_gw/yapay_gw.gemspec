@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "yapay_gw"
   spec.version       = YapayGw::VERSION
   spec.authors       = ["Ivan Simionato"]
-  spec.email         = ["ivan.simionato@superpay.com.br"]
+  spec.email         = ["ivan.simionato@yapay.com.br"]
 
   spec.summary       = "Integração Yapay Gateway"
   spec.description   = "Essa gem foi criada para facilitar a integração com o gateway de pagamentos da Yapay"
