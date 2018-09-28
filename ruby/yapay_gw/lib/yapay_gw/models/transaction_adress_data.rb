@@ -10,7 +10,7 @@ class TransactionAdressData
 
     def as_json(options = {})
         json = {:logradouro => street, 
-                :numeroCanumerortao => number,
+                :numero => number,
                 :complemento => complement,
                 :cep => zip_code,
                 :bairro => district,
