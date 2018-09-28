@@ -15,4 +15,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'yapay_gateway_client'
+rootProject.name = 'yapay-gateway-client'
