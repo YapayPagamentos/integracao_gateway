@@ -9,7 +9,12 @@ import br.com.yapay.gateway.restv3.model.ItemData;
 import br.com.yapay.gateway.restv3.model.Transaction;
 import br.com.yapay.gateway.restv3.model.TransactionData;
 
-public class TransactionBuilder {
+public class TransactionBuilder implements ITransactionBuilder {
+
+	@Override
+	public Transaction build() {
+		return transaction;
+	}
 
 	private static Transaction transaction;
 
@@ -67,10 +72,6 @@ public class TransactionBuilder {
 		}
 
 		transaction.setExtraFields(transactionExtraFieldsList);
-	}
-	
-	public Transaction build() {
-		return transaction;
 	}
 
 }
