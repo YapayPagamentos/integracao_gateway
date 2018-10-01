@@ -1,55 +1,53 @@
-package br.com.yapay.gateway.restv3.model;
+package br.com.yapay.gateway.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class AirlineTripData {
+public class FlightRangeData {
 
-	@SerializedName("pnr")
-	private String pnr;
-
-	@SerializedName("titularCartaoEPassageiro")
-	private Boolean cardholderIsPassenger;
-
-	@SerializedName("dataEmissaoPassagem")
-	private String ticketIssueDate;
-
+	@SerializedName("classeDoServico")
+	private String serviceClass;
+	
+	@SerializedName("dataDaViagem")
+	private String tripDate;
+	
 	@SerializedName("codigoCompanhiaAerea")
 	private String companyCode;
-
+	
+	@SerializedName("escalaPermitida")
+	private Boolean permitFlight;
+	
 	@SerializedName("aeroportoPartida")
 	private String departureAirport;
-
+	
 	@SerializedName("dataHoraPartida")
 	private String departureDate;
-
+	
 	@SerializedName("aeroportoChegada")
 	private String arrivalAirport;
-
+	
 	@SerializedName("dataHoraChegada")
 	private String arrivalDate;
+	
+	@SerializedName("numeroVoo")
+	private String flyNumber;
+	
+	@SerializedName("classeTarifaria")
+	private String rateClass;
 
-	public String getPnr() {
-		return pnr;
+	public String getServiceClass() {
+		return serviceClass;
 	}
 
-	public void setPnr(String pnr) {
-		this.pnr = pnr;
+	public void setServiceClass(String serviceClass) {
+		this.serviceClass = serviceClass;
 	}
 
-	public Boolean getCardholderIsPassenger() {
-		return cardholderIsPassenger;
+	public String getTripDate() {
+		return tripDate;
 	}
 
-	public void setCardholderIsPassenger(Boolean cardholderIsPassenger) {
-		this.cardholderIsPassenger = cardholderIsPassenger;
-	}
-
-	public String getTicketIssueDate() {
-		return ticketIssueDate;
-	}
-
-	public void setTicketIssueDate(String ticketIssueDate) {
-		this.ticketIssueDate = ticketIssueDate;
+	public void setTripDate(String tripDate) {
+		this.tripDate = tripDate;
 	}
 
 	public String getCompanyCode() {
@@ -58,6 +56,14 @@ public class AirlineTripData {
 
 	public void setCompanyCode(String companyCode) {
 		this.companyCode = companyCode;
+	}
+
+	public Boolean getPermitFlight() {
+		return permitFlight;
+	}
+
+	public void setPermitFlight(Boolean permitFlight) {
+		this.permitFlight = permitFlight;
 	}
 
 	public String getDepartureAirport() {
@@ -90,6 +96,22 @@ public class AirlineTripData {
 
 	public void setArrivalDate(String arrivalDate) {
 		this.arrivalDate = arrivalDate;
+	}
+
+	public String getFlyNumber() {
+		return flyNumber;
+	}
+
+	public void setFlyNumber(String flyNumber) {
+		this.flyNumber = flyNumber;
+	}
+
+	public String getRateClass() {
+		return rateClass;
+	}
+
+	public void setRateClass(String rateClass) {
+		this.rateClass = rateClass;
 	}
 
 }

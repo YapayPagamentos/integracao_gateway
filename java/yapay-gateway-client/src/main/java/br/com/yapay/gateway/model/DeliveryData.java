@@ -1,4 +1,4 @@
-package br.com.yapay.gateway.restv3.model;
+package br.com.yapay.gateway.model;
 
 import com.google.gson.annotations.SerializedName;
 

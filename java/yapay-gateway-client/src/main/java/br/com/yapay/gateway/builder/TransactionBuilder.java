@@ -3,11 +3,11 @@ package br.com.yapay.gateway.builder;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.yapay.gateway.restv3.model.CreditCardData;
-import br.com.yapay.gateway.restv3.model.ExtraField;
-import br.com.yapay.gateway.restv3.model.ItemData;
-import br.com.yapay.gateway.restv3.model.Transaction;
-import br.com.yapay.gateway.restv3.model.TransactionData;
+import br.com.yapay.gateway.model.CreditCardData;
+import br.com.yapay.gateway.model.ExtraField;
+import br.com.yapay.gateway.model.ItemData;
+import br.com.yapay.gateway.model.Transaction;
+import br.com.yapay.gateway.model.TransactionData;
 
 public class TransactionBuilder implements ITransactionBuilder {
 

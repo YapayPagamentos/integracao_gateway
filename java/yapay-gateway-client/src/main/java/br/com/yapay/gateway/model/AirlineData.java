@@ -1,4 +1,4 @@
-package br.com.yapay.gateway.restv3.model;
+package br.com.yapay.gateway.model;
 
 import java.util.List;
 

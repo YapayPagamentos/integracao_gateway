@@ -1,6 +1,6 @@
 package br.com.yapay.gateway.builder;
 
-import br.com.yapay.gateway.restv3.model.Transaction;
+import br.com.yapay.gateway.model.Transaction;
 
 public interface ITransactionBuilder {
 
