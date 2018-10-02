@@ -11,12 +11,15 @@ import br.com.yapay.gateway.model.TransactionData;
 
 public class TransactionBuilder implements ITransactionBuilder {
 
-	@Override
-	public Transaction build() {
-		return transaction;
-	}
-
 	private static Transaction transaction;
+
+	public static Transaction build() {
+
+		Transaction newTransaction = transaction;
+		transaction = null;
+
+		return newTransaction;
+	}
 
 	public static void newTransaction(String storeCode, Integer paymentCode, Long transactionNumber, Long value) {
 		transaction = new Transaction();
