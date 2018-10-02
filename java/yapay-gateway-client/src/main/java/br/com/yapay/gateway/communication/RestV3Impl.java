@@ -41,7 +41,7 @@ public class RestV3Impl implements RestV3 {
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
 		HttpResponse response = client.execute(newPost(communicationUrl, jsonBuilder.toJson(transaction)));
-		
+
 		return new BasicResponseHandler().handleResponse(response);
 	}
 
@@ -51,7 +51,7 @@ public class RestV3Impl implements RestV3 {
 		HttpClient client = this.httpClientBuilder(credential);
 
 		HttpResponse response = client
-				.execute(new HttpGet(communicationUrl + "/api/v3/transacao/" + storeCode + "/" + transactionNumber));
+				.execute(newGet(communicationUrl + "/api/v3/transacao/" + storeCode + "/" + transactionNumber));
 
 		return null;
 	}
@@ -77,7 +77,7 @@ public class RestV3Impl implements RestV3 {
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
 		HttpResponse response = client.execute(newPost(communicationUrl, jsonBuilder.toJson(registerData)));
-		
+
 		return new BasicResponseHandler().handleResponse(response);
 	}
 
@@ -92,13 +92,8 @@ public class RestV3Impl implements RestV3 {
 	public String oneClickRegisterUpdate(Credential credential, OneClickRegisterData registerData)
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
-		HttpPut httpPut = new HttpPut(communicationUrl);
+		HttpResponse response = client.execute(newPut(communicationUrl, jsonBuilder.toJson(registerData)));
 
-		StringEntity postBody = new StringEntity(jsonBuilder.toJson(registerData));
-		httpPut.setEntity(postBody);
-		httpPut.setHeader("Content-type", "application/json");
-
-		HttpResponse response = client.execute(httpPut);
 		return new BasicResponseHandler().handleResponse(response);
 	}
 
@@ -107,17 +102,17 @@ public class RestV3Impl implements RestV3 {
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
 		HttpResponse response = client.execute(newPost(communicationUrl, jsonBuilder.toJson(transaction)));
-		
+
 		return new BasicResponseHandler().handleResponse(response);
 	}
 
 	@Override
 	public String recurringPaymentRegister(Credential credential, RecurringPayment recurringPayment)
 			throws ClientProtocolException, IOException {
-		
+
 		HttpClient client = this.httpClientBuilder(credential);
 		HttpResponse response = client.execute(newPost(communicationUrl, jsonBuilder.toJson(recurringPayment)));
-		
+
 		return new BasicResponseHandler().handleResponse(response);
 	}
 
@@ -160,6 +155,20 @@ public class RestV3Impl implements RestV3 {
 		httpPost.setEntity(postBody);
 		httpPost.setHeader("Content-type", "application/json");
 		return httpPost;
+	}
+
+	private HttpPut newPut(String url, String body) throws UnsupportedEncodingException {
+		HttpPut httpPut = new HttpPut(url);
+		StringEntity postBody = new StringEntity(body);
+		httpPut.setEntity(postBody);
+		httpPut.setHeader("Content-type", "application/json");
+		return httpPut;
+	}
+
+	private HttpGet newGet(String url) {
+		HttpGet httpGet = new HttpGet(url);
+		httpGet.setHeader("Content-type", "application/json");
+		return httpGet;
 	}
 
 }
