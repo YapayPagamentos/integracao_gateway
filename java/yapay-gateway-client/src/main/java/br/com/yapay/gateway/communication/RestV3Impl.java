@@ -14,81 +14,86 @@ import br.com.yapay.gateway.model.Transaction;
 
 public class RestV3Impl implements RestV3 {
 
+	private final String communicationUrl;
+
+	public RestV3Impl(String url) {
+		this.communicationUrl = url;
+	}
+
 	@Override
 	public String transactionAuthorize(Credential credential, Transaction transaction) {
 		HttpClient client = this.httpClientBuilder(credential);
-		
+
 		return null;
 	}
 
 	@Override
 	public String transactionConsult(Credential credential, String storeCode, Long transactionNumber) {
 		HttpClient client = this.httpClientBuilder(credential);
-		
-		
+
 		return null;
 	}
 
 	@Override
 	public String transactionCapture(Credential credential, String storeCode, Long transactionNumber, Long value) {
 		HttpClient client = this.httpClientBuilder(credential);
-		
+
 		return null;
 	}
 
 	@Override
 	public String transactionCancel(Credential credential, String storeCode, Long transactionNumber, Long value) {
 		HttpClient client = this.httpClientBuilder(credential);
-		
+
 		return null;
 	}
 
 	@Override
 	public String oneClickRegister(Credential credential, OneClickRegisterData registerData) {
 		HttpClient client = this.httpClientBuilder(credential);
-		
+
 		return null;
 	}
 
 	@Override
 	public String oneClickConsult(Credential credential, String token) {
 		HttpClient client = this.httpClientBuilder(credential);
-		
+
 		return null;
 	}
 
 	@Override
 	public String oneClickRegisterUpdate(Credential credential, OneClickRegisterData registerData) {
 		HttpClient client = this.httpClientBuilder(credential);
-		
+
 		return null;
 	}
 
 	@Override
 	public String oneClickAuthorize(Credential credential, String token, Transaction transaction) {
 		HttpClient client = this.httpClientBuilder(credential);
-		
+
 		return null;
 	}
 
 	@Override
 	public String recurringPaymentRegister(Credential credential, RecurringPayment recurringPayment) {
 		HttpClient client = this.httpClientBuilder(credential);
-		
+
 		return null;
 	}
 
 	@Override
 	public String recurringPaymentConsult(Credential credential, String storeCode, Long recurringPaymentNumber) {
 		HttpClient client = this.httpClientBuilder(credential);
-		
+
 		return null;
 	}
 
 	@Override
 	public String recurringPaymentCancel(Credential credential, String storeCode, Long recurringPaymentNumber) {
 		HttpClient client = this.httpClientBuilder(credential);
-		
+
 		return null;
 	}
 
