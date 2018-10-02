@@ -1,6 +1,7 @@
 package br.com.yapay.gateway.communication;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthScope;
@@ -10,6 +11,7 @@ import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.BasicResponseHandler;
@@ -38,13 +40,8 @@ public class RestV3Impl implements RestV3 {
 	public String transactionAuthorize(Credential credential, Transaction transaction)
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
-		HttpPost httpPost = new HttpPost(communicationUrl);
-
-		StringEntity postBody = new StringEntity(jsonBuilder.toJson(transaction));
-		httpPost.setEntity(postBody);
-		httpPost.setHeader("Content-type", "application/json");
-
-		HttpResponse response = client.execute(httpPost);
+		HttpResponse response = client.execute(newPost(communicationUrl, jsonBuilder.toJson(transaction)));
+		
 		return new BasicResponseHandler().handleResponse(response);
 	}
 
@@ -79,8 +76,9 @@ public class RestV3Impl implements RestV3 {
 	public String oneClickRegister(Credential credential, OneClickRegisterData registerData)
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
-
-		return null;
+		HttpResponse response = client.execute(newPost(communicationUrl, jsonBuilder.toJson(registerData)));
+		
+		return new BasicResponseHandler().handleResponse(response);
 	}
 
 	@Override
@@ -94,24 +92,33 @@ public class RestV3Impl implements RestV3 {
 	public String oneClickRegisterUpdate(Credential credential, OneClickRegisterData registerData)
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
+		HttpPut httpPut = new HttpPut(communicationUrl);
 
-		return null;
+		StringEntity postBody = new StringEntity(jsonBuilder.toJson(registerData));
+		httpPut.setEntity(postBody);
+		httpPut.setHeader("Content-type", "application/json");
+
+		HttpResponse response = client.execute(httpPut);
+		return new BasicResponseHandler().handleResponse(response);
 	}
 
 	@Override
 	public String oneClickAuthorize(Credential credential, String token, Transaction transaction)
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
-
-		return null;
+		HttpResponse response = client.execute(newPost(communicationUrl, jsonBuilder.toJson(transaction)));
+		
+		return new BasicResponseHandler().handleResponse(response);
 	}
 
 	@Override
 	public String recurringPaymentRegister(Credential credential, RecurringPayment recurringPayment)
 			throws ClientProtocolException, IOException {
+		
 		HttpClient client = this.httpClientBuilder(credential);
-
-		return null;
+		HttpResponse response = client.execute(newPost(communicationUrl, jsonBuilder.toJson(recurringPayment)));
+		
+		return new BasicResponseHandler().handleResponse(response);
 	}
 
 	@Override
@@ -145,6 +152,14 @@ public class RestV3Impl implements RestV3 {
 				gatewayCredential.getPassword());
 		credentialProviders.setCredentials(AuthScope.ANY, credentials);
 		return credentialProviders;
+	}
+
+	private HttpPost newPost(String url, String body) throws UnsupportedEncodingException {
+		HttpPost httpPost = new HttpPost(url);
+		StringEntity postBody = new StringEntity(body);
+		httpPost.setEntity(postBody);
+		httpPost.setHeader("Content-type", "application/json");
+		return httpPost;
 	}
 
 }
