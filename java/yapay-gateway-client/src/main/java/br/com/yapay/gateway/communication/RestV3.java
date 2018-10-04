@@ -23,7 +23,7 @@ public interface RestV3 extends Communication{
 	
 	String oneClickConsult(Credential credential, String token) throws ClientProtocolException, IOException;
 	
-	String oneClickRegisterUpdate(Credential credential, OneClickRegisterData registerData) throws ClientProtocolException, IOException;
+	String oneClickRegisterUpdate(Credential credential, String token, OneClickRegisterData registerData) throws ClientProtocolException, IOException;
 	
 	String oneClickAuthorize(Credential credential, String token, Transaction transaction) throws ClientProtocolException, IOException;
 	

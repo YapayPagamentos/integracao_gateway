@@ -45,11 +45,11 @@ class RestV3
             .get("#{BaseURL.get_url}/api/v3/oneclick/#{token}")
     end
 
-    def oneclick_register_update(credentials, oneclick_register_data)
+    def oneclick_register_update(credentials, token, oneclick_register_data)
         HTTP.basic_auth(:user => credentials.user, 
                         :pass => credentials.password)
             .headers(:content_type => "application/json")
-            .get("#{BaseURL.get_url}/api/v3/oneclick/#{token}/alterar", :body => ActiveSupport::JSON.encode(oneclick_register_data))
+            .put("#{BaseURL.get_url}/api/v3/oneclick/#{token}/alterar", :body => ActiveSupport::JSON.encode(oneclick_register_data))
     end
 
     def oneclick_authorize(credentials, token, transaction)

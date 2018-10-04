@@ -53,7 +53,7 @@ public class RestV3Impl implements RestV3 {
 		HttpResponse response = client
 				.execute(newGet(communicationUrl + "/api/v3/transacao/" + storeCode + "/" + transactionNumber));
 
-		return null;
+		return new BasicResponseHandler().handleResponse(response);
 	}
 
 	@Override
@@ -61,15 +61,20 @@ public class RestV3Impl implements RestV3 {
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
 
-		return null;
+		HttpResponse response = client.execute(newPut(
+				communicationUrl + "/api/v3/transacao/" + storeCode + "/" + transactionNumber + "/capturar", null));
+
+		return new BasicResponseHandler().handleResponse(response);
 	}
 
 	@Override
 	public String transactionCancel(Credential credential, String storeCode, Long transactionNumber, Long value)
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
+		HttpResponse response = client.execute(newPut(
+				communicationUrl + "/api/v3/transacao/" + storeCode + "/" + transactionNumber + "/cancelar", null));
 
-		return null;
+		return new BasicResponseHandler().handleResponse(response);
 	}
 
 	@Override
@@ -84,15 +89,17 @@ public class RestV3Impl implements RestV3 {
 	@Override
 	public String oneClickConsult(Credential credential, String token) throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
+		HttpResponse response = client.execute(newGet(communicationUrl + "/api/v3/oneclick/" + token));
 
-		return null;
+		return new BasicResponseHandler().handleResponse(response);
 	}
 
 	@Override
-	public String oneClickRegisterUpdate(Credential credential, OneClickRegisterData registerData)
+	public String oneClickRegisterUpdate(Credential credential, String token, OneClickRegisterData registerData)
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
-		HttpResponse response = client.execute(newPut(communicationUrl, jsonBuilder.toJson(registerData)));
+		HttpResponse response = client.execute(
+				newPut(communicationUrl + "/api/v3/oneclick/" + token + "/alterar", jsonBuilder.toJson(registerData)));
 
 		return new BasicResponseHandler().handleResponse(response);
 	}
@@ -101,7 +108,8 @@ public class RestV3Impl implements RestV3 {
 	public String oneClickAuthorize(Credential credential, String token, Transaction transaction)
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
-		HttpResponse response = client.execute(newPost(communicationUrl, jsonBuilder.toJson(transaction)));
+		HttpResponse response = client.execute(newPost(communicationUrl + "/api/v3/oneclick/" + token + "/autorizar",
+				jsonBuilder.toJson(transaction)));
 
 		return new BasicResponseHandler().handleResponse(response);
 	}
@@ -111,7 +119,8 @@ public class RestV3Impl implements RestV3 {
 			throws ClientProtocolException, IOException {
 
 		HttpClient client = this.httpClientBuilder(credential);
-		HttpResponse response = client.execute(newPost(communicationUrl, jsonBuilder.toJson(recurringPayment)));
+		HttpResponse response = client
+				.execute(newPost(communicationUrl + "/api/v3/recorrencia", jsonBuilder.toJson(recurringPayment)));
 
 		return new BasicResponseHandler().handleResponse(response);
 	}
@@ -120,16 +129,21 @@ public class RestV3Impl implements RestV3 {
 	public String recurringPaymentConsult(Credential credential, String storeCode, Long recurringPaymentNumber)
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
+		HttpResponse response = client
+				.execute(newGet(communicationUrl + "/api/v3/recorrencia/" + storeCode + "/" + recurringPaymentNumber));
 
-		return null;
+		return new BasicResponseHandler().handleResponse(response);
 	}
 
 	@Override
 	public String recurringPaymentCancel(Credential credential, String storeCode, Long recurringPaymentNumber)
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
+		HttpResponse response = client.execute(newPut(
+				communicationUrl + "/api/v3/recorrencia/" + storeCode + "/" + recurringPaymentNumber + "/cancelar",
+				null));
 
-		return null;
+		return new BasicResponseHandler().handleResponse(response);
 	}
 
 	private HttpClient httpClientBuilder(Credential gatewayCredential) throws IOException {
