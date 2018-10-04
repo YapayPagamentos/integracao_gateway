@@ -40,7 +40,7 @@ public class RestV3Impl implements RestV3 {
 	public String transactionAuthorize(Credential credential, Transaction transaction)
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
-		HttpResponse response = client.execute(newPost(communicationUrl, jsonBuilder.toJson(transaction)));
+		HttpResponse response = client.execute(newPost(communicationUrl +"/api/v3/transacao", jsonBuilder.toJson(transaction)));
 
 		return new BasicResponseHandler().handleResponse(response);
 	}
