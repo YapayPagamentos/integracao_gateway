@@ -2,8 +2,11 @@ package br.com.yapay.gateway.builder;
 
 import br.com.yapay.gateway.model.CreditCardData;
 import br.com.yapay.gateway.model.DebitCardData;
+import br.com.yapay.gateway.model.PhoneData;
 import br.com.yapay.gateway.model.RecurringPayment;
+import br.com.yapay.gateway.model.RecurringPaymentChargingData;
 import br.com.yapay.gateway.model.RecurringPaymentData;
+import br.com.yapay.gateway.model.RecurringPaymentDeliveryData;
 
 public class RecurringPaymentBuilderImpl implements RecurringPaymentBuilder {
 
@@ -73,5 +76,77 @@ public class RecurringPaymentBuilderImpl implements RecurringPaymentBuilder {
 		recurringPayment.getRecurringPaymentData().getDebitCard().setAccountType(debitCardData.getAccountType());
 		recurringPayment.getRecurringPaymentData().getDebitCard().setAgency(debitCardData.getAgency());
 		recurringPayment.getRecurringPaymentData().getDebitCard().setAgencyDigit(debitCardData.getAgencyDigit());
+	}
+
+	public static void withDelivery(RecurringPaymentDeliveryData deliveryData) {
+		recurringPayment.getRecurringPaymentData().setDeliveryData(new RecurringPaymentDeliveryData());
+		recurringPayment.getRecurringPaymentData().getDeliveryData().setDeliveryCity(deliveryData.getDeliveryCity());
+		recurringPayment.getRecurringPaymentData().getDeliveryData()
+				.setDeliveryComplement(deliveryData.getDeliveryComplement());
+		recurringPayment.getRecurringPaymentData().getDeliveryData()
+				.setDeliveryCountry(deliveryData.getDeliveryCountry());
+		recurringPayment.getRecurringPaymentData().getDeliveryData()
+				.setDeliveryDistrict(deliveryData.getDeliveryDistrict());
+		recurringPayment.getRecurringPaymentData().getDeliveryData().setDeliveryMail(deliveryData.getDeliveryMail());
+		recurringPayment.getRecurringPaymentData().getDeliveryData().setDeliveryName(deliveryData.getDeliveryName());
+		recurringPayment.getRecurringPaymentData().getDeliveryData()
+				.setDeliveryNumber(deliveryData.getDeliveryNumber());
+		recurringPayment.getRecurringPaymentData().getDeliveryData().setDeliveryState(deliveryData.getDeliveryState());
+		recurringPayment.getRecurringPaymentData().getDeliveryData()
+				.setDeliveryStreet(deliveryData.getDeliveryStreet());
+		recurringPayment.getRecurringPaymentData().getDeliveryData()
+				.setDeliveryZipCode(deliveryData.getDeliveryZipCode());
+
+		if (deliveryData.getPhone() != null) {
+			recurringPayment.getRecurringPaymentData().getDeliveryData().setPhone(new PhoneData());
+			recurringPayment.getRecurringPaymentData().getDeliveryData().getPhone()
+					.setDdd(deliveryData.getPhone().getDdd());
+			recurringPayment.getRecurringPaymentData().getDeliveryData().getPhone()
+					.setDdi(deliveryData.getPhone().getDdi());
+			recurringPayment.getRecurringPaymentData().getDeliveryData().getPhone()
+					.setPhone(deliveryData.getPhone().getPhone());
+			recurringPayment.getRecurringPaymentData().getDeliveryData().getPhone()
+					.setPhoneType(deliveryData.getPhone().getPhoneType());
+		}
+	}
+
+	public static void withChargingData(RecurringPaymentChargingData chargingData) {
+		recurringPayment.getRecurringPaymentData().setChargingData(new RecurringPaymentChargingData());
+		recurringPayment.getRecurringPaymentData().getChargingData().setBirthday(chargingData.getBirthday());
+		recurringPayment.getRecurringPaymentData().getChargingData().setBuyerMail(chargingData.getBuyerMail());
+		recurringPayment.getRecurringPaymentData().getChargingData().setBuyerName(chargingData.getBuyerName());
+		recurringPayment.getRecurringPaymentData().getChargingData()
+				.setClientAddressCity(chargingData.getClientAddressCity());
+		recurringPayment.getRecurringPaymentData().getChargingData()
+				.setClientAddressComplement(chargingData.getClientAddressComplement());
+		recurringPayment.getRecurringPaymentData().getChargingData()
+				.setClientAddressCountry(chargingData.getClientAddressCountry());
+		recurringPayment.getRecurringPaymentData().getChargingData()
+				.setClientAddressDistrict(chargingData.getClientAddressDistrict());
+		recurringPayment.getRecurringPaymentData().getChargingData()
+				.setClientAddressNumber(chargingData.getClientAddressNumber());
+		recurringPayment.getRecurringPaymentData().getChargingData()
+				.setClientAddressState(chargingData.getClientAddressState());
+		recurringPayment.getRecurringPaymentData().getChargingData()
+				.setClientAddressStreet(chargingData.getClientAddressStreet());
+		recurringPayment.getRecurringPaymentData().getChargingData()
+				.setClientAddressZipcode(chargingData.getClientAddressZipcode());
+		recurringPayment.getRecurringPaymentData().getChargingData().setClientCode(chargingData.getClientCode());
+		recurringPayment.getRecurringPaymentData().getChargingData().setClientSex(chargingData.getClientSex());
+		recurringPayment.getRecurringPaymentData().getChargingData().setClientType(chargingData.getClientType());
+		recurringPayment.getRecurringPaymentData().getChargingData().setDocument(chargingData.getDocument());
+		recurringPayment.getRecurringPaymentData().getChargingData().setDocumentTwo(chargingData.getDocumentTwo());
+
+		if (chargingData.getPhone() != null) {
+			recurringPayment.getRecurringPaymentData().getChargingData().setPhone(new PhoneData());
+			recurringPayment.getRecurringPaymentData().getChargingData().getPhone()
+					.setDdd(chargingData.getPhone().getDdd());
+			recurringPayment.getRecurringPaymentData().getChargingData().getPhone()
+					.setDdi(chargingData.getPhone().getDdi());
+			recurringPayment.getRecurringPaymentData().getChargingData().getPhone()
+					.setPhone(chargingData.getPhone().getPhone());
+			recurringPayment.getRecurringPaymentData().getChargingData().getPhone()
+					.setPhoneType(chargingData.getPhone().getPhoneType());
+		}
 	}
 }
