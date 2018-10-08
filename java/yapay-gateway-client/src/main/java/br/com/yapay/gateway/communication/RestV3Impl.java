@@ -40,7 +40,8 @@ public class RestV3Impl implements RestV3 {
 	public String transactionAuthorize(Credential credential, Transaction transaction)
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
-		HttpResponse response = client.execute(newPost(communicationUrl +"/api/v3/transacao", jsonBuilder.toJson(transaction)));
+		HttpResponse response = client
+				.execute(newPost(communicationUrl + "/api/v3/transacao", jsonBuilder.toJson(transaction)));
 
 		return new BasicResponseHandler().handleResponse(response);
 	}
@@ -81,7 +82,8 @@ public class RestV3Impl implements RestV3 {
 	public String oneClickRegister(Credential credential, OneClickRegisterData registerData)
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
-		HttpResponse response = client.execute(newPost(communicationUrl, jsonBuilder.toJson(registerData)));
+		HttpResponse response = client
+				.execute(newPost(communicationUrl + "/api/v3/oneclick", jsonBuilder.toJson(registerData)));
 
 		return new BasicResponseHandler().handleResponse(response);
 	}
