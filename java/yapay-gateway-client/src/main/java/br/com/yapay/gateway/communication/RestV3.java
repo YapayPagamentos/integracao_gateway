@@ -13,7 +13,7 @@ public interface RestV3 extends Communication{
 
 	String transactionAuthorize(Credential credential, Transaction transaction) throws ClientProtocolException, IOException;
 	
-	String transactionConsult(Credential credential, String storeCode, Long transactionNumber) throws ClientProtocolException, IOException;
+	String transactionQuery(Credential credential, String storeCode, Long transactionNumber) throws ClientProtocolException, IOException;
 	
 	String transactionCapture(Credential credential, String storeCode, Long transactionNumber, Long value) throws ClientProtocolException, IOException;
 	
@@ -21,7 +21,7 @@ public interface RestV3 extends Communication{
 	
 	String oneClickRegister(Credential credential, OneClickRegisterData registerData) throws ClientProtocolException, IOException;
 	
-	String oneClickConsult(Credential credential, String token) throws ClientProtocolException, IOException;
+	String oneClickQuery(Credential credential, String token) throws ClientProtocolException, IOException;
 	
 	String oneClickRegisterUpdate(Credential credential, String token, OneClickRegisterData registerData) throws ClientProtocolException, IOException;
 	
@@ -29,7 +29,7 @@ public interface RestV3 extends Communication{
 	
 	String recurringPaymentRegister(Credential credential, RecurringPayment recurringPayment) throws ClientProtocolException, IOException;
 	
-	String recurringPaymentConsult(Credential credential, String storeCode, Long recurringPaymentNumber) throws ClientProtocolException, IOException;
+	String recurringPaymentQuery(Credential credential, String storeCode, Long recurringPaymentNumber) throws ClientProtocolException, IOException;
 	
 	String recurringPaymentCancel(Credential credential, String storeCode, Long recurringPaymentNumber) throws ClientProtocolException, IOException;
 }

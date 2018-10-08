@@ -10,7 +10,7 @@ class RestV3
             .post("#{BaseURL.get_url}/api/v3/transacao", :body => ActiveSupport::JSON.encode(transaction)) 
     end
 
-    def transaction_consult(credentials, store_code, transaction_number)
+    def transaction_query(credentials, store_code, transaction_number)
         HTTP.basic_auth(:user => credentials.user, 
                         :pass => credentials.password)
             .headers(:content_type => "application/json")
@@ -38,7 +38,7 @@ class RestV3
             .post("#{BaseURL.get_url}/api/v3/oneclick", :body => ActiveSupport::JSON.encode(oneclick_register_data))
     end
 
-    def oneclick_consult(credentials, token)
+    def oneclick_query(credentials, token)
         HTTP.basic_auth(:user => credentials.user, 
                         :pass => credentials.password)
             .headers(:content_type => "application/json")
@@ -66,7 +66,7 @@ class RestV3
             .post("#{BaseURL.get_url}/api/v3/recorrencia", :body => ActiveSupport::JSON.encode(recurring_payment_data))
     end
 
-    def recurring_payment_consult(credentials, store_code, recurring_payment_number)
+    def recurring_payment_query(credentials, store_code, recurring_payment_number)
         HTTP.basic_auth(:user => credentials.user, 
                         :pass => credentials.password)
             .headers(:content_type => "application/json")

@@ -46,7 +46,7 @@ public class RestV3Impl implements RestV3 {
 	}
 
 	@Override
-	public String transactionConsult(Credential credential, String storeCode, Long transactionNumber)
+	public String transactionQuery(Credential credential, String storeCode, Long transactionNumber)
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
 
@@ -87,7 +87,7 @@ public class RestV3Impl implements RestV3 {
 	}
 
 	@Override
-	public String oneClickConsult(Credential credential, String token) throws ClientProtocolException, IOException {
+	public String oneClickQuery(Credential credential, String token) throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
 		HttpResponse response = client.execute(newGet(communicationUrl + "/api/v3/oneclick/" + token));
 
@@ -126,7 +126,7 @@ public class RestV3Impl implements RestV3 {
 	}
 
 	@Override
-	public String recurringPaymentConsult(Credential credential, String storeCode, Long recurringPaymentNumber)
+	public String recurringPaymentQuery(Credential credential, String storeCode, Long recurringPaymentNumber)
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
 		HttpResponse response = client
