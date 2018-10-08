@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.yapay.gateway.model.AddressData;
+import br.com.yapay.gateway.model.ChargingData;
 import br.com.yapay.gateway.model.CreditCardData;
 import br.com.yapay.gateway.model.DeliveryData;
 import br.com.yapay.gateway.model.ExtraField;
@@ -114,6 +115,52 @@ public class TransactionBuilderImpl implements TransactionBuilder {
 			}
 
 			transaction.getDelivery().setDeliveryPhone(myPhoneList);
+		}
+	}
+
+	public static void withCharging(ChargingData chargingData) {
+		transaction.setCharging(new ChargingData());
+		transaction.getCharging().setClientBirthday(chargingData.getClientBirthday());
+		transaction.getCharging().setClientCode(chargingData.getClientCode());
+		transaction.getCharging().setClientDocument(chargingData.getClientDocument());
+		transaction.getCharging().setClientDocumentTwo(chargingData.getClientDocumentTwo());
+		transaction.getCharging().setClientEmail(chargingData.getClientEmail());
+		transaction.getCharging().setClientName(chargingData.getClientName());
+		transaction.getCharging().setClientSex(chargingData.getClientSex());
+
+		if (chargingData.getClientChargingAdress() != null) {
+			transaction.getCharging().setClientChargingAdress(new AddressData());
+			transaction.getCharging().getClientChargingAdress()
+					.setCity(chargingData.getClientChargingAdress().getCity());
+			transaction.getCharging().getClientChargingAdress()
+					.setComplement(chargingData.getClientChargingAdress().getComplement());
+			transaction.getCharging().getClientChargingAdress()
+					.setCountry(chargingData.getClientChargingAdress().getCountry());
+			transaction.getCharging().getClientChargingAdress()
+					.setDistrict(chargingData.getClientChargingAdress().getDistrict());
+			transaction.getCharging().getClientChargingAdress()
+					.setNumber(chargingData.getClientChargingAdress().getNumber());
+			transaction.getCharging().getClientChargingAdress()
+					.setState(chargingData.getClientChargingAdress().getState());
+			transaction.getCharging().getClientChargingAdress()
+					.setStreet(chargingData.getClientChargingAdress().getStreet());
+			transaction.getCharging().getClientChargingAdress()
+					.setZipCode(chargingData.getClientChargingAdress().getZipCode());
+		}
+
+		if (chargingData.getClientChargingPhone() != null && !chargingData.getClientChargingPhone().isEmpty()) {
+			List<PhoneData> myPhoneList = new ArrayList<>();
+
+			for (PhoneData phone : chargingData.getClientChargingPhone()) {
+				PhoneData myPhone = new PhoneData();
+				myPhone.setDdd(phone.getDdd());
+				myPhone.setDdi(phone.getDdi());
+				myPhone.setPhone(phone.getPhone());
+				myPhone.setPhoneType(phone.getPhoneType());
+				myPhoneList.add(myPhone);
+			}
+
+			transaction.getCharging().setClientChargingPhone(myPhoneList);
 		}
 	}
 
