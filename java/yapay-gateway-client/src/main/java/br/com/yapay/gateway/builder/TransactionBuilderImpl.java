@@ -3,9 +3,12 @@ package br.com.yapay.gateway.builder;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.yapay.gateway.model.AddressData;
 import br.com.yapay.gateway.model.CreditCardData;
+import br.com.yapay.gateway.model.DeliveryData;
 import br.com.yapay.gateway.model.ExtraField;
 import br.com.yapay.gateway.model.ItemData;
+import br.com.yapay.gateway.model.PhoneData;
 import br.com.yapay.gateway.model.Transaction;
 import br.com.yapay.gateway.model.TransactionData;
 
@@ -75,6 +78,43 @@ public class TransactionBuilderImpl implements TransactionBuilder {
 		}
 
 		transaction.setExtraFields(transactionExtraFieldsList);
+	}
+
+	public static void withDelivery(DeliveryData deliveryData) {
+		transaction.setDelivery(new DeliveryData());
+		transaction.getDelivery().setBirthday(deliveryData.getBirthday());
+		transaction.getDelivery().setDocument(deliveryData.getDocument());
+		transaction.getDelivery().setDocumentTwo(deliveryData.getDocumentTwo());
+		transaction.getDelivery().setMail(deliveryData.getMail());
+		transaction.getDelivery().setName(deliveryData.getName());
+		transaction.getDelivery().setSex(deliveryData.getSex());
+
+		if (deliveryData.getDeliveryAddress() != null) {
+			transaction.getDelivery().setDeliveryAddress(new AddressData());
+			transaction.getDelivery().getDeliveryAddress().setCity(deliveryData.getDeliveryAddress().getCity());
+			transaction.getDelivery().getDeliveryAddress()
+					.setComplement(deliveryData.getDeliveryAddress().getComplement());
+			transaction.getDelivery().getDeliveryAddress().setCountry(deliveryData.getDeliveryAddress().getCountry());
+			transaction.getDelivery().getDeliveryAddress().setDistrict(deliveryData.getDeliveryAddress().getDistrict());
+			transaction.getDelivery().getDeliveryAddress().setNumber(deliveryData.getDeliveryAddress().getNumber());
+			transaction.getDelivery().getDeliveryAddress().setState(deliveryData.getDeliveryAddress().getState());
+			transaction.getDelivery().getDeliveryAddress().setStreet(deliveryData.getDeliveryAddress().getStreet());
+		}
+
+		if (deliveryData.getDeliveryPhone() != null && !deliveryData.getDeliveryPhone().isEmpty()) {
+			List<PhoneData> myPhoneList = new ArrayList<>();
+
+			for (PhoneData phone : deliveryData.getDeliveryPhone()) {
+				PhoneData myPhone = new PhoneData();
+				myPhone.setDdd(phone.getDdd());
+				myPhone.setDdi(phone.getDdi());
+				myPhone.setPhone(phone.getPhone());
+				myPhone.setPhoneType(phone.getPhoneType());
+				myPhoneList.add(myPhone);
+			}
+
+			transaction.getDelivery().setDeliveryPhone(myPhoneList);
+		}
 	}
 
 }

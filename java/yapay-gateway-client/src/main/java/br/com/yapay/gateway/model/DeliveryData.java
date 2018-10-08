@@ -1,5 +1,7 @@
 package br.com.yapay.gateway.model;
 
+import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
 public class DeliveryData {
@@ -26,7 +28,7 @@ public class DeliveryData {
 	private AddressData deliveryAddress;
 
 	@SerializedName("telefone")
-	private PhoneData deliveryPhone;
+	private List<PhoneData> deliveryPhone;
 
 	public String getName() {
 		return name;
@@ -84,11 +86,11 @@ public class DeliveryData {
 		this.deliveryAddress = deliveryAddress;
 	}
 
-	public PhoneData getDeliveryPhone() {
+	public List<PhoneData> getDeliveryPhone() {
 		return deliveryPhone;
 	}
 
-	public void setDeliveryPhone(PhoneData deliveryPhone) {
+	public void setDeliveryPhone(List<PhoneData> deliveryPhone) {
 		this.deliveryPhone = deliveryPhone;
 	}
 
