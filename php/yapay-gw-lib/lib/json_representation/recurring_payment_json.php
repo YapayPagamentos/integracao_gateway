@@ -1,8 +1,8 @@
 <?php 
 	
 	class RecurringPaymentJson {
-		var $recurringPaymentData;
-    	var $storeCode;
+		var $recorrencia;
+    	var $estabelecimento;
 	}
 
  ?>

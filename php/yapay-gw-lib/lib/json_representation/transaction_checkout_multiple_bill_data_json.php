@@ -1,8 +1,8 @@
 <?php 
 	
 	class TransactionCheckoutMultipleBillDataJson {
-		var $value;
-    	var $dueData;
+		var $valor;
+    	var $vencimento;
 	}
 
  ?>

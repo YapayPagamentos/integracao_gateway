@@ -1,9 +1,9 @@
 <?php 
 	
 	class TransactionAirlineDataJson {
-	    var $tripData;
-	    var $passengerData;
-	    var $flightRangeData;
+	    var $dadosViagem;
+	    var $dadosPassageiros;
+	    var $dadosEscalas;
 	}
 
  ?>

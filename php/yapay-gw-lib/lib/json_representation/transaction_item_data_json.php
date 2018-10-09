@@ -1,12 +1,12 @@
 <?php 
 	
 	class TransactionItemDataJson {
-		var $productCode;
-	    var $productCategory;
-	    var $productName;
-	    var $productAmount;
-	    var $productUnitaryValue;
-	    var $categoryName;
+		var $codigoProduto;
+	    var $codigoCategoria;
+	    var $nomeProduto;
+	    var $quantidadeProduto;
+	    var $valorUnitarioProduto;
+	    var $nomeCategoria;
 
 
 	}

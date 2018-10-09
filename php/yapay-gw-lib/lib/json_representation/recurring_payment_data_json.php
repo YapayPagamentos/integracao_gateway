@@ -1,25 +1,25 @@
 <?php 
 	
 	class RecurringPaymentDataJson {
-		var $paymentCode;
-	    var $recurringPaymentNumber
-	    var $value;
-	    var $modality;
-	    var $frequency;
-	    var $notificationUrl;
-	    var $processImmediately;
-	    var $billingAmount;
-	    var $billingFirstDate;
-	    var $billDueDate;
-	    var $freeFieldOne;
-	    var $freeFieldTwo;
-	    var $freeFieldThree;
-	    var $freeFieldFour;
-	    var $freeFieldFive;
-	    var $recurringChargingData;
-	    var $recurringCardData;
-	    var $recurringDebitData;
-	    var $recurringShippingData;
+		var $formaPagamento;
+	    var $numeroRecorrencia
+	    var $valor;
+	    var $modalidade;
+	    var $periodicidade;
+	    var $urlNotificacao;
+	    var $processarImediatamente;
+	    var $quantidadeCobrancas;
+	    var $dataPrimeiraCobranca;
+	    var $vencimentoBoleto;
+	    var $campoLivre1;
+	    var $campoLivre2;
+	    var $campoLivre3;
+	    var $campoLivre4;
+	    var $campoLivre5;
+	    var $dadosCobranca;
+	    var $dadosCartao;
+	    var $dadosDebito;
+	    var $dadosEntrega;
 	}
 
  ?>

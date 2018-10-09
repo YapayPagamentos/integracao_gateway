@@ -1,28 +1,28 @@
 <?php 
 	
 	class TransactionDataJson {
-		var $transactionNumber;
-		var $value;
-		var $discountValue;
-		var $boardingFee;
-		var $installments;
-		var $installmentType;
-		var $hintUrl;
-		var $resultUrl;
-		var $unpaidRedirectUrl;
-		var $idiom;
+		var $numeroTransacao;
+		var $valor;
+		var $valorDesconto;
+		var $taxaEmbarque;
+		var $parcelas;
+		var $tipoParcelamento;
+		var $urlCampainha;
+		var $urlResultado;
+		var $urlRedirecionamentoNaoPago;
+		var $idioma;
 		var $ip;
 		var $browser;
-		var $transactionOrigin;
-		var $freeFieldOne;
-		var $freeFieldTwo;
-		var $freeFieldThree;
-		var $freeFieldFour;
-		var $freeFieldFive;
-		var $billDueDate;
-		var $country;
-		var $currency;
-		var $recurrentPayment;
+		var $origemTransacao;
+		var $campoLivre1;
+		var $campoLivre2;
+		var $campoLivre3;
+		var $campoLivre4;
+		var $campoLivre5;
+		var $dataVencimentoBoleto;
+		var $pais;
+		var $moeda;
+		var $pagamentoRecorrente;
 
 	}
 

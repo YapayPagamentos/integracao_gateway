@@ -1,9 +1,9 @@
 <?php 
 	
 	class TransactionAirlinePassengerDataJson {
-		var $firstName;
-	    var $middleName;
-	    var $lastName;
+		var $primeiroNome;
+	    var $segundoNome;
+	    var $sobrenome;
 	}
 
  ?>

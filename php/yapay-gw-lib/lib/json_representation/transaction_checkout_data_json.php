@@ -1,11 +1,11 @@
 <?php 
 	
 	class TransactionCheckoutDataJson {
-		var $process;
-	    var $paymentType;
-	    var $multipleCard;
-	    var $multipleBill;
-	    var $multipleBillData;
+		var $processar;
+	    var $tipoPagamento;
+	    var $multiploCartao;
+	    var $multiploBoleto;
+	    var $boletos;
 	}
 
  ?>

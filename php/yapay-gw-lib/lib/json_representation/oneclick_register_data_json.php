@@ -1,12 +1,12 @@
 <?php 
 	
 	class OneclickRegisterDataJson {
-		var $storeCode;
-	    var $cardHolderName;
-	    var $cardNumber;
-	    var $expirationDate;
-	    var $buyerEmail;
-	    var $paymentCode;
+		var $codigoEstabelecimento;
+	    var $nomeTitularCartaoCredito;
+	    var $numeroCartaoCredito;
+	    var $dataValidadeCartao;
+	    var $emailComprador;
+	    var $formaPagamento;
 	}
 
  ?>

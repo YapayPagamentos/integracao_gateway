@@ -1,16 +1,16 @@
 <?php 
 	
 	class TransactionAirlineFlightRangeDataJson {
-		var $serviceClass;
-	    var $tripDate;
-	    var $companyCode;
-	    var $permitFlight;
-	    var $departureAirport;
-	    var $departureDate;
-	    var $arrivalAirport;
-	    var $arrivalDate;
-	    var $flyNumber;
-	    var $rateClass;
+		var $classeDoServico;
+	    var $dataDaViagem;
+	    var $codigoCompanhiaAerea;
+	    var $escalaPermitida;
+	    var $aeroportoPartida;
+	    var $dataHoraPartida;
+	    var $aeroportoChegada;
+	    var $dataHoraChegada;
+	    var $numeroVoo;
+	    var $classeTarifaria;
 	}
 
  ?>

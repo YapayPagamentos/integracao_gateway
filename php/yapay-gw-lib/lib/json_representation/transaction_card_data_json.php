@@ -1,13 +1,13 @@
 <?php 
 	
 	class TransactionCardDataJson {
-		var $cardHolderName;
-	    var $cardNumber;
-	    var $cvv;
-	    var $expirationDate;
-	    var $paymentCode;
-	    var $installments;
-	    var $value;
+		var $nomePortador;
+	    var $numeroCartao;
+	    var $codigoSeguranca;
+	    var $dataValidade;
+	    var $codigoFormaPagamento;
+	    var $parcelas;
+	    var $valor;
 
 	}
 

@@ -1,23 +1,23 @@
 <?php 
 	
 	class RecurringChargingDataJson {
-		var $buyerName;
-	    var $buyerMail;
-	    var $clientType;
-	    var $document;
-	    var $birthday;
-	    var $clientCode;
-	    var $clientSex;
-	    var $documentTwo;
-	    var $clientAddressStreet;
-	    var $clientAddressNumber;
-	    var $clientAddressDistrict;
-	    var $clientAddressComplement;
-	    var $clientAddressCity;
-	    var $clientAddressState;
-	    var $clientAddressZipcode;
-	    var $clientAddressCountry;
-	    var $clientPhone;
+		var $nomeComprador;
+	    var $emailComprador;
+	    var $tipoCliente;
+	    var $documento;
+	    var $dataNascimento;
+	    var $codigoCliente;
+	    var $sexo;
+	    var $documento2;
+	    var $enderecoComprador;
+	    var $numeroEnderecoComprador;
+	    var $bairroComprador;
+	    var $complementoComprador;
+	    var $cidadeComprador;
+	    var $estadoComprador;
+	    var $cepComprador;
+	    var $paisComprador;
+	    var $telefone;
 	}
 
  ?>

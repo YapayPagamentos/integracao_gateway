@@ -1,14 +1,14 @@
 <?php 
 	
 	class TransactionAdressDataJson {
-		var $street;
-	    var $number
-	    var $complement;
-	    var $zipCode;
-	    var $district;
-	    var $city;
-	    var $state;
-	    var $country;
+		var $logradouro;
+	    var $numero
+	    var $complemento;
+	    var $cep;
+	    var $bairro;
+	    var $cidade;
+	    var $estado;
+	    var $pais;
 	}
 
  ?>

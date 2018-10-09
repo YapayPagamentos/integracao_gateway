@@ -1,11 +1,11 @@
 <?php 
 	
 	class TransactionDebitDataJson {
-		var $agency;
-	    var $agencyDigit;
-	    var $accountNumber;
-	    var $accountNumberDigit;
-	    var $accountType;
+		var $agencia;
+	    var $agenciaDigito;
+	    var $conta;
+	    var $contaDigito;
+	    var $tipoConta;
 	}
 
  ?>

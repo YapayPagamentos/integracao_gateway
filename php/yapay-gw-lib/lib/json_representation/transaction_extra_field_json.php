@@ -1,8 +1,8 @@
 <?php 
 	
 	class TransactionExtraFieldJson {
-		var $key;
-	    var $value;
+		var $chave;
+	    var $valor;
 
 	}
 

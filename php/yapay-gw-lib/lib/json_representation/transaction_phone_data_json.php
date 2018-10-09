@@ -3,8 +3,8 @@
 	class TransactionPhoneDataJson {
 		var $ddi;
 	    var $ddd;
-	    var $phone;
-	    var $phoneType;
+	    var $telefone;
+	    var $tipoTelefone;
 
 	}
 

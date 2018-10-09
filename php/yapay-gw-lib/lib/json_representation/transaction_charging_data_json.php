@@ -1,16 +1,16 @@
 <?php 
 	
 	class TransactionChargingDataJson {
-		var $clientCode;
-	    var $clientType;
-	    var $clientName;
-	    var $clientEmail;
-	    var $clientBirthday;
-	    var $clientSex;
-	    var $clientDocument;
-	    var $clientDocumentTwo;
-	    var $clientChargingAdressData;
-	    var $clientChargingPhoneData;
+		var $codigoCliente;
+	    var $tipoCliente;
+	    var $nome;
+	    var $email;
+	    var $dataNascimento;
+	    var $sexo;
+	    var $documento;
+	    var $documento2;
+	    var $endereco;
+	    var $telefone;
 	}
 
  ?>

@@ -2,13 +2,13 @@
 	
 	class TransactionAirlineTripDataJson {
 		var $pnr;
-	    var $cardholderIsPassenger;
-	    var $ticketIssueDate;
-	    var $companyCode;
-	    var $departureAirport;
-	    var $departureDate;
-	    var $arrivalAirport;
-	    var $arrivalDate;
+	    var $titularCartaoEPassageiro;
+	    var $dataEmissaoPassagem;
+	    var $codigoCompanhiaAerea;
+	    var $aeroportoPartida;
+	    var $dataHoraPartida;
+	    var $aeroportoChegada;
+	    var $dataHoraChegada;
 	}
 
  ?>
