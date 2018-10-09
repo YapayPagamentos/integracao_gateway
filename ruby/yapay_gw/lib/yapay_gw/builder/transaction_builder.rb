@@ -5,7 +5,7 @@ require_relative '../models/transaction_item_data'
 require_relative '../models/transaction_charging_data'
 require_relative '../models/transaction_phone_data'
 require_relative '../models/transaction_extra_field'
-require_relative '../models/transaction_adress_data'
+require_relative '../models/transaction_address_data'
 require_relative '../models/transaction_delivery_data'
 
 module Builder

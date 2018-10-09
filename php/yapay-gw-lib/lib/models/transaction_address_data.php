@@ -1,6 +1,6 @@
 <?php 
 	
-	class TransactionAdressData {
+	class TransactionAddressData {
 		var $street;
 	    var $number
 	    var $complement;
