@@ -1,8 +1,8 @@
 <?php 
 	
 	class TransactionExtraFieldJson {
-		var $chave;
-	    var $valor;
+		public $chave;
+	    public $valor;
 
 	    public function __construct($transactionExtraField) {
        		$this->chave = $transactionExtraField->key;

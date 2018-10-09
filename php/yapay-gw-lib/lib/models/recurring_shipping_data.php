@@ -1,17 +1,17 @@
 <?php 
 	
 	class RecurringShippingData {
-	    var $shippingName;
-	    var $shippingMail;
-	    var $shippingStreet;
-	    var $shippingNumber;
-	    var $shippingDistrict;
-	    var $shippingComplement;
-	    var $shippingCity;
-	    var $shippingState;
-	    var $shippingZipcode;
-	    var $shippingCountry;
-	    var $shippingPhone;	
+	    public $shippingName;
+	    public $shippingMail;
+	    public $shippingStreet;
+	    public $shippingNumber;
+	    public $shippingDistrict;
+	    public $shippingComplement;
+	    public $shippingCity;
+	    public $shippingState;
+	    public $shippingZipcode;
+	    public $shippingCountry;
+	    public $shippingPhone;	
 
 	}
 

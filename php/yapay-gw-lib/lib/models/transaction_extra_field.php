@@ -1,8 +1,8 @@
 <?php 
 	
 	class TransactionExtraField {
-		var $key;
-	    var $value;
+		public $key;
+	    public $value;
 
 	}
 

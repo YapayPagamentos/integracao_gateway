@@ -1,14 +1,14 @@
 <?php 
 	
 	class TransactionAddressDataJson {
-		var $logradouro;
-	    var $numero
-	    var $complemento;
-	    var $cep;
-	    var $bairro;
-	    var $cidade;
-	    var $estado;
-	    var $pais;
+		public $logradouro;
+	    public $numero
+	    public $complemento;
+	    public $cep;
+	    public $bairro;
+	    public $cidade;
+	    public $estado;
+	    public $pais;
 
 
 	    public function __construct($transactionAddressData) {

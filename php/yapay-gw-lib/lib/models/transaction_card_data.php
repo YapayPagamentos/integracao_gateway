@@ -1,13 +1,13 @@
 <?php 
 	
 	class TransactionCardData {
-		var $cardHolderName;
-	    var $cardNumber;
-	    var $cvv;
-	    var $expirationDate;
-	    var $paymentCode;
-	    var $installments;
-	    var $value;
+		public $cardHolderName;
+	    public $cardNumber;
+	    public $cvv;
+	    public $expirationDate;
+	    public $paymentCode;
+	    public $installments;
+	    public $value;
 
 	}
 

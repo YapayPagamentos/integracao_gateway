@@ -1,17 +1,17 @@
 <?php 
 	
 	class RecurringShippingDataJson {
-	    var $nomeEntrega;
-	    var $emailEntrega;
-	    var $enderecoEntrega;
-	    var $numeroEnderecoEntrega;
-	    var $bairroEntrega;
-	    var $complementoEntrega;
-	    var $cidadeEntrega;
-	    var $estadoEntrega;
-	    var $cepEntrega;
-	    var $paisEntrega;
-	    var $telefone;
+	    public $nomeEntrega;
+	    public $emailEntrega;
+	    public $enderecoEntrega;
+	    public $numeroEnderecoEntrega;
+	    public $bairroEntrega;
+	    public $complementoEntrega;
+	    public $cidadeEntrega;
+	    public $estadoEntrega;
+	    public $cepEntrega;
+	    public $paisEntrega;
+	    public $telefone;
 
 	    public function __construct($recurringShippingData) {
 	       $this->nomeEntrega = $recurringShippingData->shippingName;

@@ -1,12 +1,12 @@
 <?php 
 	
 	class TransactionItemData {
-		var $productCode;
-	    var $productCategory;
-	    var $productName;
-	    var $productAmount;
-	    var $productUnitaryValue;
-	    var $categoryName;
+		public $productCode;
+	    public $productCategory;
+	    public $productName;
+	    public $productAmount;
+	    public $productUnitaryValue;
+	    public $categoryName;
 
 
 	}

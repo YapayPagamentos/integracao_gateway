@@ -1,23 +1,23 @@
 <?php 
 	
 	class RecurringChargingDataJson {
-		var $nomeComprador;
-	    var $emailComprador;
-	    var $tipoCliente;
-	    var $documento;
-	    var $dataNascimento;
-	    var $codigoCliente;
-	    var $sexo;
-	    var $documento2;
-	    var $enderecoComprador;
-	    var $numeroEnderecoComprador;
-	    var $bairroComprador;
-	    var $complementoComprador;
-	    var $cidadeComprador;
-	    var $estadoComprador;
-	    var $cepComprador;
-	    var $paisComprador;
-	    var $telefone;
+		public $nomeComprador;
+	    public $emailComprador;
+	    public $tipoCliente;
+	    public $documento;
+	    public $dataNascimento;
+	    public $codigoCliente;
+	    public $sexo;
+	    public $documento2;
+	    public $enderecoComprador;
+	    public $numeroEnderecoComprador;
+	    public $bairroComprador;
+	    public $complementoComprador;
+	    public $cidadeComprador;
+	    public $estadoComprador;
+	    public $cepComprador;
+	    public $paisComprador;
+	    public $telefone;
 
 	    public function __construct($recurringChargingData) {
 	        $this->nomeComprador = $recurringChargingData->buyerName;

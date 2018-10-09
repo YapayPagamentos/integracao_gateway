@@ -1,16 +1,16 @@
 <?php 
 	
 	class TransactionAirlineFlightRangeDataJson {
-		var $classeDoServico;
-	    var $dataDaViagem;
-	    var $codigoCompanhiaAerea;
-	    var $escalaPermitida;
-	    var $aeroportoPartida;
-	    var $dataHoraPartida;
-	    var $aeroportoChegada;
-	    var $dataHoraChegada;
-	    var $numeroVoo;
-	    var $classeTarifaria;
+		public $classeDoServico;
+	    public $dataDaViagem;
+	    public $codigoCompanhiaAerea;
+	    public $escalaPermitida;
+	    public $aeroportoPartida;
+	    public $dataHoraPartida;
+	    public $aeroportoChegada;
+	    public $dataHoraChegada;
+	    public $numeroVoo;
+	    public $classeTarifaria;
 
 	    public function __construct($transactionAirlineFlightRangeData) {
        		$this->classeDoServico = $transactionAirlineFlightRangeData->serviceClass;

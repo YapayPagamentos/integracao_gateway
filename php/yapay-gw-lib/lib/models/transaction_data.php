@@ -1,28 +1,28 @@
 <?php 
 	
 	class TransactionData {
-		var $transactionNumber;
-		var $value;
-		var $discountValue;
-		var $boardingFee;
-		var $installments;
-		var $installmentType;
-		var $hintUrl;
-		var $resultUrl;
-		var $unpaidRedirectUrl;
-		var $idiom;
-		var $ip;
-		var $browser;
-		var $transactionOrigin;
-		var $freeFieldOne;
-		var $freeFieldTwo;
-		var $freeFieldThree;
-		var $freeFieldFour;
-		var $freeFieldFive;
-		var $billDueDate;
-		var $country;
-		var $currency;
-		var $recurrentPayment;
+		public $transactionNumber;
+		public $value;
+		public $discountValue;
+		public $boardingFee;
+		public $installments;
+		public $installmentType;
+		public $hintUrl;
+		public $resultUrl;
+		public $unpaidRedirectUrl;
+		public $idiom;
+		public $ip;
+		public $browser;
+		public $transactionOrigin;
+		public $freeFieldOne;
+		public $freeFieldTwo;
+		public $freeFieldThree;
+		public $freeFieldFour;
+		public $freeFieldFive;
+		public $billDueDate;
+		public $country;
+		public $currency;
+		public $recurrentPayment;
 
 	}
 

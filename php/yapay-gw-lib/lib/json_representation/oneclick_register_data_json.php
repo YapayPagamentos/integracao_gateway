@@ -1,12 +1,12 @@
 <?php 
 	
 	class OneclickRegisterDataJson {
-		var $codigoEstabelecimento;
-	    var $nomeTitularCartaoCredito;
-	    var $numeroCartaoCredito;
-	    var $dataValidadeCartao;
-	    var $emailComprador;
-	    var $formaPagamento;
+		public $codigoEstabelecimento;
+	    public $nomeTitularCartaoCredito;
+	    public $numeroCartaoCredito;
+	    public $dataValidadeCartao;
+	    public $emailComprador;
+	    public $formaPagamento;
 
 		public function __construct($oneClickRegisterData) {
 		   $this->codigoEstabelecimento = $oneClickRegisterData->storeCode;

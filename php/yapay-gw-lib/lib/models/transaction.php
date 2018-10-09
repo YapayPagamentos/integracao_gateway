@@ -1,18 +1,18 @@
 <?php 
 	
 	class Transaction {
-		var $storeCode;
-	    var $paymentCode;
-	    var $transactionData;
-	    var $transactionCheckoutData;
-	    var $transactionCardData;
-	    var $transactionMultipleCardData;
-	    var $transactionDebitData;
-	    var $transactionItemData;
-	    var $transactionChargingData;
-	    var $transactionDeliveryData;
-	    var $transactionAirlineData;
-	    var $transactionExtraFields;
+		public $storeCode;
+	    public $paymentCode;
+	    public $transactionData;
+	    public $transactionCheckoutData;
+	    public $transactionCardData;
+	    public $transactionMultipleCardData;
+	    public $transactionDebitData;
+	    public $transactionItemData;
+	    public $transactionChargingData;
+	    public $transactionDeliveryData;
+	    public $transactionAirlineData;
+	    public $transactionExtraFields;
 	}
 
  ?>

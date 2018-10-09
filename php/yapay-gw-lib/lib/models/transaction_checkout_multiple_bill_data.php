@@ -1,8 +1,8 @@
 <?php 
 	
 	class TransactionCheckoutMultipleBillData {
-		var $value;
-    	var $dueData;
+		public $value;
+    	public $dueData;
 	}
 
  ?>

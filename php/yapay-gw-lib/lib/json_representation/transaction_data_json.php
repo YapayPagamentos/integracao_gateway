@@ -1,28 +1,28 @@
 <?php 
 	
 	class TransactionDataJson {
-		var $numeroTransacao;
-		var $valor;
-		var $valorDesconto;
-		var $taxaEmbarque;
-		var $parcelas;
-		var $tipoParcelamento;
-		var $urlCampainha;
-		var $urlResultado;
-		var $urlRedirecionamentoNaoPago;
-		var $idioma;
-		var $ip;
-		var $browser;
-		var $origemTransacao;
-		var $campoLivre1;
-		var $campoLivre2;
-		var $campoLivre3;
-		var $campoLivre4;
-		var $campoLivre5;
-		var $dataVencimentoBoleto;
-		var $pais;
-		var $moeda;
-		var $pagamentoRecorrente;
+		public $numeroTransacao;
+		public $valor;
+		public $valorDesconto;
+		public $taxaEmbarque;
+		public $parcelas;
+		public $tipoParcelamento;
+		public $urlCampainha;
+		public $urlResultado;
+		public $urlRedirecionamentoNaoPago;
+		public $idioma;
+		public $ip;
+		public $browser;
+		public $origemTransacao;
+		public $campoLivre1;
+		public $campoLivre2;
+		public $campoLivre3;
+		public $campoLivre4;
+		public $campoLivre5;
+		public $dataVencimentoBoleto;
+		public $pais;
+		public $moeda;
+		public $pagamentoRecorrente;
 
 		public function __construct($transactionData) {
 	        $this->numeroTransacao = $transactionData->transactionNumber;

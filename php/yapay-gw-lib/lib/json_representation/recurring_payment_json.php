@@ -1,8 +1,8 @@
 <?php 
 	
 	class RecurringPaymentJson {
-		var $recorrencia;
-    	var $estabelecimento;
+		public $recorrencia;
+    	public $estabelecimento;
 
     	public function __construct($recurringPayment) {
         	$this->recorrencia = $recurringPayment->recurringPaymentData;

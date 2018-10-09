@@ -1,14 +1,14 @@
 <?php 
 	
 	class TransactionAirlineTripDataJson {
-		var $pnr;
-	    var $titularCartaoEPassageiro;
-	    var $dataEmissaoPassagem;
-	    var $codigoCompanhiaAerea;
-	    var $aeroportoPartida;
-	    var $dataHoraPartida;
-	    var $aeroportoChegada;
-	    var $dataHoraChegada;
+		public $pnr;
+	    public $titularCartaoEPassageiro;
+	    public $dataEmissaoPassagem;
+	    public $codigoCompanhiaAerea;
+	    public $aeroportoPartida;
+	    public $dataHoraPartida;
+	    public $aeroportoChegada;
+	    public $dataHoraChegada;
 
 	    public function __construct($transactionAirlineTripData) {
         	$this->pnr = $transactionAirlineTripData->pnr;

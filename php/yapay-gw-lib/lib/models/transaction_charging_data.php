@@ -1,16 +1,16 @@
 <?php 
 	
 	class TransactionChargingData {
-		var $clientCode;
-	    var $clientType;
-	    var $clientName;
-	    var $clientEmail;
-	    var $clientBirthday;
-	    var $clientSex;
-	    var $clientDocument;
-	    var $clientDocumentTwo;
-	    var $clientChargingAdressData;
-	    var $clientChargingPhoneData;
+		public $clientCode;
+	    public $clientType;
+	    public $clientName;
+	    public $clientEmail;
+	    public $clientBirthday;
+	    public $clientSex;
+	    public $clientDocument;
+	    public $clientDocumentTwo;
+	    public $clientChargingAdressData;
+	    public $clientChargingPhoneData;
 	}
 
  ?>

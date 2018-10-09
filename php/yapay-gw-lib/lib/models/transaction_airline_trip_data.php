@@ -1,14 +1,14 @@
 <?php 
 	
 	class TransactionAirlineTripData {
-		var $pnr;
-	    var $cardholderIsPassenger;
-	    var $ticketIssueDate;
-	    var $companyCode;
-	    var $departureAirport;
-	    var $departureDate;
-	    var $arrivalAirport;
-	    var $arrivalDate;
+		public $pnr;
+	    public $cardholderIsPassenger;
+	    public $ticketIssueDate;
+	    public $companyCode;
+	    public $departureAirport;
+	    public $departureDate;
+	    public $arrivalAirport;
+	    public $arrivalDate;
 	}
 
  ?>

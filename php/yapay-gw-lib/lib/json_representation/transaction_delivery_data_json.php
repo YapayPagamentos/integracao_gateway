@@ -1,14 +1,14 @@
 <?php 
 	
 	class TransactionDeliveryDataJson {
-		var $nome;
-	    var $email;
-	    var $dataNascimento;
-	    var $sexo;
-	    var $documento;
-	    var $documento2;
-	    var $endereco;
-	    var $telefone;
+		public $nome;
+	    public $email;
+	    public $dataNascimento;
+	    public $sexo;
+	    public $documento;
+	    public $documento2;
+	    public $endereco;
+	    public $telefone;
 
 	    public function __construct($transactionDeliveryData) {
 	        $this->nome = $transactionDeliveryData->name;

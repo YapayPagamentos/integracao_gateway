@@ -1,9 +1,9 @@
 <?php 
 	
 	class TransactionAirlinePassengerDataJson {
-		var $primeiroNome;
-	    var $segundoNome;
-	    var $sobrenome;
+		public $primeiroNome;
+	    public $segundoNome;
+	    public $sobrenome;
 
 	    public function __construct($transactionAirlinePassengerData) {
         	$this->primeiroNome = $transactionAirlinePassengerData->firstName;

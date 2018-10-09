@@ -1,12 +1,12 @@
 <?php 
 	
 	class TransactionItemDataJson {
-		var $codigoProduto;
-	    var $codigoCategoria;
-	    var $nomeProduto;
-	    var $quantidadeProduto;
-	    var $valorUnitarioProduto;
-	    var $nomeCategoria;
+		public $codigoProduto;
+	    public $codigoCategoria;
+	    public $nomeProduto;
+	    public $quantidadeProduto;
+	    public $valorUnitarioProduto;
+	    public $nomeCategoria;
 
 		public function __construct($transactionItemData) {
 	       $this->codigoProduto = $transactionItemData->productCode;

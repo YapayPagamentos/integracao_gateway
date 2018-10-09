@@ -1,11 +1,11 @@
 <?php 
 	
 	class TransactionDebitDataJson {
-		var $agencia;
-	    var $agenciaDigito;
-	    var $conta;
-	    var $contaDigito;
-	    var $tipoConta;
+		public $agencia;
+	    public $agenciaDigito;
+	    public $conta;
+	    public $contaDigito;
+	    public $tipoConta;
 
 	    public function __construct($transactionDebitData) {
 	        $this->agencia = $transactionDebitData->agency;

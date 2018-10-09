@@ -1,14 +1,14 @@
 <?php 
 	
 	class TransactionAddressData {
-		var $street;
-	    var $number
-	    var $complement;
-	    var $zipCode;
-	    var $district;
-	    var $city;
-	    var $state;
-	    var $country;
+		public $street;
+	    public $number
+	    public $complement;
+	    public $zipCode;
+	    public $district;
+	    public $city;
+	    public $state;
+	    public $country;
 	}
 
  ?>

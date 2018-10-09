@@ -1,10 +1,10 @@
 <?php 
 	
 	class TransactionPhoneDataJson {
-		var $ddi;
-	    var $ddd;
-	    var $telefone;
-	    var $tipoTelefone;
+		public $ddi;
+	    public $ddd;
+	    public $telefone;
+	    public $tipoTelefone;
 
 
 	    public function __construct($transactionPhoneData) {

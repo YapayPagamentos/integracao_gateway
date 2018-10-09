@@ -1,12 +1,12 @@
 <?php 
 	
 	class OneclickRegisterData {
-		var $storeCode;
-	    var $cardHolderName;
-	    var $cardNumber;
-	    var $expirationDate;
-	    var $buyerEmail;
-	    var $paymentCode;
+		public $storeCode;
+	    public $cardHolderName;
+	    public $cardNumber;
+	    public $expirationDate;
+	    public $buyerEmail;
+	    public $paymentCode;
 	}
 
  ?>

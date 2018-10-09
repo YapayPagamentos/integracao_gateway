@@ -1,10 +1,10 @@
 <?php 
 	
 	class TransactionPhoneData {
-		var $ddi;
-	    var $ddd;
-	    var $phone;
-	    var $phoneType;
+		public $ddi;
+	    public $ddd;
+	    public $phone;
+	    public $phoneType;
 
 	}
 

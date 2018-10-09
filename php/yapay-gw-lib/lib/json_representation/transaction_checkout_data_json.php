@@ -1,11 +1,11 @@
 <?php 
 	
 	class TransactionCheckoutDataJson {
-		var $processar;
-	    var $tipoPagamento;
-	    var $multiploCartao;
-	    var $multiploBoleto;
-	    var $boletos;
+		public $processar;
+	    public $tipoPagamento;
+	    public $multiploCartao;
+	    public $multiploBoleto;
+	    public $boletos;
 
 	    public function __construct($transactionCheckoutData) {
 	        $this->processar = $transactionCheckoutData->process;

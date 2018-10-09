@@ -1,18 +1,18 @@
 <?php 
 	
 	class TransactionJson {
-		var $codigoEstabelecimento;
-	    var $codigoFormaPagamento;
-	    var $transacao;
-	    var $checkout;
-	    var $dadosCartao;
-	    var $dadosMultiplosCartoes;
-	    var $dadosDebito;
-	    var $itensDoPedido;
-	    var $dadosCobranca;
-	    var $dadosEntrega;
-	    var $dadosAirline;
-	    var $camposExtras;
+		public $codigoEstabelecimento;
+	    public $codigoFormaPagamento;
+	    public $transacao;
+	    public $checkout;
+	    public $dadosCartao;
+	    public $dadosMultiplosCartoes;
+	    public $dadosDebito;
+	    public $itensDoPedido;
+	    public $dadosCobranca;
+	    public $dadosEntrega;
+	    public $dadosAirline;
+	    public $camposExtras;
 
 
 	    public function __construct($transaction) {

@@ -1,8 +1,8 @@
 <?php 
 	
 	class TransactionCheckoutMultipleBillDataJson {
-		var $valor;
-    	var $vencimento;
+		public $valor;
+    	public $vencimento;
 
     	public function __construct($transactionCheckoutMultipleBillData) {
         	$this->valor = $transactionCheckoutMultipleBillData->value;

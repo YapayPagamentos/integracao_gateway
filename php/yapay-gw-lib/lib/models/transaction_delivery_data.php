@@ -1,14 +1,14 @@
 <?php 
 	
 	class TransactionDeliveryData {
-		var $name;
-	    var $mail;
-	    var $birthday;
-	    var $sex;
-	    var $document;
-	    var $documentTwo;
-	    var $deliveryAddressData;
-	    var $deliveryPhoneData;
+		public $name;
+	    public $mail;
+	    public $birthday;
+	    public $sex;
+	    public $document;
+	    public $documentTwo;
+	    public $deliveryAddressData;
+	    public $deliveryPhoneData;
 
 	}
 

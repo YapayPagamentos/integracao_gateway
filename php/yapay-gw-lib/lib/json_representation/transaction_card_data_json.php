@@ -1,13 +1,13 @@
 <?php 
 	
 	class TransactionCardDataJson {
-		var $nomePortador;
-	    var $numeroCartao;
-	    var $codigoSeguranca;
-	    var $dataValidade;
-	    var $codigoFormaPagamento;
-	    var $parcelas;
-	    var $valor;
+		public $nomePortador;
+	    public $numeroCartao;
+	    public $codigoSeguranca;
+	    public $dataValidade;
+	    public $codigoFormaPagamento;
+	    public $parcelas;
+	    public $valor;
 
 	    public function __construct($transactionCardData) {
 			$this->nomePortador = $transactionCardData->cardHolderName;

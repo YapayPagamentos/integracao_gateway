@@ -1,9 +1,9 @@
 <?php 
 	
 	class Credential {
-	    var $user;
-	    var $password;
-	    var $storeCode;
+	    public $user;
+	    public $password;
+	    public $storeCode;
 
 	}
 

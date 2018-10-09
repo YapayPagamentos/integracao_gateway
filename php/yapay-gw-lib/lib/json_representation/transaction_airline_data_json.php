@@ -1,9 +1,9 @@
 <?php 
 	
 	class TransactionAirlineDataJson {
-	    var $dadosViagem;
-	    var $dadosPassageiros;
-	    var $dadosEscalas;
+	    public $dadosViagem;
+	    public $dadosPassageiros;
+	    public $dadosEscalas;
 
 	    public function __construct($transactionAirlineData) {
         	$this->dadosViagem = $transactionAirlineData->tripData;

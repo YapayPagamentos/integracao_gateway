@@ -1,16 +1,16 @@
 <?php 
 	
 	class TransactionAirlineFlightRangeData {
-		var $serviceClass;
-	    var $tripDate;
-	    var $companyCode;
-	    var $permitFlight;
-	    var $departureAirport;
-	    var $departureDate;
-	    var $arrivalAirport;
-	    var $arrivalDate;
-	    var $flyNumber;
-	    var $rateClass;
+		public $serviceClass;
+	    public $tripDate;
+	    public $companyCode;
+	    public $permitFlight;
+	    public $departureAirport;
+	    public $departureDate;
+	    public $arrivalAirport;
+	    public $arrivalDate;
+	    public $flyNumber;
+	    public $rateClass;
 	}
 
  ?>
