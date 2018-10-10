@@ -7,19 +7,25 @@
 		private $oneClickRegisterData;
 		
 		public function registerNewOneClick($storeCode, $paymentCode){
-			$oneClickRegisterData = new OneclickRegisterData();
-			$oneClickRegisterData->storeCode = $storeCode;
-			$oneClickRegisterData->paymentCode = $paymentCode;
+			$this->oneClickRegisterData = new OneclickRegisterData();
+			$this->oneClickRegisterData->storeCode = $storeCode;
+			$this->oneClickRegisterData->paymentCode = $paymentCode;
 		}
 
 		public function withCreditCard($cardHolderName, $cardNumber, $expirationDate){
-			$oneClickRegisterData->cardHolderName = $cardHolderName;
-			$oneClickRegisterData->cardNumber = $cardNumber;
-			$oneClickRegisterData->expirationDate = $expirationDate;
+			$this->oneClickRegisterData->cardHolderName = $cardHolderName;
+			$this->oneClickRegisterData->cardNumber = $cardNumber;
+			$this->oneClickRegisterData->expirationDate = $expirationDate;
 		}
 
 		public function forEmail($buyerEmail){
-			$oneClickRegisterData->buyerEmail = $buyerEmail;
+			$this->oneClickRegisterData->buyerEmail = $buyerEmail;
+		}
+
+		public function build(){
+			$myOneClickRegisterData = $this->oneClickRegisterData;
+			$this->oneClickRegisterData = null;
+			return $myOneClickRegisterData;
 		}
 
 	}

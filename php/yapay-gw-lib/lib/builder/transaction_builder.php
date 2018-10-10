@@ -15,25 +15,25 @@
 		private $transaction;
 
 		public function newTransaction($storeCode, $paymentCode, $transactionNumber, $value){
-			$transaction = new Transaction();
-			$transaction->storeCode = $storeCode;
-			$transaction->paymentCode = $paymentCode;
-			$transaction->transactionData = new TransactionData();
-			$transaction->transactionData->transactionNumber = $transactionNumber;
-			$transaction->transactionData->value = $value;
-			$transaction->transactionData->installments = 1;
+			$this->transaction = new Transaction();
+			$this->transaction->storeCode = $storeCode;
+			$this->transaction->paymentCode = $paymentCode;
+			$this->transaction->transactionData = new TransactionData();
+			$this->transaction->transactionData->transactionNumber = $transactionNumber;
+			$this->transaction->transactionData->value = $value;
+			$this->transaction->transactionData->installments = 1;
 		}
 
 		public function withInstallments($installments){
-			$transaction->transactionData->installments = $installments;
+			$this->$transaction->transactionData->installments = $installments;
 		}
 
 		public function withSingleCreditCard($cardHolderName, $cardNumber, $cvv, $expirationDate){
-			$transaction->transactionCardData = new TransactionCardData();
-			$transaction->transactionCardData->cardHolderName = $cardHolderName;
-			$transaction->transactionCardData->cardNumber = $cardNumber;
-			$transaction->transactionCardData->cvv = $cvv;
-			$transaction->transactionCardData->expirationDate = $expirationDate;
+			$this->transaction->transactionCardData = new TransactionCardData();
+			$this->transaction->transactionCardData->cardHolderName = $cardHolderName;
+			$this->transaction->transactionCardData->cardNumber = $cardNumber;
+			$this->transaction->transactionCardData->cvv = $cvv;
+			$this->transaction->transactionCardData->expirationDate = $expirationDate;
 		}
 
 		public function withItems($arrayOfTransactionItem){
@@ -50,6 +50,12 @@
 
 		public function withDeliveryData($deliveryData){
 			
+		}
+
+		public function build(){
+			$myTransaction = $this->transaction;
+			$this->transaction = null;
+			return $myTransaction;
 		}
 
 	}
