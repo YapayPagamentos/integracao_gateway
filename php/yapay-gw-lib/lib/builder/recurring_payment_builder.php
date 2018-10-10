@@ -49,15 +49,56 @@
 		}
 
 		public function withCharging($recurringChargingData){
-			
+			$this->recurringPayment->recurringPaymentData->recurringChargingData = new RecurringChargingData();
+			$this->recurringPayment->recurringPaymentData->recurringChargingData->buyerName = $recurringChargingData->buyerName;
+		    $this->recurringPayment->recurringPaymentData->recurringChargingData->buyerMail = $recurringChargingData->buyerMail;
+		    $this->recurringPayment->recurringPaymentData->recurringChargingData->clientType = $recurringChargingData->clientType;
+		    $this->recurringPayment->recurringPaymentData->recurringChargingData->document = $recurringChargingData->document;
+		    $this->recurringPayment->recurringPaymentData->recurringChargingData->birthday = $recurringChargingData->birthday;
+		    $this->recurringPayment->recurringPaymentData->recurringChargingData->clientCode = $recurringChargingData->clientCode;
+		    $this->recurringPayment->recurringPaymentData->recurringChargingData->clientSex = $recurringChargingData->clientSex;
+		    $this->recurringPayment->recurringPaymentData->recurringChargingData->documentTwo = $recurringChargingData->documentTwo;
+		    $this->recurringPayment->recurringPaymentData->recurringChargingData->clientAddressStreet = $recurringChargingData->clientAddressStreet;
+		    $this->recurringPayment->recurringPaymentData->recurringChargingData->clientAddressNumber = $recurringChargingData->clientAddressNumber;
+		    $this->recurringPayment->recurringPaymentData->recurringChargingData->clientAddressDistrict = $recurringChargingData->clientAddressDistrict;
+		    $this->recurringPayment->recurringPaymentData->recurringChargingData->clientAddressComplement = $recurringChargingData->clientAddressComplement;
+		    $this->recurringPayment->recurringPaymentData->recurringChargingData->clientAddressCity = $recurringChargingData->clientAddressCity;
+		    $this->recurringPayment->recurringPaymentData->recurringChargingData->clientAddressState = $recurringChargingData->clientAddressState;
+		    $this->recurringPayment->recurringPaymentData->recurringChargingData->clientAddressZipcode = $recurringChargingData->clientAddressZipcode;
+		    $this->recurringPayment->recurringPaymentData->recurringChargingData->clientAddressCountry = $recurringChargingData->clientAddressCountry;
+
+		    if ($recurringChargingData->clientPhone != null) {
+		    	$myPhones = array();
+		    	foreach ($recurringChargingData->clientPhone as $clientPhone) {
+		    		$phone = new TransactionPhoneData();
+		    		$phone->ddd = $clientPhone->ddd;
+		    		$phone->ddi = $clientPhone->ddi;
+		    		$phone->phone = $clientPhone->phone;
+		    		$phone->phoneType = $clientPhone->phoneType;
+		    		array_push($myPhones, $phone);
+		    	}
+		    	$this->recurringPayment->recurringPaymentData->recurringChargingData->clientPhone = $myPhones;
+		    }
 		}
 
-		public function withCreditCatd($creditCardData){
-			
+		public function withCreditCard($creditCardData){
+			$this->recurringPayment->recurringPaymentData->recurringCardData = new TransactionCardData();
+			$this->recurringPayment->recurringPaymentData->recurringCardData->cardHolderName = $creditCardData->cardHolderName;
+			$this->recurringPayment->recurringPaymentData->recurringCardData->cardNumber = $creditCardData->cardNumber;
+			$this->recurringPayment->recurringPaymentData->recurringCardData->cvv = $creditCardData->cvv;
+			$this->recurringPayment->recurringPaymentData->recurringCardData->expirationDate = $creditCardData->expirationDate;
+			$this->recurringPayment->recurringPaymentData->recurringCardData->paymentCode = $creditCardData->paymentCode;
+			$this->recurringPayment->recurringPaymentData->recurringCardData->installments = $creditCardData->installments;
+			$this->recurringPayment->recurringPaymentData->recurringCardData->value = $creditCardData->value;
 		}
 
 		public function withDebitCard($debitCardData){
-			
+			$this->recurringPayment->recurringPaymentData->recurringDebitData = new TransactionDebitData();
+			$this->recurringPayment->recurringPaymentData->recurringDebitData->agency = $debitCardData->agency
+		    $this->recurringPayment->recurringPaymentData->recurringDebitData->agencyDigit = $debitCardData->agencyDigit
+		    $this->recurringPayment->recurringPaymentData->recurringDebitData->accountNumber = $debitCardData->accountNumber
+		    $this->recurringPayment->recurringPaymentData->recurringDebitData->accountNumberDigit = $debitCardData->accountNumberDigit
+		    $this->recurringPayment->recurringPaymentData->recurringDebitData->accountType = $debitCardData->accountType
 		}
 
 		public function withDelivery($recurringShippingData){
