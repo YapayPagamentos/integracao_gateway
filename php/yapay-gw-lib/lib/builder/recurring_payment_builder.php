@@ -102,7 +102,18 @@
 		}
 
 		public function withDelivery($recurringShippingData){
-			
+			$this->recurringPayment->recurringPaymentData->recurringShippingData = new RecurringShippingData();
+			$this->recurringPayment->recurringPaymentData->recurringShippingData->shippingName = $recurringShippingData->shippingName;
+			$this->recurringPayment->recurringPaymentData->recurringShippingData->shippingMail = $recurringShippingData->shippingMail;
+			$this->recurringPayment->recurringPaymentData->recurringShippingData->shippingStreet = $recurringShippingData->shippingStreet;
+			$this->recurringPayment->recurringPaymentData->recurringShippingData->shippingNumber = $recurringShippingData->shippingNumber;
+			$this->recurringPayment->recurringPaymentData->recurringShippingData->shippingDistrict = $recurringShippingData->shippingDistrict;
+			$this->recurringPayment->recurringPaymentData->recurringShippingData->shippingComplement = $recurringShippingData->shippingComplement;
+			$this->recurringPayment->recurringPaymentData->recurringShippingData->shippingCity = $recurringShippingData->shippingCity;
+			$this->recurringPayment->recurringPaymentData->recurringShippingData->shippingState = $recurringShippingData->shippingState;
+			$this->recurringPayment->recurringPaymentData->recurringShippingData->shippingZipcode = $recurringShippingData->shippingZipcode;
+			$this->recurringPayment->recurringPaymentData->recurringShippingData->shippingCountry = $recurringShippingData->shippingCountry;
+			$this->recurringPayment->recurringPaymentData->recurringShippingData->shippingPhone = $recurringShippingData->shippingPhone;
 		}
 
 		public function build(){
