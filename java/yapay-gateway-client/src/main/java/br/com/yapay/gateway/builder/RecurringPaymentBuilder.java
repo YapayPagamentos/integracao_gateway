@@ -26,6 +26,7 @@ public class RecurringPaymentBuilder{
 		recurringPayment.getRecurringPaymentData().setPaymentCode(paymentCode);
 		recurringPayment.getRecurringPaymentData().setRecurringPaymentNumber(recurringPaymentNumber);
 		recurringPayment.getRecurringPaymentData().setValue(value);
+		recurringPayment.getRecurringPaymentData().setModality(1);
 	}
 
 	public static void withFrequencyOf(Integer frequency) {
