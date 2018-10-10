@@ -45,7 +45,17 @@
 		}
 
 		public function includeExtraFields($arrayOfExtraFields){
-			
+
+			if($arrayOfExtraFields != null){
+				$myExtraFields = array();
+				foreach ($arrayOfExtraFields as $extraField) {
+					$myExtraField = new TransactionExtraField();
+					$myExtraField->key = $extraField->key;
+					$myExtraField->value = $extraField->value;
+					array_push($myExtraFields, $myExtraField);
+				}
+			$this->transactionExtraFields = $myExtraFields;
+			}
 		}
 
 		public function withDeliveryData($deliveryData){
