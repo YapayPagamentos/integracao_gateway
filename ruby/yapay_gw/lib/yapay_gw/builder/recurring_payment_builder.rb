@@ -76,7 +76,6 @@ module Builder
                 @recurring_payment.recurring_payment_data.recurring_charging_data.client_phone.phone = recurring_charging_data.client_phone.phone
                 @recurring_payment.recurring_payment_data.recurring_charging_data.client_phone.phone_type = recurring_charging_data.client_phone.phone_type
             end
-
             @recurring_payment
         end
 
@@ -90,7 +89,6 @@ module Builder
             @recurring_payment.recurring_payment_data.recurring_card_data.installments = credit_card_data.installments
             @recurring_payment.recurring_payment_data.recurring_card_data.value = credit_card_data.value
             @recurring_payment
-
         end
 
         def self.with_debit_card(debit_card_data)
@@ -123,7 +121,6 @@ module Builder
                 @recurring_payment.recurring_payment_data.recurring_shipping_data.shipping_phone.phone = shipping_data.shipping_phone.phone
                 @recurring_payment.recurring_payment_data.recurring_shipping_data.shipping_phone.phone_type = shipping_data.shipping_phone.phone_type
             end
-
             @recurring_payment
         end
     end
