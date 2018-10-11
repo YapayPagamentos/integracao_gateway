@@ -2,7 +2,7 @@
 	
 	class TransactionAddressData {
 		public $street;
-	    public $number
+	    public $number;
 	    public $complement;
 	    public $zipCode;
 	    public $district;
