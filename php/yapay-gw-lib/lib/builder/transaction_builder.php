@@ -103,11 +103,43 @@
 					$myExtraField->value = $extraField->value;
 					array_push($myExtraFields, $myExtraField);
 				}
-			$this->transactionExtraFields = $myExtraFields;
+			$this->transaction->transactionExtraFields = $myExtraFields;
 			}
 		}
 
 		public function withDeliveryData($deliveryData){
+			$this->transaction->transactionDeliveryData->name = $deliveryData->name;
+			$this->transaction->transactionDeliveryData->mail = $deliveryData->mail;
+			$this->transaction->transactionDeliveryData->birthday = $deliveryData->birthday;
+			$this->transaction->transactionDeliveryData->sex = $deliveryData->sex;
+			$this->transaction->transactionDeliveryData->document = $deliveryData->document;
+			$this->transaction->transactionDeliveryData->documentTwo = $deliveryData->documentTwo;
+
+			if ($deliveryData->deliveryAddressData != null) {
+				$this->transaction->transactionDeliveryData->deliveryAddressData = new TransactionAddressData();
+				$this->transaction->transactionDeliveryData->deliveryAddressData->street = $deliveryData->deliveryAddressData->street;
+				$this->transaction->transactionDeliveryData->deliveryAddressData->number = $deliveryData->deliveryAddressData->number;
+				$this->transaction->transactionDeliveryData->deliveryAddressData->complement = $deliveryData->deliveryAddressData->complement;
+				$this->transaction->transactionDeliveryData->deliveryAddressData->zipCode = $deliveryData->deliveryAddressData->zipCode;
+				$this->transaction->transactionDeliveryData->deliveryAddressData->district = $deliveryData->deliveryAddressData->district;
+				$this->transaction->transactionDeliveryData->deliveryAddressData->city = $deliveryData->deliveryAddressData->city;
+				$this->transaction->transactionDeliveryData->deliveryAddressData->state = $deliveryData->deliveryAddressData->state;
+				$this->transaction->transactionDeliveryData->deliveryAddressData->country = $deliveryData->deliveryAddressData->country;
+			}
+
+			if ($deliveryData->deliveryPhoneData != null) {
+				$myPhones = array();
+				foreach ($deliveryData->deliveryPhoneData as $phoneData) {
+					$phone = new TransactionPhoneData;
+					$phone->ddd = $phoneData->ddd;
+					$phone->ddi = $phoneData->ddi;
+					$phone->phone = $phoneData->phone;
+					$phone->phoneType = $phoneData->phoneType;
+					array_push($myPhones, $phone);
+				}
+
+				$this->transaction->transactionDeliveryData->deliveryPhoneData = $myPhones;
+			}
 			
 		}
 
