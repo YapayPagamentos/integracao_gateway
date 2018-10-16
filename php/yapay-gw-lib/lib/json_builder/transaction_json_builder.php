@@ -11,14 +11,20 @@
 			$jsonTransaction = new TransactionJson();
 			$jsonTransaction->transacao = $this->newTransactionData($transaction->transactionData);
 			$jsonTransaction->dadosCartao = $this->newTransactionCardData($transaction->transactionCardData);
+
+			return $jsonTransaction;
 		}
 
 		public function newTransactionData($transactionData){
 			$jsonTransactionData = new TransactionDataJson();
+
+			return $jsonTransactionData;
 		}
 
 		public function newTransactionCardData($transactionCardData){
 			$jsonTransactionCardData = new TransactionCardData();
+
+			return $jsonTransactionCardData;
 		}
 	}
 
