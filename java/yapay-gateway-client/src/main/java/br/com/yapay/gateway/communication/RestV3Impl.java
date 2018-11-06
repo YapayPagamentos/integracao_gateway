@@ -62,8 +62,14 @@ public class RestV3Impl implements RestV3 {
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
 
-		HttpResponse response = client.execute(newPut(
-				communicationUrl + "/api/v3/transacao/" + storeCode + "/" + transactionNumber + "/capturar", null));
+		String valueParameter = "";
+
+		if (value != null && value > 0) {
+			valueParameter = "?valor=" + value.toString();
+		}
+
+		HttpResponse response = client.execute(newPut(communicationUrl + "/api/v3/transacao/" + storeCode + "/"
+				+ transactionNumber + "/capturar" + valueParameter, null));
 
 		return new BasicResponseHandler().handleResponse(response);
 	}
@@ -72,8 +78,15 @@ public class RestV3Impl implements RestV3 {
 	public String transactionCancel(Credential credential, String storeCode, Long transactionNumber, Long value)
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
-		HttpResponse response = client.execute(newPut(
-				communicationUrl + "/api/v3/transacao/" + storeCode + "/" + transactionNumber + "/cancelar", null));
+
+		String valueParameter = "";
+
+		if (value != null && value > 0) {
+			valueParameter = "?valor=" + value.toString();
+		}
+
+		HttpResponse response = client.execute(newPut(communicationUrl + "/api/v3/transacao/" + storeCode + "/"
+				+ transactionNumber + "/cancelar" + valueParameter, null));
 
 		return new BasicResponseHandler().handleResponse(response);
 	}
