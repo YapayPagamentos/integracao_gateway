@@ -18,10 +18,10 @@ public class OneClickBuilder{
 		oneClickData.setStoreCode(storeCode);
 	}
 	
-	public static void withCreditCard(String cardHolderName, String cardNumber, String cardExpirationData) {
+	public static void withCreditCard(String cardHolderName, String cardNumber, String cardExpiration) {
 		oneClickData.setCardHolderName(cardHolderName);
 		oneClickData.setCardNumber(cardNumber);
-		oneClickData.setExpirationDate(cardExpirationData);
+		oneClickData.setExpirationDate(cardExpiration);
 	}
 	
 	public static void forEmail(String buyerEmail) {
