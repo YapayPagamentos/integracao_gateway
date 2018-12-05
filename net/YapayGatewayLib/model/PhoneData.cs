@@ -5,12 +5,16 @@ namespace YapayGatewayLib.Model
 {
     public class PhoneData
     {
-	 string ddi{get;set;}
-	
-	 string ddd{get;set;}
-	
-	 string phone{get;set;}
-	
-	 int phoneType{get;set;}
+        [JsonProperty(PropertyName = "ddi")]
+        string ddi { get; set; }
+
+        [JsonProperty(PropertyName = "ddd")]
+        string ddd { get; set; }
+
+        [JsonProperty(PropertyName = "telefone")]
+        string phone { get; set; }
+
+        [JsonProperty(PropertyName = "tipoTelefone")]
+        int phoneType { get; set; }
     }
 }
