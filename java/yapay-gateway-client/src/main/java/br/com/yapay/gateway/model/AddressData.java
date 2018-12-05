@@ -7,7 +7,7 @@ public class AddressData {
 	@SerializedName("logradouro")
 	private String street;
 
-	@SerializedName("numbero")
+	@SerializedName("numero")
 	private String number;
 
 	@SerializedName("complemento")
