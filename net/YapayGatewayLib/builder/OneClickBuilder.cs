@@ -6,9 +6,14 @@ namespace YapayGatewayLib.Builder
     public class OneClickBuilder
     {
 
+        private static OneClickRegisterData registerData;
+
         public static OneClickRegisterData build()
         {
-            return null;
+            OneClickRegisterData newRegisterData = registerData;
+            registerData = null;
+
+            return newRegisterData;
         }
 
 
