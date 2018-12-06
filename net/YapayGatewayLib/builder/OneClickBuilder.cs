@@ -19,17 +19,21 @@ namespace YapayGatewayLib.Builder
 
         public static void NewOneClickRegister(string storeCode, long paymentCode)
         {
-
+            registerData = new OneClickRegisterData();
+            registerData.storeCode = storeCode;
+            registerData.paymentCode = paymentCode;
         }
 
         public static void WithCreditCard(string cardHoldername, string cardNumber, string cardExpiration)
         {
-
+            registerData.cardHolderName = cardHoldername;
+            registerData.cardNumber = cardNumber;
+            registerData.expirationDate = cardExpiration;
         }
 
         public static void ForEmail(string buyerEmail)
         {
-
+            registerData.buyerEmail = buyerEmail;
         }
     }
 }
