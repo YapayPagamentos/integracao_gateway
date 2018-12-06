@@ -11,7 +11,10 @@ namespace YapayGatewayLib.Builder
 
         public static Transaction build()
         {
-            return null;
+
+            Transaction newTransaction = transaction;
+            transaction = null;
+            return transaction;
         }
 
 
@@ -19,21 +22,34 @@ namespace YapayGatewayLib.Builder
         {
             transaction = new Transaction();
             transaction.transactionData = new TransactionData();
+            transaction.storeCode = storeCode;
+            transaction.paymentCode = paymentCode;
+            transaction.transactionData.transactionNumber = transactionNumber;
+            transaction.transactionData.value = value;
         }
 
         public static void WithInstallments(int installments)
         {
-
+            transaction.transactionData.installments = installments;
         }
 
         public static void WithSingleCreditCard(string cardHolderName, string cardNumber, string cvv, string expirationDate)
         {
-
+            transaction.creditCard = new CreditCardData();
+            transaction.creditCard.cardHolderName = cardHolderName;
+            transaction.creditCard.cardNumber = cardNumber;
+            transaction.creditCard.cvv = cvv;
+            transaction.creditCard.expirationDate = expirationDate;
         }
 
         public static void WithSingleDebitCard(string agency, string agencyDigit, string accountNumber, string accountNumberDigit, string accountType)
         {
-
+            transaction.debitCard = new DebitCardData();
+            transaction.debitCard.agency = agency;
+            transaction.debitCard.agencyDigit = agencyDigit;
+            transaction.debitCard.accountNumber = accountNumber;
+            transaction.debitCard.accountNumberDigit = accountNumberDigit;
+            transaction.debitCard.accountType = accountType;
         }
 
         public static void WithItems(List<ItemData> listOfItems)
