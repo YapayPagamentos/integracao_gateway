@@ -6,13 +6,13 @@ namespace YapayGatewayLib.Model
 {
     public class AirlineData
     {
-        [JsonProperty(PropertyName = "dadosViagem")]
-        AirlineTripData tripData { get; set; }
+      [JsonProperty(PropertyName = "dadosViagem")]
+      public AirlineTripData tripData { get; set; }
 
-        [JsonProperty(PropertyName = "dadosPassageiros")]
-        List<PassengerData> passengerData { get; set; }
+      [JsonProperty(PropertyName = "dadosPassageiros")]
+      public List<PassengerData> passengerData { get; set; }
 
-        [JsonProperty(PropertyName = "dadosEscalas")]
-        List<FlightRangeData> flightRange { get; set; }
+      [JsonProperty(PropertyName = "dadosEscalas")]
+      public List<FlightRangeData> flightRange { get; set; }
     }
 }

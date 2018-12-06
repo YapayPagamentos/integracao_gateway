@@ -6,9 +6,9 @@ namespace YapayGatewayLib.Model
     public class TransactionCheckoutMultipleBillData
     {
         [JsonProperty(PropertyName = "valor")]
-        long value { get; set; }
+        public long value { get; set; }
 
         [JsonProperty(PropertyName = "vencimento")]
-        string dueDate { get; set; }
+        public string dueDate { get; set; }
     }
 }

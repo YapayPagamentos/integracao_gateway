@@ -6,12 +6,12 @@ namespace YapayGatewayLib.Model
     public class PassengerData
     {
     [JsonProperty(PropertyName = "primeiroNome")]
-	 string firstName{get;set;}
+	public string firstName{get;set;}
 
-     [JsonProperty(PropertyName = "segundoNome")]
-	 string middleName{get;set;}
+    [JsonProperty(PropertyName = "segundoNome")]
+	public string middleName{get;set;}
 
-     [JsonProperty(PropertyName = "sobrenome")]
-	 string lastName{get;set;}
+    [JsonProperty(PropertyName = "sobrenome")]
+	public string lastName{get;set;}
     }
 }

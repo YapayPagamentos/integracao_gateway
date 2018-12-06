@@ -6,36 +6,36 @@ namespace YapayGatewayLib.Model
     public class RecurringPaymentDeliveryData
     {
         [JsonProperty(PropertyName = "nomeEntrega")]
-        string deliveryName { get; set; }
+        public string deliveryName { get; set; }
 
         [JsonProperty(PropertyName = "emailEntrega")]
-        string deliveryMail { get; set; }
+        public string deliveryMail { get; set; }
 
         [JsonProperty(PropertyName = "enderecoEntrega")]
-        string deliveryStreet { get; set; }
+        public string deliveryStreet { get; set; }
 
         [JsonProperty(PropertyName = "numeroEnderecoEntrega")]
-        string deliveryNumber { get; set; }
+        public string deliveryNumber { get; set; }
 
         [JsonProperty(PropertyName = "bairroEntrega")]
-        string deliveryDistrict { get; set; }
+        public string deliveryDistrict { get; set; }
 
         [JsonProperty(PropertyName = "complementoEntrega")]
-        string deliveryComplement { get; set; }
+        public string deliveryComplement { get; set; }
 
         [JsonProperty(PropertyName = "cidadeEntrega")]
-        string deliveryCity { get; set; }
+        public string deliveryCity { get; set; }
 
         [JsonProperty(PropertyName = "estadoEntrega")]
-        string deliveryState { get; set; }
+        public string deliveryState { get; set; }
 
         [JsonProperty(PropertyName = "cepEntrega")]
-        string deliveryZipCode { get; set; }
+        public string deliveryZipCode { get; set; }
 
         [JsonProperty(PropertyName = "paisEntrega")]
-        string deliveryCountry { get; set; }
+        public string deliveryCountry { get; set; }
 
         [JsonProperty(PropertyName = "telefone")]
-        PhoneData phone { get; set; }
+        public PhoneData phone { get; set; }
     }
 }

@@ -6,69 +6,69 @@ namespace YapayGatewayLib.Model
     public class TransactionData
     {
         [JsonProperty(PropertyName = "numeroTransacao")]
-        long transactionNumber { get; set; }
+        public long transactionNumber { get; set; }
 
         [JsonProperty(PropertyName = "valor")]
-        long value { get; set; }
+        public long value { get; set; }
 
         [JsonProperty(PropertyName = "valorDesconto")]
-        long discountValue { get; set; }
+        public long discountValue { get; set; }
 
         [JsonProperty(PropertyName = "taxaEmbarque")]
-        long boardingFee { get; set; }
+        public long boardingFee { get; set; }
 
         [JsonProperty(PropertyName = "parcelas")]
-        int installments { get; set; }
+        public int installments { get; set; }
 
         [JsonProperty(PropertyName = "tipoParcelamento")]
-        string installmentType { get; set; }
+        public string installmentType { get; set; }
 
         [JsonProperty(PropertyName = "urlCampainha")]
-        string hintUrl { get; set; }
+        public string hintUrl { get; set; }
 
         [JsonProperty(PropertyName = "urlResultado")]
-        string resultUrl { get; set; }
+        public string resultUrl { get; set; }
 
         [JsonProperty(PropertyName = "urlRedirecionamentoNaoPago")]
-        string unpaidRedirectUrl { get; set; }
+        public string unpaidRedirectUrl { get; set; }
 
         [JsonProperty(PropertyName = "idioma")]
-        int idiom { get; set; }
+        public int idiom { get; set; }
 
         [JsonProperty(PropertyName = "ip")]
-        string ip { get; set; }
+        public string ip { get; set; }
 
         [JsonProperty(PropertyName = "browser")]
-        string browser { get; set; }
+        public string browser { get; set; }
 
         [JsonProperty(PropertyName = "origemTransacao")]
-        int transactionOrigin { get; set; }
+        public int transactionOrigin { get; set; }
 
         [JsonProperty(PropertyName = "campoLivre1")]
-        string freeFieldOne { get; set; }
+        public string freeFieldOne { get; set; }
 
         [JsonProperty(PropertyName = "campoLivre2")]
-        string freeFieldTwo { get; set; }
+        public string freeFieldTwo { get; set; }
 
         [JsonProperty(PropertyName = "campoLivre3")]
-        string freeFieldThree { get; set; }
+        public string freeFieldThree { get; set; }
 
         [JsonProperty(PropertyName = "campoLivre4")]
-        string freeFieldFour { get; set; }
+        public string freeFieldFour { get; set; }
 
         [JsonProperty(PropertyName = "campoLivre5")]
-        string freeFieldFive { get; set; }
+        public string freeFieldFive { get; set; }
 
         [JsonProperty(PropertyName = "dataVencimentoBoleto")]
-        string billDueDate { get; set; }
+        public string billDueDate { get; set; }
 
         [JsonProperty(PropertyName = "pais")]
-        string country { get; set; }
+        public string country { get; set; }
 
         [JsonProperty(PropertyName = "moeda")]
-        string currency { get; set; }
+        public string currency { get; set; }
 
         [JsonProperty(PropertyName = "pagamentoRecorrente")]
-        bool recurrentPayment { get; set; }
+        public bool recurrentPayment { get; set; }
     }
 }

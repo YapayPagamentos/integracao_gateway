@@ -6,34 +6,34 @@ namespace YapayGatewayLib.Model
 {
     public class ChargingData
     {
-        [JsonProperty(PropertyName = "codigoCliente")]
-        int clientCode { get; set; }
+       [JsonProperty(PropertyName = "codigoCliente")]
+       public int clientCode { get; set; }
 
-        [JsonProperty(PropertyName = "tipoCliente")]
-        int clientType { get; set; }
+       [JsonProperty(PropertyName = "tipoCliente")]
+       public int clientType { get; set; }
 
-        [JsonProperty(PropertyName = "nome")]
-        string clientName { get; set; }
+       [JsonProperty(PropertyName = "nome")]
+       public string clientName { get; set; }
 
-        [JsonProperty(PropertyName = "email")]
-        string clientEmail { get; set; }
+       [JsonProperty(PropertyName = "email")]
+       public string clientEmail { get; set; }
 
-        [JsonProperty(PropertyName = "dataNascimento")]
-        string clientBirthday { get; set; }
+       [JsonProperty(PropertyName = "dataNascimento")]
+       public string clientBirthday { get; set; }
 
-        [JsonProperty(PropertyName = "sexo")]
-        string clientSex { get; set; }
+       [JsonProperty(PropertyName = "sexo")]
+       public string clientSex { get; set; }
 
-        [JsonProperty(PropertyName = "documento")]
-        string clientDocument { get; set; }
+       [JsonProperty(PropertyName = "documento")]
+       public string clientDocument { get; set; }
 
-        [JsonProperty(PropertyName = "documento2")]
-        string clientDocumentTwo { get; set; }
+       [JsonProperty(PropertyName = "documento2")]
+       public string clientDocumentTwo { get; set; }
 
-        [JsonProperty(PropertyName = "endereco")]
-        AddressData clientChargingAdress { get; set; }
+       [JsonProperty(PropertyName = "endereco")]
+       public AddressData clientChargingAdress { get; set; }
 
-        [JsonProperty(PropertyName = "telefone")]
-        List<PhoneData> clientChargingPhone { get; set; }
+       [JsonProperty(PropertyName = "telefone")]
+       public List<PhoneData> clientChargingPhone { get; set; }
     }
 }

@@ -4,8 +4,8 @@ namespace YapayGatewayLib.Model
 {
     public class Credential
     {
-        string user { get; set; }
-        string password { get; set; }
-        string storeCode { get; set; }
+       public string user { get; set; }
+       public string password { get; set; }
+       public string storeCode { get; set; }
     }
 }

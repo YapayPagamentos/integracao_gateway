@@ -6,27 +6,27 @@ namespace YapayGatewayLib.Model
     public class AddressData
     {
         [JsonProperty(PropertyName = "logradouro")]
-        string street { get; set; }
+        public string street { get; set; }
 
         [JsonProperty(PropertyName = "numero")]
-        string number { get; set; }
+        public string number { get; set; }
 
         [JsonProperty(PropertyName = "complemento")]
-        string complement { get; set; }
+        public string complement { get; set; }
 
         [JsonProperty(PropertyName = "cep")]
-        string zipCode { get; set; }
+        public string zipCode { get; set; }
 
         [JsonProperty(PropertyName = "bairro")]
-        string district { get; set; }
+        public string district { get; set; }
 
         [JsonProperty(PropertyName = "cidade")]
-        string city { get; set; }
+        public string city { get; set; }
 
         [JsonProperty(PropertyName = "estado")]
-        string state { get; set; }
+        public string state { get; set; }
 
         [JsonProperty(PropertyName = "pais")]
-        string country { get; set; }
+        public string country { get; set; }
     }
 }

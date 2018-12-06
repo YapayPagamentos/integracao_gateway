@@ -5,10 +5,10 @@ namespace YapayGatewayLib.Model
 {
     public class ExtraField
     {
-        [JsonProperty(PropertyName = "chave")]
-        int key{get; set;}
+      [JsonProperty(PropertyName = "chave")]
+      public int key{get; set;}
 
-        [JsonProperty(PropertyName = "valor")]
-        string value{get; set;}
+      [JsonProperty(PropertyName = "valor")]
+      public string value{get; set;}
     }
 }
