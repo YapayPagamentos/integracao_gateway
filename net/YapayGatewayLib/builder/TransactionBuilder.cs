@@ -7,6 +7,12 @@ namespace YapayGatewayLib.Builder
     public class TransactionBuilder
     {
 
+        public static Transaction build()
+        {
+            return null;
+        }
+
+
         public static void NewTransaction(string storeCode, int paymentCode, long transactionNumber, long value)
         {
 

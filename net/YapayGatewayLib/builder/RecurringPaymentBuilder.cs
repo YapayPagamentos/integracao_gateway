@@ -5,6 +5,11 @@ namespace YapayGatewayLib.Builder
 {
     public class RecurringPaymentBuilder
     {
+
+        public static RecurringPayment build(){
+            return null;
+        }
+
         public static void NewRecurringPayment(string storeCode, long paymentCode, long recurringPaymentNumber, long value)
         {
 
