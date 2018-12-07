@@ -45,42 +45,67 @@ namespace YapayGatewayLib.Communication
 
         public string TransactionCancel(Credential credential, string storeCode, long transactionNumber, long value)
         {
-            return null;
+
+            var result = CreateHttpClient(credential).PutAsync(this.url + "/api/v3/transacao/" + storeCode + "/" + transactionNumber, null).Result;
+
+            return result.Content.ToString();
         }
 
         public string OneClickRegister(Credential credential, OneClickRegisterData registerData)
         {
-            return null;
+            var content = new StringContent(JsonConvert.SerializeObject(registerData), Encoding.UTF8, "application/json");
+
+            var result = CreateHttpClient(credential).PostAsync(this.url + "/api/v3/oneclick", content).Result;
+
+            return result.Content.ToString();
         }
 
         public string OneClickQuery(Credential credential, string token)
         {
-            return null;
+            var result = CreateHttpClient(credential).GetAsync(this.url + "/api/v3/oneclick/" + token).Result;
+
+            return result.Content.ToString();
         }
 
         public string OneClickRegisterUpdate(Credential credential, string token, OneClickRegisterData registerData)
         {
-            return null;
+            var content = new StringContent(JsonConvert.SerializeObject(registerData), Encoding.UTF8, "application/json");
+            var result = CreateHttpClient(credential).PutAsync(this.url + "/api/v3/oneclick/" + token + "/alterar", content).Result;
+
+            return result.Content.ToString();
         }
 
         public string OneClickAuthorize(Credential credential, string token, Transaction transaction)
         {
-            return null;
+            var content = new StringContent(JsonConvert.SerializeObject(transaction), Encoding.UTF8, "application/json");
+
+            var result = CreateHttpClient(credential).PostAsync(this.url + "/api/v3/oneclick/" + token + "/autorizar", content).Result;
+
+            return result.Content.ToString();
         }
 
         public string RecurringPaymentRegister(Credential credential, RecurringPayment recurringPayment)
         {
-            return null;
+            var content = new StringContent(JsonConvert.SerializeObject(recurringPayment), Encoding.UTF8, "application/json");
+
+            var result = CreateHttpClient(credential).PostAsync(this.url + "/api/v3/recorrencia", content).Result;
+
+            return result.Content.ToString();
         }
 
         public string RecurringPaymentQuery(Credential credential, string storeCode, long recurringPaymentNumber)
         {
-            return null;
+            var result = CreateHttpClient(credential).GetAsync(this.url + "/api/v3/recorrencia/" + storeCode + "/" + recurringPaymentNumber).Result;
+
+            return result.Content.ToString();
         }
 
         public string RecurringPaymentCancel(Credential credential, string storeCode, long recurringPaymentNumber)
         {
-            return null;
+
+            var result = CreateHttpClient(credential).PutAsync(this.url + "/api/v3/recorrencia/" + storeCode + "/" + recurringPaymentNumber + "/cancelar", null).Result;
+
+            return result.Content.ToString();
         }
 
         private HttpClient CreateHttpClient(Credential credential)
