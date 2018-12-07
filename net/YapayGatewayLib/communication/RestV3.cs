@@ -2,24 +2,45 @@ using System;
 using YapayGatewayLib.Model;
 using System.Net.Http;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace YapayGatewayLib.Communication
 {
     public class RestV3
     {
+
+        public RestV3(string url)
+        {
+            this.url = url;
+        }
+
+        private string url;
+
         public string TransactionAuthorize(Credential credential, Transaction transaction)
         {
-            return null;
+
+            var content = new StringContent(JsonConvert.SerializeObject(transaction), Encoding.UTF8, "application/json");
+
+            var result = CreateHttpClient(credential).PostAsync(this.url + "/api/v3/transacao", content).Result;
+
+            return result.Content.ToString();
         }
 
         public string TransactionQuery(Credential credential, string storeCode, long transactionNumber)
         {
-            return null;
+
+            var result = CreateHttpClient(credential).GetAsync(this.url + "/api/v3/transacao/" + storeCode + "/" + transactionNumber).Result;
+
+            return result.Content.ToString();
         }
 
         public string TransactionCapture(Credential credential, string storeCode, long transactionNumber, long value)
         {
-            return null;
+
+            var result = CreateHttpClient(credential).PutAsync(this.url + "/api/v3/transacao/" + storeCode + "/" + transactionNumber, null).Result;
+
+
+            return result.Content.ToString();
         }
 
         public string TransactionCancel(Credential credential, string storeCode, long transactionNumber, long value)
@@ -62,7 +83,7 @@ namespace YapayGatewayLib.Communication
             return null;
         }
 
-        private HttpClient createHttpClient(Credential credential)
+        private HttpClient CreateHttpClient(Credential credential)
         {
             var byteArray = Encoding.ASCII.GetBytes(credential.user + ":" + credential.password);
             HttpClient client = new HttpClient();
