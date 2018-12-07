@@ -1,5 +1,7 @@
 using System;
 using YapayGatewayLib.Model;
+using System.Net.Http;
+using System.Text;
 
 namespace YapayGatewayLib.Communication
 {
@@ -58,6 +60,14 @@ namespace YapayGatewayLib.Communication
         public string RecurringPaymentCancel(Credential credential, string storeCode, long recurringPaymentNumber)
         {
             return null;
+        }
+
+        private HttpClient createHttpClient(Credential credential)
+        {
+            var byteArray = Encoding.ASCII.GetBytes(credential.user + ":" + credential.password);
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+            return client;
         }
     }
 }
