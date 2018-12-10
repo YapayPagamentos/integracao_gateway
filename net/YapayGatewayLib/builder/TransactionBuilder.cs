@@ -14,7 +14,7 @@ namespace YapayGatewayLib.Builder
 
             Transaction newTransaction = transaction;
             transaction = null;
-            return transaction;
+            return newTransaction;
         }
 
 
