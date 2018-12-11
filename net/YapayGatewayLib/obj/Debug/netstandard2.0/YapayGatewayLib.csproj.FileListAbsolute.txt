@@ -1,0 +1,9 @@
+/home/ivansimionato/Documents/repositories/integracoes/net/YapayGatewayLib/bin/Debug/netstandard2.0/YapayGatewayLib.deps.json
+/home/ivansimionato/Documents/repositories/integracoes/net/YapayGatewayLib/bin/Debug/netstandard2.0/YapayGatewayLib.dll
+/home/ivansimionato/Documents/repositories/integracoes/net/YapayGatewayLib/bin/Debug/netstandard2.0/YapayGatewayLib.pdb
+/home/ivansimionato/Documents/repositories/integracoes/net/YapayGatewayLib/obj/Debug/netstandard2.0/YapayGatewayLib.csprojAssemblyReference.cache
+/home/ivansimionato/Documents/repositories/integracoes/net/YapayGatewayLib/obj/Debug/netstandard2.0/YapayGatewayLib.csproj.CoreCompileInputs.cache
+/home/ivansimionato/Documents/repositories/integracoes/net/YapayGatewayLib/obj/Debug/netstandard2.0/YapayGatewayLib.AssemblyInfoInputs.cache
+/home/ivansimionato/Documents/repositories/integracoes/net/YapayGatewayLib/obj/Debug/netstandard2.0/YapayGatewayLib.AssemblyInfo.cs
+/home/ivansimionato/Documents/repositories/integracoes/net/YapayGatewayLib/obj/Debug/netstandard2.0/YapayGatewayLib.dll
+/home/ivansimionato/Documents/repositories/integracoes/net/YapayGatewayLib/obj/Debug/netstandard2.0/YapayGatewayLib.pdb

@@ -21,11 +21,19 @@ class RestV3
             .get("#{BaseURL.get_url}/api/v3/transacao/#{store_code}/#{transaction_number}")
     end
 
+    def transaction_capture(credentials, transaction_number, value)
+        transaction_capture(credentials, credentials.store_code, transaction_number, value)
+    end
+
     def transaction_capture(credentials, store_code, transaction_number, value)
         HTTP.basic_auth(:user => credentials.user, 
                         :pass => credentials.password)
             .headers(:content_type => "application/json")
             .put("#{BaseURL.get_url}/api/v3/transacao/#{store_code}/#{transaction_number}/capturar")
+    end
+
+    def transaction_cancel(credentials, transaction_number, value)
+        transaction_cancel(credentials, credentials.store_code, transaction_number, value)
     end
 
     def transaction_cancel(credentials, store_code, transaction_number, value)
@@ -70,12 +78,20 @@ class RestV3
             .post("#{BaseURL.get_url}/api/v3/recorrencia", :body => ActiveSupport::JSON.encode(recurring_payment_data))
     end
 
+    def recurring_payment_query(credentials, recurring_payment_number)
+        recurring_payment_query(credentials, credentials.store_code, recurring_payment_number);
+    end
+
     def recurring_payment_query(credentials, store_code, recurring_payment_number)
         HTTP.basic_auth(:user => credentials.user, 
                         :pass => credentials.password)
             .headers(:content_type => "application/json")
             .get("#{BaseURL.get_url}/api/v3/recorrencia/#{store_code}/#{recurring_payment_number}")
-    end 
+    end
+
+    def recurring_payment_cancel(credentials, recurring_payment_number)
+         recurring_payment_cancel(credentials, credentials.store_code, recurring_payment_number)
+     end 
 
     def recurring_payment_cancel(credentials, store_code, recurring_payment_number)
         HTTP.basic_auth(:user => credentials.user, 
