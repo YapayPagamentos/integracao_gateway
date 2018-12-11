@@ -47,6 +47,12 @@ public class RestV3Impl implements RestV3 {
 	}
 
 	@Override
+	public String transactionQuery(Credential credential, Long transactionNumber)
+			throws ClientProtocolException, IOException {
+		return transactionQuery(credential, credential.getStoreCode(), transactionNumber);
+	}
+
+	@Override
 	public String transactionQuery(Credential credential, String storeCode, Long transactionNumber)
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
@@ -55,6 +61,12 @@ public class RestV3Impl implements RestV3 {
 				.execute(newGet(communicationUrl + "/api/v3/transacao/" + storeCode + "/" + transactionNumber));
 
 		return new BasicResponseHandler().handleResponse(response);
+	}
+
+	@Override
+	public String transactionCapture(Credential credential, Long transactionNumber, Long value)
+			throws ClientProtocolException, IOException {
+		return transactionCapture(credential, credential.getStoreCode(), transactionNumber, value);
 	}
 
 	@Override
@@ -72,6 +84,12 @@ public class RestV3Impl implements RestV3 {
 				+ transactionNumber + "/capturar" + valueParameter, null));
 
 		return new BasicResponseHandler().handleResponse(response);
+	}
+
+	@Override
+	public String transactionCancel(Credential credential, Long transactionNumber, Long value)
+			throws ClientProtocolException, IOException {
+		return transactionCancel(credential, credential.getStoreCode(), transactionNumber, value);
 	}
 
 	@Override
@@ -141,6 +159,12 @@ public class RestV3Impl implements RestV3 {
 	}
 
 	@Override
+	public String recurringPaymentQuery(Credential credential, Long recurringPaymentNumber)
+			throws ClientProtocolException, IOException {
+		return recurringPaymentQuery(credential, credential.getStoreCode(), recurringPaymentNumber);
+	}
+
+	@Override
 	public String recurringPaymentQuery(Credential credential, String storeCode, Long recurringPaymentNumber)
 			throws ClientProtocolException, IOException {
 		HttpClient client = this.httpClientBuilder(credential);
@@ -148,6 +172,12 @@ public class RestV3Impl implements RestV3 {
 				.execute(newGet(communicationUrl + "/api/v3/recorrencia/" + storeCode + "/" + recurringPaymentNumber));
 
 		return new BasicResponseHandler().handleResponse(response);
+	}
+
+	@Override
+	public String recurringPaymentCancel(Credential credential, Long recurringPaymentNumber)
+			throws ClientProtocolException, IOException {
+		return recurringPaymentCancel(credential, credential.getStoreCode(), recurringPaymentNumber);
 	}
 
 	@Override
