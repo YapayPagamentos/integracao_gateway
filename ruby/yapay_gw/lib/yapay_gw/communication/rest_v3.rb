@@ -10,6 +10,10 @@ class RestV3
             .post("#{BaseURL.get_url}/api/v3/transacao", :body => ActiveSupport::JSON.encode(transaction)) 
     end
 
+    def transaction_query(credentials, transaction_number)
+        transaction_query(credentials, credentials.store_code, transaction_number)
+    end
+
     def transaction_query(credentials, store_code, transaction_number)
         HTTP.basic_auth(:user => credentials.user, 
                         :pass => credentials.password)
