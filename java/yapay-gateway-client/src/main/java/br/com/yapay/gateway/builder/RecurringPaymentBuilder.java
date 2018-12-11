@@ -1,5 +1,6 @@
 package br.com.yapay.gateway.builder;
 
+import br.com.yapay.gateway.model.Credential;
 import br.com.yapay.gateway.model.CreditCardData;
 import br.com.yapay.gateway.model.DebitCardData;
 import br.com.yapay.gateway.model.PhoneData;
@@ -8,18 +9,32 @@ import br.com.yapay.gateway.model.RecurringPaymentChargingData;
 import br.com.yapay.gateway.model.RecurringPaymentData;
 import br.com.yapay.gateway.model.RecurringPaymentDeliveryData;
 
-public class RecurringPaymentBuilder{
+public class RecurringPaymentBuilder {
 
-	private static RecurringPayment recurringPayment;
+	private RecurringPayment recurringPayment;
 
-	public static RecurringPayment build() {
+	private String storeCode;
+
+	public RecurringPaymentBuilder() {
+
+	}
+
+	public RecurringPaymentBuilder(Credential credentials) {
+		this.storeCode = credentials.getStoreCode();
+	}
+
+	public RecurringPayment build() {
 		RecurringPayment newRecurringPayment = recurringPayment;
 		recurringPayment = null;
 		return newRecurringPayment;
 	}
 
-	public static void newRecurringPayment(String storeCode, Long paymentCode, Long recurringPaymentNumber,
-			Long value) {
+	public void newRecurringPayment(Long paymentCode, Long recurringPaymentNumber, Long value) {
+		this.newRecurringPayment(null, paymentCode, recurringPaymentNumber, value);
+		recurringPayment.setStoreCode(storeCode);
+	}
+
+	public void newRecurringPayment(String storeCode, Long paymentCode, Long recurringPaymentNumber, Long value) {
 		recurringPayment = new RecurringPayment();
 		recurringPayment.setStoreCode(storeCode);
 		recurringPayment.setRecurringPaymentData(new RecurringPaymentData());
@@ -29,26 +44,26 @@ public class RecurringPaymentBuilder{
 		recurringPayment.getRecurringPaymentData().setModality(1);
 	}
 
-	public static void withFrequencyOf(Integer frequency) {
+	public void withFrequencyOf(Integer frequency) {
 		recurringPayment.getRecurringPaymentData().setFrequency(frequency);
 	}
 
-	public static void setNotificationUrl(String notificationUrl) {
+	public void setNotificationUrl(String notificationUrl) {
 		recurringPayment.getRecurringPaymentData().setNotificationUrl(notificationUrl);
 	}
 
-	public static void shouldProcessImmediately(Boolean processImmediately) {
+	public void shouldProcessImmediately(Boolean processImmediately) {
 		recurringPayment.getRecurringPaymentData().setProcessImmediately(processImmediately);
 	}
 
-	public static void withBillingOptions(Integer billingAmount, String billingFirstDate, String billDueDate) {
+	public void withBillingOptions(Integer billingAmount, String billingFirstDate, String billDueDate) {
 		recurringPayment.getRecurringPaymentData().setBillingAmount(billingAmount);
 		recurringPayment.getRecurringPaymentData().setBillingFirstDate(billingFirstDate);
 		recurringPayment.getRecurringPaymentData().setBillDueDate(billDueDate);
 	}
 
-	public static void withFreeFields(String freeFieldOne, String freeFieldTwo, String freeFieldThree,
-			String freeFieldFour, String freeFieldFive) {
+	public void withFreeFields(String freeFieldOne, String freeFieldTwo, String freeFieldThree, String freeFieldFour,
+			String freeFieldFive) {
 		recurringPayment.getRecurringPaymentData().setFreeFieldOne(freeFieldOne);
 		recurringPayment.getRecurringPaymentData().setFreeFieldTwo(freeFieldTwo);
 		recurringPayment.getRecurringPaymentData().setFreeFieldThree(freeFieldThree);
@@ -56,7 +71,7 @@ public class RecurringPaymentBuilder{
 		recurringPayment.getRecurringPaymentData().setFreeFieldFive(freeFieldFive);
 	}
 
-	public static void withCreditCard(CreditCardData creditCardData) {
+	public void withCreditCard(CreditCardData creditCardData) {
 		recurringPayment.getRecurringPaymentData().setCreditCard(new CreditCardData());
 		recurringPayment.getRecurringPaymentData().getCreditCard()
 				.setCardHolderName(creditCardData.getCardHolderName());
@@ -69,7 +84,7 @@ public class RecurringPaymentBuilder{
 		recurringPayment.getRecurringPaymentData().getCreditCard().setValue(creditCardData.getValue());
 	}
 
-	public static void withDebitCard(DebitCardData debitCardData) {
+	public void withDebitCard(DebitCardData debitCardData) {
 		recurringPayment.getRecurringPaymentData().setDebitCard(new DebitCardData());
 		recurringPayment.getRecurringPaymentData().getDebitCard().setAccountNumber(debitCardData.getAccountNumber());
 		recurringPayment.getRecurringPaymentData().getDebitCard()
@@ -79,7 +94,7 @@ public class RecurringPaymentBuilder{
 		recurringPayment.getRecurringPaymentData().getDebitCard().setAgencyDigit(debitCardData.getAgencyDigit());
 	}
 
-	public static void withDelivery(RecurringPaymentDeliveryData deliveryData) {
+	public void withDelivery(RecurringPaymentDeliveryData deliveryData) {
 		recurringPayment.getRecurringPaymentData().setDeliveryData(new RecurringPaymentDeliveryData());
 		recurringPayment.getRecurringPaymentData().getDeliveryData().setDeliveryCity(deliveryData.getDeliveryCity());
 		recurringPayment.getRecurringPaymentData().getDeliveryData()
@@ -111,7 +126,7 @@ public class RecurringPaymentBuilder{
 		}
 	}
 
-	public static void withChargingData(RecurringPaymentChargingData chargingData) {
+	public void withChargingData(RecurringPaymentChargingData chargingData) {
 		recurringPayment.getRecurringPaymentData().setChargingData(new RecurringPaymentChargingData());
 		recurringPayment.getRecurringPaymentData().getChargingData().setBirthday(chargingData.getBirthday());
 		recurringPayment.getRecurringPaymentData().getChargingData().setBuyerMail(chargingData.getBuyerMail());

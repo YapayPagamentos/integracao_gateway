@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.com.yapay.gateway.model.AddressData;
 import br.com.yapay.gateway.model.ChargingData;
+import br.com.yapay.gateway.model.Credential;
 import br.com.yapay.gateway.model.CreditCardData;
 import br.com.yapay.gateway.model.DebitCardData;
 import br.com.yapay.gateway.model.DeliveryData;
@@ -16,9 +17,19 @@ import br.com.yapay.gateway.model.TransactionData;
 
 public class TransactionBuilder {
 
-	private static Transaction transaction;
+	private Transaction transaction;
 
-	public static Transaction build() {
+	private String storeCode;
+
+	public TransactionBuilder() {
+
+	}
+
+	public TransactionBuilder(Credential credential) {
+		this.storeCode = credential.getStoreCode();
+	}
+
+	public Transaction build() {
 
 		Transaction newTransaction = transaction;
 		transaction = null;
@@ -26,7 +37,12 @@ public class TransactionBuilder {
 		return newTransaction;
 	}
 
-	public static void newTransaction(String storeCode, Integer paymentCode, Long transactionNumber, Long value) {
+	public void newTransaction(Integer paymentCode, Long transactionNumber, Long value) {
+		this.newTransaction(null, paymentCode, transactionNumber, value);
+		transaction.setStoreCode(storeCode);
+	}
+
+	public void newTransaction(String storeCode, Integer paymentCode, Long transactionNumber, Long value) {
 		transaction = new Transaction();
 		transaction.setTransactionData(new TransactionData());
 		transaction.setStoreCode(storeCode);
@@ -35,12 +51,11 @@ public class TransactionBuilder {
 		transaction.getTransactionData().setValue(value);
 	}
 
-	public static void withInstallments(Integer installments) {
+	public void withInstallments(Integer installments) {
 		transaction.getTransactionData().setInstallments(installments);
 	}
 
-	public static void withSingleCreditCard(String cardHolderName, String cardNumber, String cvv,
-			String expirationDate) {
+	public void withSingleCreditCard(String cardHolderName, String cardNumber, String cvv, String expirationDate) {
 		transaction.setCreditCard(new CreditCardData());
 		transaction.getCreditCard().setCardHolderName(cardHolderName);
 		transaction.getCreditCard().setCardNumber(cardNumber);
@@ -48,8 +63,8 @@ public class TransactionBuilder {
 		transaction.getCreditCard().setExpirationDate(expirationDate);
 	}
 
-	public static void withSingleDebitCard(String agency, String agencyDigit, String accountNumber,
-			String accountNumberDigit, String accountType) {
+	public void withSingleDebitCard(String agency, String agencyDigit, String accountNumber, String accountNumberDigit,
+			String accountType) {
 		transaction.setDebitCard(new DebitCardData());
 		transaction.getDebitCard().setAgency(agency);
 		transaction.getDebitCard().setAgencyDigit(agencyDigit);
@@ -58,7 +73,7 @@ public class TransactionBuilder {
 		transaction.getDebitCard().setAccountType(accountType);
 	}
 
-	public static void withItems(List<ItemData> listOfItems) {
+	public void withItems(List<ItemData> listOfItems) {
 		List<ItemData> transactionItemList = new ArrayList<>();
 
 		if (listOfItems != null) {
@@ -77,7 +92,7 @@ public class TransactionBuilder {
 		transaction.setItems(transactionItemList);
 	}
 
-	public static void withExtraFields(List<ExtraField> listOfExtraFields) {
+	public void withExtraFields(List<ExtraField> listOfExtraFields) {
 		List<ExtraField> transactionExtraFieldsList = new ArrayList<>();
 
 		if (listOfExtraFields != null) {
@@ -92,7 +107,7 @@ public class TransactionBuilder {
 		transaction.setExtraFields(transactionExtraFieldsList);
 	}
 
-	public static void withDelivery(DeliveryData deliveryData) {
+	public void withDelivery(DeliveryData deliveryData) {
 		transaction.setDelivery(new DeliveryData());
 		transaction.getDelivery().setBirthday(deliveryData.getBirthday());
 		transaction.getDelivery().setDocument(deliveryData.getDocument());
@@ -129,7 +144,7 @@ public class TransactionBuilder {
 		}
 	}
 
-	public static void withCharging(ChargingData chargingData) {
+	public void withCharging(ChargingData chargingData) {
 		transaction.setCharging(new ChargingData());
 		transaction.getCharging().setClientBirthday(chargingData.getClientBirthday());
 		transaction.getCharging().setClientCode(chargingData.getClientCode());

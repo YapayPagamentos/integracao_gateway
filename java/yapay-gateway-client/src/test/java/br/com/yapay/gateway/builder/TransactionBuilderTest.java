@@ -3,16 +3,25 @@ package br.com.yapay.gateway.builder;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import br.com.yapay.gateway.model.Transaction;
 
 public class TransactionBuilderTest {
+	
+	
+	private TransactionBuilder builder;
+	
+	@Before
+	public void configure() {
+		builder = new TransactionBuilder();
+	}
 
 	@Test
 	public void itShouldInitializeANewTransaction() {
-		TransactionBuilder.newTransaction("15000000", new Integer(123), new Long(123), new Long(150));
-		Transaction transaction = TransactionBuilder.build();
+		builder.newTransaction("15000000", new Integer(123), new Long(123), new Long(150));
+		Transaction transaction = builder.build();
 
 		assertNotNull(transaction);
 		assertEquals("15000000", transaction.getStoreCode());
@@ -24,18 +33,18 @@ public class TransactionBuilderTest {
 
 	@Test
 	public void youNeedToBeAbleToSetInstallmentsForTransaction() {
-		TransactionBuilder.newTransaction("15000000", new Integer(123), new Long(123), new Long(150));
-		TransactionBuilder.withInstallments(new Integer(3));
-		Transaction transaction = TransactionBuilder.build();
+		builder.newTransaction("15000000", new Integer(123), new Long(123), new Long(150));
+		builder.withInstallments(new Integer(3));
+		Transaction transaction = builder.build();
 
 		assertEquals(new Integer(3), transaction.getTransactionData().getInstallments());
 	}
 
 	@Test
 	public void youShouldBeAbleToSetCreditCardInfo() {
-		TransactionBuilder.newTransaction("15000000", new Integer(123), new Long(123), new Long(150));
-		TransactionBuilder.withSingleCreditCard("IVAN SIMIONATO", "123456789", "123", "10/2020");
-		Transaction transaction = TransactionBuilder.build();
+		builder.newTransaction("15000000", new Integer(123), new Long(123), new Long(150));
+		builder.withSingleCreditCard("IVAN SIMIONATO", "123456789", "123", "10/2020");
+		Transaction transaction = builder.build();
 
 		assertNotNull(transaction.getCreditCard());
 		assertEquals("IVAN SIMIONATO", transaction.getCreditCard().getCardHolderName());
@@ -46,9 +55,9 @@ public class TransactionBuilderTest {
 	
 	@Test
 	public void youShouldBeAbleToSetDebitCardInfo() {
-		TransactionBuilder.newTransaction("15000000", new Integer(123), new Long(123), new Long(150));
-		TransactionBuilder.withSingleDebitCard("12", "X", "123456789", "7", "T");
-		Transaction transaction = TransactionBuilder.build();
+		builder.newTransaction("15000000", new Integer(123), new Long(123), new Long(150));
+		builder.withSingleDebitCard("12", "X", "123456789", "7", "T");
+		Transaction transaction = builder.build();
 		
 		assertNotNull(transaction.getDebitCard());
 		assertEquals("12", transaction.getDebitCard().getAgency());
