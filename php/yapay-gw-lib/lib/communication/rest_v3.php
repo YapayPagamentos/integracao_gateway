@@ -1,6 +1,13 @@
 <?php 
 	
 	class RestV3 {
+
+		private $baseUrl;
+
+		function __construct($baseUrl)
+		{
+			$this->baseUrl = $baseUrl;
+		}
 		
 		public function transactionAuthorize($credentials, $transaction){
 			
@@ -44,6 +51,15 @@
 
 		public function recurringPaymentCancel($credentials, $storeCode, $recurringPaymentNumber){
 			
+		}
+
+		private function curlInit($requestType, $url, $data, $credential){
+			$ch = curl_init($url);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $requestType);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+			curl_setopt($ch, CURLOPT_USERPWD, $credential->user . ":" . $credential->password);
+			return $ch;
 		}
 
 	}
