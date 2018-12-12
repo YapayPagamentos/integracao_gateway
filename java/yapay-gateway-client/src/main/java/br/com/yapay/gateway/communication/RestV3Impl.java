@@ -5,7 +5,10 @@ import static org.apache.commons.lang3.StringUtils.defaultString;
 import static org.apache.commons.lang3.StringUtils.trimToNull;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -34,74 +37,21 @@ public class RestV3Impl implements RestV3 {
 
 	private final Gson jsonBuilder;
 
+	private final String version;
+
 	public RestV3Impl(String url) throws ClientProtocolException, IOException {
 		this.communicationUrl = url;
 		this.jsonBuilder = new Gson();
-	}
-
-	private String postJsonAuth(Credential credential, String url, String data)
-			throws ClientProtocolException, IOException {
-		data = defaultString(data);
-		HttpPost post = new HttpPost(url);
-
-		post.setEntity(new BufferedHttpEntity(
-				new InputStreamEntity(new ByteArrayInputStream(data.getBytes()), data.length())));
-		post.setHeader("Accept", "application/json");
-		post.setHeader("Accept-Charset", "UTF-8");
-		post.setHeader("Content-Type", "application/json; charset=UTF-8");
-
-		return requestBasicAuth(post, credential);
-	}
-
-	private String putJsonAuth(Credential credential, String url, String data)
-			throws ClientProtocolException, IOException {
-		data = defaultString(data);
-		HttpPut put = new HttpPut(url);
-
-		put.setEntity(new BufferedHttpEntity(
-				new InputStreamEntity(new ByteArrayInputStream(data.getBytes()), data.length())));
-		put.setHeader("Accept", "application/json");
-		put.setHeader("Accept-Charset", "UTF-8");
-		put.setHeader("Content-Type", "application/json; charset=UTF-8");
-
-		return requestBasicAuth(put, credential);
-	}
-
-	private String getJsonAuth(Credential credential, String url) throws ClientProtocolException, IOException {
-		HttpGet get = new HttpGet(url);
-
-		get.setHeader("Accept", "application/json");
-		get.setHeader("Accept-Charset", "UTF-8");
-
-		return requestBasicAuth(get, credential);
-	}
-
-	private String requestBasicAuth(HttpUriRequest request, Credential credential)
-			throws ClientProtocolException, IOException {
-		String encoded = String.valueOf(encodeBase64String(
-				(trimToNull(credential.getUser()) + ":" + trimToNull(credential.getPassword())).getBytes()));
-		request.addHeader("Authorization", " Basic " + encoded);
-
-		return requestHttpClient(request);
-	}
-
-	private String requestHttpClient(HttpUriRequest request) throws ClientProtocolException, IOException {
-		String result = null;
-
-		int connectionTimeout = 73_000;
-		int readTimeout = 10 * connectionTimeout;
-		RequestConfig config = RequestConfig.custom().setConnectTimeout(connectionTimeout).setSocketTimeout(readTimeout)
-				.build();
-		try (CloseableHttpClient client = HttpClientBuilder.create().setDefaultRequestConfig(config).build()) {
-			result = executeRequestHttpClient(client, request);
+		String v = "0.0.1";
+		try (InputStream in = new FileInputStream(
+				"/META-INF/maven/br.com.gateway.yapay/yapay-gateway-client/pom.properties")) {
+			Properties properties = new Properties();
+			properties.load(in);
+			v = properties.getProperty("version");
+		} catch (Exception e) {
+			v = "0.0.1";
 		}
-		return result;
-	}
-
-	private String executeRequestHttpClient(HttpClient client, HttpUriRequest request)
-			throws ClientProtocolException, IOException {
-		HttpResponse response = client.execute(request);
-		return response.getEntity() == null ? null : EntityUtils.toString(response.getEntity());
+		version = v;
 	}
 
 	@Override
@@ -216,5 +166,71 @@ public class RestV3Impl implements RestV3 {
 		return putJsonAuth(credential,
 				communicationUrl + "/api/v3/recorrencia/" + storeCode + "/" + recurringPaymentNumber + "/cancelar",
 				null);
+	}
+
+	private String postJsonAuth(Credential credential, String url, String data)
+			throws ClientProtocolException, IOException {
+		data = defaultString(data);
+		HttpPost post = new HttpPost(url);
+
+		post.setEntity(new BufferedHttpEntity(
+				new InputStreamEntity(new ByteArrayInputStream(data.getBytes()), data.length())));
+		post.setHeader("Accept", "application/json");
+		post.setHeader("Accept-Charset", "UTF-8");
+		post.setHeader("Content-Type", "application/json; charset=UTF-8");
+
+		return requestBasicAuth(post, credential);
+	}
+
+	private String putJsonAuth(Credential credential, String url, String data)
+			throws ClientProtocolException, IOException {
+		data = defaultString(data);
+		HttpPut put = new HttpPut(url);
+
+		put.setEntity(new BufferedHttpEntity(
+				new InputStreamEntity(new ByteArrayInputStream(data.getBytes()), data.length())));
+		put.setHeader("Accept", "application/json");
+		put.setHeader("Accept-Charset", "UTF-8");
+		put.setHeader("Content-Type", "application/json; charset=UTF-8");
+
+		return requestBasicAuth(put, credential);
+	}
+
+	private String getJsonAuth(Credential credential, String url) throws ClientProtocolException, IOException {
+		HttpGet get = new HttpGet(url);
+
+		get.setHeader("Accept", "application/json");
+		get.setHeader("Accept-Charset", "UTF-8");
+
+		return requestBasicAuth(get, credential);
+	}
+
+	private String requestBasicAuth(HttpUriRequest request, Credential credential)
+			throws ClientProtocolException, IOException {
+		String encoded = String.valueOf(encodeBase64String(
+				(trimToNull(credential.getUser()) + ":" + trimToNull(credential.getPassword())).getBytes()));
+		request.addHeader("Authorization", " Basic " + encoded);
+
+		return requestHttpClient(request);
+	}
+
+	private String requestHttpClient(HttpUriRequest request) throws ClientProtocolException, IOException {
+		String result = null;
+
+		request.addHeader("User-Agent", "YapayGatewayJava_" + version);
+		int connectionTimeout = 73_000;
+		int readTimeout = 10 * connectionTimeout;
+		RequestConfig config = RequestConfig.custom().setConnectTimeout(connectionTimeout).setSocketTimeout(readTimeout)
+				.build();
+		try (CloseableHttpClient client = HttpClientBuilder.create().setDefaultRequestConfig(config).build()) {
+			result = executeRequestHttpClient(client, request);
+		}
+		return result;
+	}
+
+	private String executeRequestHttpClient(HttpClient client, HttpUriRequest request)
+			throws ClientProtocolException, IOException {
+		HttpResponse response = client.execute(request);
+		return response.getEntity() == null ? null : EntityUtils.toString(response.getEntity());
 	}
 }
