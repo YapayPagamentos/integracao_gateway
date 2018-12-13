@@ -164,13 +164,90 @@ public class Transaction {
 			return this;
 		}
 
+		public Builder withCharging(String clientName, String clientEmail, String clientDocument) {
+			return withCharging(new ChargingData(clientName, clientEmail, clientDocument));
+		}
+
+		public Builder withCharging(String clientName, String clientEmail, String clientBirthday, String clientGenre,
+				String clientDocument, String clientDocumentTwo, AddressData clientAddress,
+				List<PhoneData> clientPhones) {
+			return withCharging(new ChargingData(clientName, clientEmail, clientBirthday, clientGenre, clientDocument,
+					clientDocumentTwo, clientAddress, clientPhones));
+		}
+
 		public Builder withCharging(ChargingData charging) {
 			this.charging = charging;
 			return this;
 		}
 
+		public Builder withChargingAddress(String street, String number, String zipCode, String district, String city,
+				String state) {
+			return withChargingAddress(new AddressData(street, number, zipCode, district, city, state));
+		}
+
+		public Builder withChargingAddress(String street, String number, String complement, String zipCode,
+				String district, String city, String state, String country) {
+			return withChargingAddress(
+					new AddressData(street, number, complement, zipCode, district, city, state, country));
+		}
+
+		public Builder withChargingAddress(AddressData clientAddress) {
+			if (this.charging != null) {
+				this.charging.setClientAddress(clientAddress);
+			}
+			return this;
+		}
+
+		public Builder addChargingPhone(String ddd, String number) {
+			return addChargingPhone(new PhoneData(ddd, number));
+		}
+
+		public Builder addChargingPhone(String ddi, String ddd, String number) {
+			return addChargingPhone(new PhoneData(ddi, ddd, number));
+		}
+
+		public Builder addChargingPhone(PhoneData clientPhone) {
+			if (this.charging != null) {
+				this.charging.addClientPhone(clientPhone);
+			}
+			return this;
+		}
+
 		public Builder withDelivery(DeliveryData delivery) {
 			this.delivery = delivery;
+			return this;
+		}
+
+		public Builder withDeliveryAddress(String street, String number, String zipCode, String district, String city,
+				String state) {
+			return withDeliveryAddress(new AddressData(street, number, zipCode, district, city, state));
+		}
+
+		public Builder withDeliveryAddress(String street, String number, String complement, String zipCode,
+				String district, String city, String state, String country) {
+			return withDeliveryAddress(
+					new AddressData(street, number, complement, zipCode, district, city, state, country));
+		}
+
+		public Builder withDeliveryAddress(AddressData deliveryAddress) {
+			if (this.delivery != null) {
+				this.delivery.setDeliveryAddress(deliveryAddress);
+			}
+			return this;
+		}
+
+		public Builder addDeliveryPhone(String ddd, String number) {
+			return addDeliveryPhone(new PhoneData(ddd, number));
+		}
+
+		public Builder addDeliveryPhone(String ddi, String ddd, String number) {
+			return addDeliveryPhone(new PhoneData(ddi, ddd, number));
+		}
+
+		public Builder addDeliveryPhone(PhoneData deliveryPhone) {
+			if (this.delivery != null) {
+				this.delivery.addDeliveryPhone(deliveryPhone);
+			}
 			return this;
 		}
 
