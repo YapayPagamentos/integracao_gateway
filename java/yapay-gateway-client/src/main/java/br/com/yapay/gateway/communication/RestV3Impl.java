@@ -1,22 +1,28 @@
 package br.com.yapay.gateway.communication;
 
+import static org.apache.commons.codec.binary.Base64.encodeBase64String;
+import static org.apache.commons.lang3.StringUtils.defaultString;
+import static org.apache.commons.lang3.StringUtils.trimToNull;
+
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.InputStream;
+import java.util.Properties;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
 
 import com.google.gson.Gson;
 
@@ -31,19 +37,27 @@ public class RestV3Impl implements RestV3 {
 
 	private final Gson jsonBuilder;
 
+	private final String version;
+
 	public RestV3Impl(String url) throws ClientProtocolException, IOException {
 		this.communicationUrl = url;
 		this.jsonBuilder = new Gson();
+		String v = "0.0.1";
+		try (InputStream in = new FileInputStream(
+				"/META-INF/maven/br.com.gateway.yapay/yapay-gateway-client/pom.properties")) {
+			Properties properties = new Properties();
+			properties.load(in);
+			v = properties.getProperty("version");
+		} catch (Exception e) {
+			v = "0.0.1";
+		}
+		version = v;
 	}
 
 	@Override
 	public String transactionAuthorize(Credential credential, Transaction transaction)
 			throws ClientProtocolException, IOException {
-		HttpClient client = this.httpClientBuilder(credential);
-		HttpResponse response = client
-				.execute(newPost(communicationUrl + "/api/v3/transacao", jsonBuilder.toJson(transaction)));
-
-		return new BasicResponseHandler().handleResponse(response);
+		return postJsonAuth(credential, communicationUrl + "/api/v3/transacao", jsonBuilder.toJson(transaction));
 	}
 
 	@Override
@@ -55,12 +69,7 @@ public class RestV3Impl implements RestV3 {
 	@Override
 	public String transactionQuery(Credential credential, String storeCode, Long transactionNumber)
 			throws ClientProtocolException, IOException {
-		HttpClient client = this.httpClientBuilder(credential);
-
-		HttpResponse response = client
-				.execute(newGet(communicationUrl + "/api/v3/transacao/" + storeCode + "/" + transactionNumber));
-
-		return new BasicResponseHandler().handleResponse(response);
+		return getJsonAuth(credential, communicationUrl + "/api/v3/transacao/" + storeCode + "/" + transactionNumber);
 	}
 
 	@Override
@@ -72,18 +81,14 @@ public class RestV3Impl implements RestV3 {
 	@Override
 	public String transactionCapture(Credential credential, String storeCode, Long transactionNumber, Long value)
 			throws ClientProtocolException, IOException {
-		HttpClient client = this.httpClientBuilder(credential);
-
 		String valueParameter = "";
 
 		if (value != null && value > 0) {
 			valueParameter = "?valor=" + value.toString();
 		}
 
-		HttpResponse response = client.execute(newPut(communicationUrl + "/api/v3/transacao/" + storeCode + "/"
-				+ transactionNumber + "/capturar" + valueParameter, null));
-
-		return new BasicResponseHandler().handleResponse(response);
+		return putJsonAuth(credential, communicationUrl + "/api/v3/transacao/" + storeCode + "/" + transactionNumber
+				+ "/capturar" + valueParameter, null);
 	}
 
 	@Override
@@ -95,67 +100,45 @@ public class RestV3Impl implements RestV3 {
 	@Override
 	public String transactionCancel(Credential credential, String storeCode, Long transactionNumber, Long value)
 			throws ClientProtocolException, IOException {
-		HttpClient client = this.httpClientBuilder(credential);
-
 		String valueParameter = "";
 
 		if (value != null && value > 0) {
 			valueParameter = "?valor=" + value.toString();
 		}
 
-		HttpResponse response = client.execute(newPut(communicationUrl + "/api/v3/transacao/" + storeCode + "/"
-				+ transactionNumber + "/cancelar" + valueParameter, null));
-
-		return new BasicResponseHandler().handleResponse(response);
+		return putJsonAuth(credential, communicationUrl + "/api/v3/transacao/" + storeCode + "/" + transactionNumber
+				+ "/cancelar" + valueParameter, null);
 	}
 
 	@Override
 	public String oneClickRegister(Credential credential, OneClickRegisterData registerData)
 			throws ClientProtocolException, IOException {
-		HttpClient client = this.httpClientBuilder(credential);
-		HttpResponse response = client
-				.execute(newPost(communicationUrl + "/api/v3/oneclick", jsonBuilder.toJson(registerData)));
-
-		return new BasicResponseHandler().handleResponse(response);
+		return postJsonAuth(credential, communicationUrl + "/api/v3/oneclick", jsonBuilder.toJson(registerData));
 	}
 
 	@Override
 	public String oneClickQuery(Credential credential, String token) throws ClientProtocolException, IOException {
-		HttpClient client = this.httpClientBuilder(credential);
-		HttpResponse response = client.execute(newGet(communicationUrl + "/api/v3/oneclick/" + token));
-
-		return new BasicResponseHandler().handleResponse(response);
+		return getJsonAuth(credential, communicationUrl + "/api/v3/oneclick/" + token);
 	}
 
 	@Override
 	public String oneClickRegisterUpdate(Credential credential, String token, OneClickRegisterData registerData)
 			throws ClientProtocolException, IOException {
-		HttpClient client = this.httpClientBuilder(credential);
-		HttpResponse response = client.execute(
-				newPut(communicationUrl + "/api/v3/oneclick/" + token + "/alterar", jsonBuilder.toJson(registerData)));
-
-		return new BasicResponseHandler().handleResponse(response);
+		return putJsonAuth(credential, communicationUrl + "/api/v3/oneclick/" + token + "/alterar",
+				jsonBuilder.toJson(registerData));
 	}
 
 	@Override
 	public String oneClickAuthorize(Credential credential, String token, Transaction transaction)
 			throws ClientProtocolException, IOException {
-		HttpClient client = this.httpClientBuilder(credential);
-		HttpResponse response = client.execute(newPost(communicationUrl + "/api/v3/oneclick/" + token + "/autorizar",
-				jsonBuilder.toJson(transaction)));
-
-		return new BasicResponseHandler().handleResponse(response);
+		return postJsonAuth(credential, communicationUrl + "/api/v3/oneclick/" + token + "/autorizar",
+				jsonBuilder.toJson(transaction));
 	}
 
 	@Override
 	public String recurringPaymentRegister(Credential credential, RecurringPayment recurringPayment)
 			throws ClientProtocolException, IOException {
-
-		HttpClient client = this.httpClientBuilder(credential);
-		HttpResponse response = client
-				.execute(newPost(communicationUrl + "/api/v3/recorrencia", jsonBuilder.toJson(recurringPayment)));
-
-		return new BasicResponseHandler().handleResponse(response);
+		return postJsonAuth(credential, communicationUrl + "/api/v3/recorrencia", jsonBuilder.toJson(recurringPayment));
 	}
 
 	@Override
@@ -167,11 +150,8 @@ public class RestV3Impl implements RestV3 {
 	@Override
 	public String recurringPaymentQuery(Credential credential, String storeCode, Long recurringPaymentNumber)
 			throws ClientProtocolException, IOException {
-		HttpClient client = this.httpClientBuilder(credential);
-		HttpResponse response = client
-				.execute(newGet(communicationUrl + "/api/v3/recorrencia/" + storeCode + "/" + recurringPaymentNumber));
-
-		return new BasicResponseHandler().handleResponse(response);
+		return getJsonAuth(credential,
+				communicationUrl + "/api/v3/recorrencia/" + storeCode + "/" + recurringPaymentNumber);
 	}
 
 	@Override
@@ -183,51 +163,74 @@ public class RestV3Impl implements RestV3 {
 	@Override
 	public String recurringPaymentCancel(Credential credential, String storeCode, Long recurringPaymentNumber)
 			throws ClientProtocolException, IOException {
-		HttpClient client = this.httpClientBuilder(credential);
-		HttpResponse response = client.execute(newPut(
+		return putJsonAuth(credential,
 				communicationUrl + "/api/v3/recorrencia/" + storeCode + "/" + recurringPaymentNumber + "/cancelar",
-				null));
-
-		return new BasicResponseHandler().handleResponse(response);
+				null);
 	}
 
-	private HttpClient httpClientBuilder(Credential gatewayCredential) throws IOException {
+	private String postJsonAuth(Credential credential, String url, String data)
+			throws ClientProtocolException, IOException {
+		data = defaultString(data);
+		HttpPost post = new HttpPost(url);
 
-		try (CloseableHttpClient createdClient = HttpClientBuilder.create()
-				.setDefaultCredentialsProvider(credentialSetup(gatewayCredential)).build()) {
-			return createdClient;
+		post.setEntity(new BufferedHttpEntity(
+				new InputStreamEntity(new ByteArrayInputStream(data.getBytes()), data.length())));
+		post.setHeader("Accept", "application/json");
+		post.setHeader("Accept-Charset", "UTF-8");
+		post.setHeader("Content-Type", "application/json; charset=UTF-8");
+
+		return requestBasicAuth(post, credential);
+	}
+
+	private String putJsonAuth(Credential credential, String url, String data)
+			throws ClientProtocolException, IOException {
+		data = defaultString(data);
+		HttpPut put = new HttpPut(url);
+
+		put.setEntity(new BufferedHttpEntity(
+				new InputStreamEntity(new ByteArrayInputStream(data.getBytes()), data.length())));
+		put.setHeader("Accept", "application/json");
+		put.setHeader("Accept-Charset", "UTF-8");
+		put.setHeader("Content-Type", "application/json; charset=UTF-8");
+
+		return requestBasicAuth(put, credential);
+	}
+
+	private String getJsonAuth(Credential credential, String url) throws ClientProtocolException, IOException {
+		HttpGet get = new HttpGet(url);
+
+		get.setHeader("Accept", "application/json");
+		get.setHeader("Accept-Charset", "UTF-8");
+
+		return requestBasicAuth(get, credential);
+	}
+
+	private String requestBasicAuth(HttpUriRequest request, Credential credential)
+			throws ClientProtocolException, IOException {
+		String encoded = String.valueOf(encodeBase64String(
+				(trimToNull(credential.getUser()) + ":" + trimToNull(credential.getPassword())).getBytes()));
+		request.addHeader("Authorization", " Basic " + encoded);
+
+		return requestHttpClient(request);
+	}
+
+	private String requestHttpClient(HttpUriRequest request) throws ClientProtocolException, IOException {
+		String result = null;
+
+		request.addHeader("User-Agent", "YapayGatewayJava_" + version);
+		int connectionTimeout = 73_000;
+		int readTimeout = 10 * connectionTimeout;
+		RequestConfig config = RequestConfig.custom().setConnectTimeout(connectionTimeout).setSocketTimeout(readTimeout)
+				.build();
+		try (CloseableHttpClient client = HttpClientBuilder.create().setDefaultRequestConfig(config).build()) {
+			result = executeRequestHttpClient(client, request);
 		}
-
+		return result;
 	}
 
-	private CredentialsProvider credentialSetup(Credential gatewayCredential) {
-		CredentialsProvider credentialProviders = new BasicCredentialsProvider();
-		UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(gatewayCredential.getUser(),
-				gatewayCredential.getPassword());
-		credentialProviders.setCredentials(AuthScope.ANY, credentials);
-		return credentialProviders;
+	private String executeRequestHttpClient(HttpClient client, HttpUriRequest request)
+			throws ClientProtocolException, IOException {
+		HttpResponse response = client.execute(request);
+		return response.getEntity() == null ? null : EntityUtils.toString(response.getEntity());
 	}
-
-	private HttpPost newPost(String url, String body) throws UnsupportedEncodingException {
-		HttpPost httpPost = new HttpPost(url);
-		StringEntity postBody = new StringEntity(body);
-		httpPost.setEntity(postBody);
-		httpPost.setHeader("Content-type", "application/json");
-		return httpPost;
-	}
-
-	private HttpPut newPut(String url, String body) throws UnsupportedEncodingException {
-		HttpPut httpPut = new HttpPut(url);
-		StringEntity postBody = new StringEntity(body);
-		httpPut.setEntity(postBody);
-		httpPut.setHeader("Content-type", "application/json");
-		return httpPut;
-	}
-
-	private HttpGet newGet(String url) {
-		HttpGet httpGet = new HttpGet(url);
-		httpGet.setHeader("Content-type", "application/json");
-		return httpGet;
-	}
-
 }
