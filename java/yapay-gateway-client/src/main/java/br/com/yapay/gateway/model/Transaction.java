@@ -109,11 +109,6 @@ public class Transaction {
 			return this;
 		}
 
-		public Builder withCheckout(CheckoutData checkout) {
-			this.checkout = checkout;
-			return this;
-		}
-
 		public Builder withCard(String cardHolderName, String cardNumber, String expirationDate, String cvv) {
 			return withCard(new CardData(cardHolderName, cardNumber, expirationDate, cvv));
 		}
@@ -265,6 +260,48 @@ public class Transaction {
 				this.extraFields = new ArrayList<>();
 			}
 			this.extraFields.add(extraField);
+			return this;
+		}
+
+		public Builder withCheckout(CheckoutData checkout) {
+			this.checkout = checkout;
+			return this;
+		}
+
+		public Builder withCheckoutProcess() {
+			if (this.checkout == null) {
+				this.checkout = new CheckoutData();
+			}
+			this.checkout.setProcess(1);
+			return this;
+		}
+
+		public Builder withCheckoutPaymentType(Integer paymentType) {
+			if (this.checkout == null) {
+				this.checkout = new CheckoutData();
+			}
+			this.checkout.setPaymentType(paymentType);
+			return this;
+		}
+
+		public Builder withCheckoutMultipleCard() {
+			if (this.checkout == null) {
+				this.checkout = new CheckoutData();
+			}
+			this.checkout.setMultipleCard(1);
+			return this;
+		}
+
+		public Builder addCheckoutMultipleBillData(Long value, String dueDate) {
+			return addCheckoutMultipleBillData(new TransactionCheckoutMultipleBillData(value, dueDate));
+		}
+
+		public Builder addCheckoutMultipleBillData(TransactionCheckoutMultipleBillData multipleBillData) {
+			if (this.checkout == null) {
+				this.checkout = new CheckoutData();
+			}
+			this.checkout.setMultipleBill(1);
+			this.checkout.addMultipleBillData(multipleBillData);
 			return this;
 		}
 

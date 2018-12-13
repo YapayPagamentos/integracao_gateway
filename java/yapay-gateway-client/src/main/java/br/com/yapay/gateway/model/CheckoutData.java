@@ -1,25 +1,32 @@
 package br.com.yapay.gateway.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Class containing Checkout Yapay info
+ * 
+ * @author Adriano Santos
+ *
+ */
 public class CheckoutData {
-	
+
 	@SerializedName("processar")
 	private Integer process;
-	
+
 	@SerializedName("tipoPagamento")
 	private Integer paymentType;
-	
+
 	@SerializedName("multiploCartao")
 	private Integer multipleCard;
-	
+
 	@SerializedName("multiploBoleto")
 	private Integer multipleBill;
-	
+
 	@SerializedName("boletos")
-	private List<TransactionCheckoutMultipleBillData> multipleBillData;
+	private List<TransactionCheckoutMultipleBillData> multipleBillDataList;
 
 	public Integer getProcess() {
 		return process;
@@ -53,12 +60,22 @@ public class CheckoutData {
 		this.multipleBill = multipleBill;
 	}
 
-	public List<TransactionCheckoutMultipleBillData> getMultipleBillData() {
-		return multipleBillData;
+	public List<TransactionCheckoutMultipleBillData> getMultipleBillDataList() {
+		return multipleBillDataList;
 	}
 
-	public void setMultipleBillData(List<TransactionCheckoutMultipleBillData> multipleBillData) {
-		this.multipleBillData = multipleBillData;
+	public void setMultipleBillDataList(List<TransactionCheckoutMultipleBillData> multipleBillDataList) {
+		this.multipleBillDataList = multipleBillDataList;
 	}
 
+	public void addMultipleBillData(Long value, String dueDate) {
+		addMultipleBillData(new TransactionCheckoutMultipleBillData(value, dueDate));
+	}
+
+	public void addMultipleBillData(TransactionCheckoutMultipleBillData multipleBillData) {
+		if (this.multipleBillDataList == null) {
+			this.multipleBillDataList = new ArrayList<>();
+		}
+		this.multipleBillDataList.add(multipleBillData);
+	}
 }
