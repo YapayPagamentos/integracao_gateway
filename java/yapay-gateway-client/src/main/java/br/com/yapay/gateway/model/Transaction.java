@@ -109,11 +109,6 @@ public class Transaction {
 			return this;
 		}
 
-		public Builder withTransactionData(TransactionData transactionData) {
-			this.transactionData = transactionData;
-			return this;
-		}
-
 		public Builder withCheckout(CheckoutData checkout) {
 			this.checkout = checkout;
 			return this;
@@ -273,8 +268,113 @@ public class Transaction {
 			return this;
 		}
 
+		public Builder withTransactionData(TransactionData transactionData) {
+			this.transactionData = transactionData;
+			return this;
+		}
+
 		public Builder withInstallments(Integer installments) {
 			this.transactionData.setInstallments(installments);
+			return this;
+		}
+
+		public Builder withTransactionNumber(Long transactionNumber) {
+			this.transactionData.setTransactionNumber(transactionNumber);
+			return this;
+		}
+
+		public Builder withValue(Long value) {
+			this.transactionData.setValue(value);
+			return this;
+		}
+
+		public Builder withDiscountValue(Long discountValue) {
+			this.transactionData.setDiscountValue(discountValue);
+			return this;
+		}
+
+		public Builder withBoardingFee(Long boardingFee) {
+			this.transactionData.setBoardingFee(boardingFee);
+			return this;
+		}
+
+		public Builder withInstallmentType(String installmentType) {
+			this.transactionData.setInstallmentType(installmentType);
+			return this;
+		}
+
+		public Builder withNotificationUrl(String notificationUrl) {
+			this.transactionData.setNotificationUrl(notificationUrl);
+			return this;
+		}
+
+		public Builder withResultUrl(String resultUrl) {
+			this.transactionData.setResultUrl(resultUrl);
+			return this;
+		}
+
+		public Builder withUnpaidRedirectUrl(String unpaidRedirectUrl) {
+			this.transactionData.setUnpaidRedirectUrl(unpaidRedirectUrl);
+			return this;
+		}
+
+		public Builder withLanguage(Integer language) {
+			this.transactionData.setLanguage(language);
+			return this;
+		}
+
+		public Builder withIp(String ip) {
+			this.transactionData.setIp(ip);
+			return this;
+		}
+
+		public Builder withBrowser(String browser) {
+			this.transactionData.setBrowser(browser);
+			return this;
+		}
+
+		public Builder withTransactionOrigin(Integer transactionOrigin) {
+			this.transactionData.setTransactionOrigin(transactionOrigin);
+			return this;
+		}
+
+		public Builder withFreeFieldOne(String freeFieldOne) {
+			this.transactionData.setFreeFieldOne(freeFieldOne);
+			return this;
+		}
+
+		public Builder withFreeFieldTwo(String freeFieldTwo) {
+			this.transactionData.setFreeFieldTwo(freeFieldTwo);
+			return this;
+		}
+
+		public Builder withFreeFieldThree(String freeFieldThree) {
+			this.transactionData.setFreeFieldThree(freeFieldThree);
+			return this;
+		}
+
+		public Builder withFreeFieldFour(String freeFieldFour) {
+			this.transactionData.setFreeFieldFour(freeFieldFour);
+			return this;
+		}
+
+		public Builder withFreeFieldFive(String freeFieldFive) {
+			this.transactionData.setFreeFieldFive(freeFieldFive);
+			return this;
+		}
+
+		public Builder withBillDueDate(String billDueDate) {
+			this.transactionData.setBillDueDate(billDueDate);
+			return this;
+		}
+
+		public Builder withCountry(String country) {
+			this.transactionData.setCountry(country);
+			return this;
+		}
+
+		public Builder withCurrency(String currency) {
+			this.transactionData.setCurrency(currency);
 			return this;
 		}
 

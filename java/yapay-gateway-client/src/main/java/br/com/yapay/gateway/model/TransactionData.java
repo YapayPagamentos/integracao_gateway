@@ -73,9 +73,6 @@ public class TransactionData {
 	@SerializedName("moeda")
 	private String currency;
 
-	@SerializedName("pagamentoRecorrente")
-	private Boolean recurrentPayment;
-
 	/**
 	 * @deprecated JSON bind eyes only
 	 */
@@ -262,14 +259,6 @@ public class TransactionData {
 
 	public void setCurrency(String currency) {
 		this.currency = currency;
-	}
-
-	public Boolean getRecurrentPayment() {
-		return recurrentPayment;
-	}
-
-	public void setRecurrentPayment(Boolean recurrentPayment) {
-		this.recurrentPayment = recurrentPayment;
 	}
 
 }
