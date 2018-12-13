@@ -2,6 +2,12 @@ package br.com.yapay.gateway.model;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Class describing cart items
+ * 
+ * @author Adriano Santos
+ *
+ */
 public class ItemData {
 
 	@SerializedName("codigoProduto")

@@ -2,6 +2,12 @@ package br.com.yapay.gateway.model;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Transaction detail info
+ * 
+ * @author Adriano Santos
+ *
+ */
 public class TransactionData {
 
 	@SerializedName("numeroTransacao")
@@ -23,7 +29,7 @@ public class TransactionData {
 	private String installmentType;
 
 	@SerializedName("urlCampainha")
-	private String hintUrl;
+	private String notificationUrl;
 
 	@SerializedName("urlResultado")
 	private String resultUrl;
@@ -32,7 +38,7 @@ public class TransactionData {
 	private String unpaidRedirectUrl;
 
 	@SerializedName("idioma")
-	private Integer idiom;
+	private Integer language;
 
 	@SerializedName("ip")
 	private String ip;
@@ -69,6 +75,26 @@ public class TransactionData {
 
 	@SerializedName("pagamentoRecorrente")
 	private Boolean recurrentPayment;
+
+	/**
+	 * @deprecated JSON bind eyes only
+	 */
+	@Deprecated
+	TransactionData() {
+	}
+
+	/**
+	 * Constructor of mandatory properties
+	 * 
+	 * @param transactionNumber Order identification
+	 * @param value             Order value
+	 */
+	public TransactionData(Long transactionNumber, Long value) {
+		this.transactionNumber = transactionNumber;
+		this.value = value;
+		this.language = 1;
+		this.installments = 1;
+	}
 
 	public Long getTransactionNumber() {
 		return transactionNumber;
@@ -118,12 +144,12 @@ public class TransactionData {
 		this.installmentType = installmentType;
 	}
 
-	public String getHintUrl() {
-		return hintUrl;
+	public String getNotificationUrl() {
+		return notificationUrl;
 	}
 
-	public void setHintUrl(String hintUrl) {
-		this.hintUrl = hintUrl;
+	public void setNotificationUrl(String notificationUrl) {
+		this.notificationUrl = notificationUrl;
 	}
 
 	public String getResultUrl() {
@@ -142,12 +168,12 @@ public class TransactionData {
 		this.unpaidRedirectUrl = unpaidRedirectUrl;
 	}
 
-	public Integer getIdiom() {
-		return idiom;
+	public Integer getLanguage() {
+		return language;
 	}
 
-	public void setIdiom(Integer idiom) {
-		this.idiom = idiom;
+	public void setLanguage(Integer language) {
+		this.language = language;
 	}
 
 	public String getIp() {
