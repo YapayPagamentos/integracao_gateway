@@ -2,13 +2,11 @@ package br.com.yapay.gateway.communication;
 
 import static org.apache.commons.codec.binary.Base64.encodeBase64String;
 import static org.apache.commons.lang3.StringUtils.defaultString;
+import static org.apache.commons.lang3.StringUtils.isNoneBlank;
 import static org.apache.commons.lang3.StringUtils.trimToNull;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -37,21 +35,20 @@ public class RestV3Impl implements RestV3 {
 
 	private final Gson jsonBuilder;
 
-	private final String version;
+	private final String userAgent;
 
-	public RestV3Impl(String url) throws ClientProtocolException, IOException {
+	public RestV3Impl(String url) {
 		this.communicationUrl = url;
 		this.jsonBuilder = new Gson();
-		String v = "0.0.1";
-		try (InputStream in = new FileInputStream(
-				"/META-INF/maven/br.com.gateway.yapay/yapay-gateway-client/pom.properties")) {
-			Properties properties = new Properties();
-			properties.load(in);
-			v = properties.getProperty("version");
+		String u = "YapayGatewayJava";
+		try {
+			String v = getClass().getPackage().getImplementationVersion();
+			if (isNoneBlank(v)) {
+				u += "_" + v;
+			}
 		} catch (Exception e) {
-			v = "0.0.1";
 		}
-		version = v;
+		userAgent = u;
 	}
 
 	@Override
@@ -217,7 +214,7 @@ public class RestV3Impl implements RestV3 {
 	private String requestHttpClient(HttpUriRequest request) throws ClientProtocolException, IOException {
 		String result = null;
 
-		request.addHeader("User-Agent", "YapayGatewayJava_" + version);
+		request.addHeader("User-Agent", userAgent);
 		int connectionTimeout = 73_000;
 		int readTimeout = 10 * connectionTimeout;
 		RequestConfig config = RequestConfig.custom().setConnectTimeout(connectionTimeout).setSocketTimeout(readTimeout)
