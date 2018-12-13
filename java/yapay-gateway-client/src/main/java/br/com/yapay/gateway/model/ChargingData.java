@@ -1,9 +1,16 @@
 package br.com.yapay.gateway.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Class containing client info
+ * 
+ * @author Adriano Santos
+ *
+ */
 public class ChargingData {
 
 	@SerializedName("codigoCliente")
@@ -31,10 +38,94 @@ public class ChargingData {
 	private String clientDocumentTwo;
 
 	@SerializedName("endereco")
-	private AddressData clientChargingAdress;
+	private AddressData clientAddress;
 
 	@SerializedName("telefone")
-	private List<PhoneData> clientChargingPhone;
+	private List<PhoneData> clientPhones;
+
+	/**
+	 * @deprecated JSON bind eyes only
+	 */
+	@Deprecated
+	ChargingData() {
+	}
+
+	/**
+	 * Overload of {@link #ChargingData(String, String, String, AddressData, List)}
+	 * without {@code clientAddress} and {@code clientPhones}
+	 * 
+	 * @param clientName     Client name
+	 * @param clientEmail    Client e-mail
+	 * @param clientDocument Client document
+	 */
+	public ChargingData(String clientName, String clientEmail, String clientDocument) {
+		this(clientName, clientEmail, clientDocument, null, null);
+	}
+
+	/**
+	 * Overload of
+	 * {@link #ChargingData(String, String, String, String, String, String, AddressData, List)}
+	 * without {@code birthday}, {@code genre} and {@code documentTwo}
+	 * 
+	 * @param clientName     Client name
+	 * @param clientEmail    Client e-mail
+	 * @param clientDocument Client document
+	 * @param clientAddress  Charging address
+	 * @param clientPhones   Charging phones
+	 */
+	public ChargingData(String clientName, String clientEmail, String clientDocument, AddressData clientAddress,
+			List<PhoneData> clientPhones) {
+		this(clientName, clientEmail, null, null, clientDocument, null, clientAddress, clientPhones);
+	}
+
+	/**
+	 * Overload of
+	 * {@link #ChargingData(Integer, Integer, String, String, String, String, String, String, AddressData, List)}
+	 * with {@code clientCode} and {@code clientType} defaulting to 1
+	 * 
+	 * @param clientName        Client name
+	 * @param clientEmail       Client e-mail
+	 * @param clientBirthday    Client birth date
+	 * @param clientGenre       Client genre
+	 * @param clientDocument    Client document
+	 * @param clientDocumentTwo Client secondary document
+	 * @param clientAddress     Charging address
+	 * @param clientPhones      Charging phones
+	 */
+	public ChargingData(String clientName, String clientEmail, String clientBirthday, String clientGenre,
+			String clientDocument, String clientDocumentTwo, AddressData clientAddress, List<PhoneData> clientPhones) {
+		this(1, 1, clientName, clientEmail, clientBirthday, clientGenre, clientDocument, clientDocumentTwo,
+				clientAddress, clientPhones);
+	}
+
+	/**
+	 * Constructor with all parameters
+	 * 
+	 * @param clientCode        Client code
+	 * @param clientType        Client type
+	 * @param clientName        Client name
+	 * @param clientEmail       Client e-mail
+	 * @param clientBirthday    Client birth date
+	 * @param clientGenre       Client genre
+	 * @param clientDocument    Client document
+	 * @param clientDocumentTwo Client secondary document
+	 * @param clientAddress     Charging address
+	 * @param clientPhones      Charging phones
+	 */
+	public ChargingData(Integer clientCode, Integer clientType, String clientName, String clientEmail,
+			String clientBirthday, String clientGenre, String clientDocument, String clientDocumentTwo,
+			AddressData clientAddress, List<PhoneData> clientPhones) {
+		this.clientCode = clientCode;
+		this.clientType = clientType;
+		this.clientName = clientName;
+		this.clientEmail = clientEmail;
+		this.clientBirthday = clientBirthday;
+		this.clientGenre = clientGenre;
+		this.clientDocument = clientDocument;
+		this.clientDocumentTwo = clientDocumentTwo;
+		this.clientAddress = clientAddress;
+		this.clientPhones = clientPhones;
+	}
 
 	public Integer getClientCode() {
 		return clientCode;
@@ -100,20 +191,102 @@ public class ChargingData {
 		this.clientDocumentTwo = clientDocumentTwo;
 	}
 
-	public AddressData getClientChargingAdress() {
-		return clientChargingAdress;
+	public AddressData getClientAddress() {
+		return clientAddress;
 	}
 
-	public void setClientChargingAdress(AddressData clientChargingAdress) {
-		this.clientChargingAdress = clientChargingAdress;
+	/**
+	 * Regular setter of charging address
+	 * 
+	 * @param clientAddress Address
+	 */
+	public void setClientAddress(AddressData clientAddress) {
+		this.clientAddress = clientAddress;
 	}
 
-	public List<PhoneData> getClientChargingPhone() {
-		return clientChargingPhone;
+	/**
+	 * Overload of {@link #setClientAddress(AddressData)} that instantiate new
+	 * address from parameters
+	 * 
+	 * @param street   Street
+	 * @param number   Street number
+	 * @param zipCode  Postal identification
+	 * @param district District
+	 * @param city     City
+	 * @param state    State
+	 * 
+	 * @see AddressData#AddressData(String, String, String, String, String, String)
+	 */
+	public void setClientAddress(String street, String number, String zipCode, String district, String city,
+			String state) {
+		setClientAddress(new AddressData(street, number, zipCode, district, city, state));
 	}
 
-	public void setClientChargingPhone(List<PhoneData> clientChargingPhone) {
-		this.clientChargingPhone = clientChargingPhone;
+	/**
+	 * Overload of {@link #setClientAddress(AddressData)} that instantiate new
+	 * address from parameters
+	 * 
+	 * @param street  Street
+	 * @param number  Street number
+	 * @param zipCode Postal identification
+	 * @param city    City
+	 * @param state   State
+	 * 
+	 * @see AddressData#AddressData( String, String, String, String, String)
+	 */
+	public void setClientAddress(String street, String number, String zipCode, String city, String state) {
+		setClientAddress(new AddressData(street, number, zipCode, city, state));
 	}
 
+	public List<PhoneData> getClientPhones() {
+		return clientPhones;
+	}
+
+	/**
+	 * Regular setter of phone list
+	 * 
+	 * @param clientPhones Phones
+	 */
+	public void setClientPhones(List<PhoneData> clientPhones) {
+		this.clientPhones = clientPhones;
+	}
+
+	/**
+	 * Overload of {@link #addClientPhone(PhoneData)} that instantiate new phone
+	 * from parameters
+	 * 
+	 * @param ddd    Long distance calling code
+	 * @param number Phone number
+	 * 
+	 * @see PhoneData#PhoneData(String, String)
+	 */
+	public void addClientPhone(String ddd, String number) {
+		addClientPhone(new PhoneData(ddd, number));
+	}
+
+	/**
+	 * Overload of {@link #addClientPhone(PhoneData)} that instantiate new phone
+	 * from parameters
+	 * 
+	 * @param ddi    International calling code
+	 * @param ddd    Long distance calling code
+	 * @param number Phone number
+	 * 
+	 * @see PhoneData#PhoneData(String, String, String)
+	 */
+	public void addClientPhone(String ddi, String ddd, String number) {
+		addClientPhone(new PhoneData(ddi, ddd, number));
+	}
+
+	/**
+	 * Method for append phone in client list
+	 * 
+	 * @param clientPhone Phone
+	 */
+	public void addClientPhone(PhoneData clientPhone) {
+		if (this.clientPhones == null) {
+			this.clientPhones = new ArrayList<>();
+		}
+		this.clientPhones.add(clientPhone);
+	}
 }
