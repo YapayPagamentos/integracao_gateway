@@ -29,21 +29,55 @@ import br.com.yapay.gateway.model.OneClickRegisterData;
 import br.com.yapay.gateway.model.RecurringPayment;
 import br.com.yapay.gateway.model.Transaction;
 
+/**
+ * Communication with Gateway API
+ * 
+ * @author Adriano Santos
+ *
+ */
 public class RestV3 {
 
 	private final String communicationUrl;
-
 	private final Gson jsonBuilder;
-
 	private final String userAgent;
+	private final int connectionTimeout;
+	private final int readTimeout;
 
-	private int connectionTimeout;
+	/**
+	 * Overload to {@link #RestV3(String)} with url wrapped by {@link GatewayUrl}
+	 * 
+	 * @param gatewayUrl Enum with Endpoint to API environment
+	 */
+	public RestV3(GatewayUrl gatewayUrl) {
+		this(gatewayUrl.getUrl());
+	}
 
-	private int readTimeout;
-
+	/**
+	 * Overload to {@link #RestV3(String, int)} with timeout set to 1 minute
+	 * 
+	 * @param url Endpoint to API environment
+	 */
 	public RestV3(String url) {
+		this(url, 60_000);
+	}
+
+	/**
+	 * Constructor with text url and timeout option
+	 * 
+	 * @param url               Endpoint to API environment
+	 * @param connectionTimeout Time in milliseconds until timeout
+	 * 
+	 * @see RequestConfig
+	 */
+	public RestV3(String url, int connectionTimeout) {
+		this(url, connectionTimeout, 10 * connectionTimeout);
+	}
+
+	private RestV3(String url, int connectionTimeout, int readTimeout) {
 		this.communicationUrl = url;
 		this.jsonBuilder = new Gson();
+		this.connectionTimeout = connectionTimeout;
+		this.readTimeout = readTimeout;
 		String u = "YapayGatewayJava";
 		try {
 			String v = getClass().getPackage().getImplementationVersion();
@@ -198,8 +232,7 @@ public class RestV3 {
 		request.addHeader("User-Agent", userAgent);
 		request.addHeader("Accept", "application/json");
 		request.addHeader("Accept-Charset", "UTF-8");
-		connectionTimeout = 73_000;
-		readTimeout = 10 * connectionTimeout;
+
 		RequestConfig config = RequestConfig.custom().setConnectTimeout(connectionTimeout).setSocketTimeout(readTimeout)
 				.build();
 		try (CloseableHttpClient client = HttpClientBuilder.create().setDefaultRequestConfig(config).build()) {

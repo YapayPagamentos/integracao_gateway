@@ -1,8 +1,22 @@
 package br.com.yapay.gateway.communication;
 
+/**
+ * Enum with endpoints to Gateway API
+ * 
+ * @author Adriano Santos
+ *
+ */
 public enum GatewayUrl {
 
-	SANDBOX("https://sandbox.gateway.yapay.com.br/checkout"), PRODUCTION("https://gateway.yapay.com.br/checkout");
+	/**
+	 * Test API url
+	 */
+	SANDBOX("https://sandbox.gateway.yapay.com.br/checkout"),
+
+	/**
+	 * Production API url
+	 */
+	PRODUCTION("https://gateway.yapay.com.br/checkout");
 
 	private String url;
 
@@ -10,9 +24,13 @@ public enum GatewayUrl {
 		this.url = url;
 	}
 
+	/**
+	 * Url getter
+	 * 
+	 * @return Endpoint pointing to specific environment
+	 */
 	public String getUrl() {
 		return url;
 	}
-
 
 }
