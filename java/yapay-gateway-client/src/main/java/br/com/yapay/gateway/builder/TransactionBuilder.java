@@ -114,7 +114,7 @@ public class TransactionBuilder {
 		transaction.getDelivery().setDocumentTwo(deliveryData.getDocumentTwo());
 		transaction.getDelivery().setMail(deliveryData.getMail());
 		transaction.getDelivery().setName(deliveryData.getName());
-		transaction.getDelivery().setSex(deliveryData.getSex());
+		transaction.getDelivery().setGenre(deliveryData.getGenre());
 
 		if (deliveryData.getDeliveryAddress() != null) {
 			transaction.getDelivery().setDeliveryAddress(new AddressData());
@@ -152,7 +152,7 @@ public class TransactionBuilder {
 		transaction.getCharging().setClientDocumentTwo(chargingData.getClientDocumentTwo());
 		transaction.getCharging().setClientEmail(chargingData.getClientEmail());
 		transaction.getCharging().setClientName(chargingData.getClientName());
-		transaction.getCharging().setClientSex(chargingData.getClientSex());
+		transaction.getCharging().setClientGenre(chargingData.getClientGenre());
 
 		if (chargingData.getClientChargingAdress() != null) {
 			transaction.getCharging().setClientChargingAdress(new AddressData());

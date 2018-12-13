@@ -22,7 +22,7 @@ public class ChargingData {
 	private String clientBirthday;
 
 	@SerializedName("sexo")
-	private String clientSex;
+	private String clientGenre;
 
 	@SerializedName("documento")
 	private String clientDocument;
@@ -76,12 +76,12 @@ public class ChargingData {
 		this.clientBirthday = clientBirthday;
 	}
 
-	public String getClientSex() {
-		return clientSex;
+	public String getClientGenre() {
+		return clientGenre;
 	}
 
-	public void setClientSex(String clientSex) {
-		this.clientSex = clientSex;
+	public void setClientGenre(String clientGenre) {
+		this.clientGenre = clientGenre;
 	}
 
 	public String getClientDocument() {

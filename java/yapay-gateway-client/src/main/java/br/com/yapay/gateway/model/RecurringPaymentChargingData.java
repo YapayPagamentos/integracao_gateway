@@ -23,7 +23,7 @@ public class RecurringPaymentChargingData {
 	private Integer clientCode;
 	
 	@SerializedName("sexo")
-	private String clientSex;
+	private String clientGenre;
 	
 	@SerializedName("documento2")
 	private String documentTwo;
@@ -103,12 +103,12 @@ public class RecurringPaymentChargingData {
 		this.clientCode = clientCode;
 	}
 
-	public String getClientSex() {
-		return clientSex;
+	public String getClientGenre() {
+		return clientGenre;
 	}
 
-	public void setClientSex(String clientSex) {
-		this.clientSex = clientSex;
+	public void setClientGenre(String clientGenre) {
+		this.clientGenre = clientGenre;
 	}
 
 	public String getDocumentTwo() {

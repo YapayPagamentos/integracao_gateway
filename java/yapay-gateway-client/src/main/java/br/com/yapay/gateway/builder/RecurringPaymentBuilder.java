@@ -148,7 +148,7 @@ public class RecurringPaymentBuilder {
 		recurringPayment.getRecurringPaymentData().getChargingData()
 				.setClientAddressZipcode(chargingData.getClientAddressZipcode());
 		recurringPayment.getRecurringPaymentData().getChargingData().setClientCode(chargingData.getClientCode());
-		recurringPayment.getRecurringPaymentData().getChargingData().setClientSex(chargingData.getClientSex());
+		recurringPayment.getRecurringPaymentData().getChargingData().setClientGenre(chargingData.getClientGenre());
 		recurringPayment.getRecurringPaymentData().getChargingData().setClientType(chargingData.getClientType());
 		recurringPayment.getRecurringPaymentData().getChargingData().setDocument(chargingData.getDocument());
 		recurringPayment.getRecurringPaymentData().getChargingData().setDocumentTwo(chargingData.getDocumentTwo());

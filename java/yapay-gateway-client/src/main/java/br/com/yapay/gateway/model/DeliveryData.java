@@ -16,7 +16,7 @@ public class DeliveryData {
 	private String birthday;
 
 	@SerializedName("sexo")
-	private String sex;
+	private String genre;
 
 	@SerializedName("documento")
 	private String document;
@@ -54,12 +54,12 @@ public class DeliveryData {
 		this.birthday = birthday;
 	}
 
-	public String getSex() {
-		return sex;
+	public String getGenre() {
+		return genre;
 	}
 
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setGenre(String genre) {
+		this.genre = genre;
 	}
 
 	public String getDocument() {
