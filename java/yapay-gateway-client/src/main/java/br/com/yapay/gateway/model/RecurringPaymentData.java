@@ -2,6 +2,12 @@ package br.com.yapay.gateway.model;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Recurring payment detail info
+ * 
+ * @author Adriano Santos
+ *
+ */
 public class RecurringPaymentData {
 
 	@SerializedName("formaPagamento")
@@ -14,7 +20,7 @@ public class RecurringPaymentData {
 	private Long value;
 
 	@SerializedName("modalidade")
-	private Integer modality;
+	private Integer modality = 1;
 
 	@SerializedName("periodicidade")
 	private Integer frequency;
@@ -26,13 +32,10 @@ public class RecurringPaymentData {
 	private Boolean processImmediately;
 
 	@SerializedName("quantidadeCobrancas")
-	private Integer billingAmount;
+	private Integer billingAmount = 0;
 
 	@SerializedName("dataPrimeiraCobranca")
 	private String billingFirstDate;
-
-	@SerializedName("vencimentoBoleto")
-	private String billDueDate;
 
 	@SerializedName("campoLivre1")
 	private String freeFieldOne;
@@ -50,10 +53,7 @@ public class RecurringPaymentData {
 	private String freeFieldFive;
 
 	@SerializedName("dadosCartao")
-	private CreditCardData creditCard;
-
-	@SerializedName("dadosDebito")
-	private DebitCardData debitCard;
+	private CardData card;
 
 	@SerializedName("dadosCobranca")
 	private RecurringPaymentChargingData chargingData;
@@ -133,14 +133,6 @@ public class RecurringPaymentData {
 		this.billingFirstDate = billingFirstDate;
 	}
 
-	public String getBillDueDate() {
-		return billDueDate;
-	}
-
-	public void setBillDueDate(String billDueDate) {
-		this.billDueDate = billDueDate;
-	}
-
 	public String getFreeFieldOne() {
 		return freeFieldOne;
 	}
@@ -181,20 +173,12 @@ public class RecurringPaymentData {
 		this.freeFieldFive = freeFieldFive;
 	}
 
-	public CreditCardData getCreditCard() {
-		return creditCard;
+	public CardData getCard() {
+		return card;
 	}
 
-	public void setCreditCard(CreditCardData creditCard) {
-		this.creditCard = creditCard;
-	}
-
-	public DebitCardData getDebitCard() {
-		return debitCard;
-	}
-
-	public void setDebitCard(DebitCardData debitCard) {
-		this.debitCard = debitCard;
+	public void setCard(CardData card) {
+		this.card = card;
 	}
 
 	public RecurringPaymentChargingData getChargingData() {

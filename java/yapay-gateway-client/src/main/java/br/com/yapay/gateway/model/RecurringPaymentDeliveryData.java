@@ -2,6 +2,12 @@ package br.com.yapay.gateway.model;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Class containing recurring payment delivery info
+ * 
+ * @author Adriano Santos
+ *
+ */
 public class RecurringPaymentDeliveryData {
 
 	@SerializedName("nomeEntrega")
