@@ -2,7 +2,13 @@ package br.com.yapay.gateway.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class CreditCardData {
+/**
+ * Card info for single cards integration
+ * 
+ * @author Adriano Santos
+ *
+ */
+public class CardData {
 
 	@SerializedName("nomePortador")
 	private String cardHolderName;
@@ -16,14 +22,27 @@ public class CreditCardData {
 	@SerializedName("dataValidade")
 	private String expirationDate;
 
-	@SerializedName("codigoFormaPagamento")
-	private Integer paymentCode;
+	/**
+	 * @deprecated JSON bind eyes only
+	 */
+	@Deprecated
+	CardData() {
+	}
 
-	@SerializedName("parcelas")
-	private Integer installments;
-
-	@SerializedName("valor")
-	private Long value;
+	/**
+	 * Constructor with minimum requested parameters
+	 * 
+	 * @param cardHolderName Card holder name
+	 * @param cardNumber     Card number
+	 * @param expirationDate Card expiration date
+	 * @param cvv            Card security code
+	 */
+	public CardData(String cardHolderName, String cardNumber, String expirationDate, String cvv) {
+		this.cardHolderName = cardHolderName;
+		this.cardNumber = cardNumber;
+		this.expirationDate = expirationDate;
+		this.cvv = cvv;
+	}
 
 	public String getCardHolderName() {
 		return cardHolderName;
@@ -55,30 +74,6 @@ public class CreditCardData {
 
 	public void setExpirationDate(String expirationDate) {
 		this.expirationDate = expirationDate;
-	}
-
-	public Integer getPaymentCode() {
-		return paymentCode;
-	}
-
-	public void setPaymentCode(Integer paymentCode) {
-		this.paymentCode = paymentCode;
-	}
-
-	public Integer getInstallments() {
-		return installments;
-	}
-
-	public void setInstallments(Integer installments) {
-		this.installments = installments;
-	}
-
-	public Long getValue() {
-		return value;
-	}
-
-	public void setValue(Long value) {
-		this.value = value;
 	}
 
 }
