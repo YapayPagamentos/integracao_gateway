@@ -14,6 +14,7 @@ import com.google.gson.annotations.SerializedName;
 public class Transaction {
 
 	private final transient Credential credential;
+	private transient String resourcePath;
 
 	@SerializedName("codigoEstabelecimento")
 	private String storeCode;
@@ -58,6 +59,7 @@ public class Transaction {
 
 	private Transaction(Builder builder) {
 		this.credential = builder.credential;
+		this.resourcePath = builder.resourcePath;
 		this.storeCode = builder.storeCode;
 		this.paymentCode = builder.paymentCode;
 		this.transactionData = builder.transactionData;
@@ -79,6 +81,7 @@ public class Transaction {
 	 */
 	public static class Builder {
 		private final Credential credential;
+		private String resourcePath;
 
 		private String storeCode;
 		private Integer paymentCode;
@@ -92,11 +95,25 @@ public class Transaction {
 		private AirlineData airline;
 		private List<ExtraField> extraFields;
 
+		private Builder(Credential credential, Long transactionNumber) {
+			this(credential, null, transactionNumber, null);
+		}
+
+		private Builder(Credential credential, Long transactionNumber, Long value) {
+			this(credential, null, transactionNumber, value);
+		}
+
 		private Builder(Credential credential, Integer paymentCode, Long transactionNumber, Long value) {
 			this.credential = credential;
+			this.resourcePath = "/api/v3/transacao/";
 			this.paymentCode = paymentCode;
 			this.transactionData = new TransactionData(transactionNumber, value);
 			this.storeCode = credential.getStoreCode();
+		}
+
+		public Builder withResourcePath(String resourcePath) {
+			this.resourcePath = resourcePath;
+			return this;
 		}
 
 		public Builder withStoreCode(String storeCode) {
@@ -426,7 +443,30 @@ public class Transaction {
 	}
 
 	/**
-	 * Getting builder to construct transaction
+	 * Getting builder with minimum parameters
+	 * 
+	 * @param credential        Authentication info
+	 * @param transactionNumber Order identification
+	 * @return Transaction builder
+	 */
+	public static Builder getBuilder(Credential credential, Long transactionNumber) {
+		return new Builder(credential, transactionNumber);
+	}
+
+	/**
+	 * Getting builder to construct transaction with {@code value}
+	 * 
+	 * @param credential        Authentication info
+	 * @param transactionNumber Order identification
+	 * @param value             Order value
+	 * @return Transaction builder
+	 */
+	public static Builder getBuilder(Credential credential, Long transactionNumber, Long value) {
+		return new Builder(credential, transactionNumber, value);
+	}
+
+	/**
+	 * Getting builder to construct authorization transaction
 	 * 
 	 * @param credential        Authentication info
 	 * @param paymentCode       Payment identification
@@ -434,7 +474,7 @@ public class Transaction {
 	 * @param value             Order value
 	 * @return Transaction builder
 	 */
-	public Builder getBuilder(Credential credential, Integer paymentCode, Long transactionNumber, Long value) {
+	public static Builder getBuilder(Credential credential, Integer paymentCode, Long transactionNumber, Long value) {
 		return new Builder(credential, paymentCode, transactionNumber, value);
 	}
 
@@ -528,5 +568,9 @@ public class Transaction {
 
 	public Credential getCredential() {
 		return credential;
+	}
+
+	public String getResourcePath() {
+		return resourcePath;
 	}
 }

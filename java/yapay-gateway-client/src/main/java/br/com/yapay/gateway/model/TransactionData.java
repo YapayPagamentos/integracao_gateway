@@ -81,7 +81,7 @@ public class TransactionData {
 	}
 
 	/**
-	 * Constructor of mandatory properties
+	 * Constructor with {@code value} for convenience
 	 * 
 	 * @param transactionNumber Order identification
 	 * @param value             Order value
@@ -91,6 +91,16 @@ public class TransactionData {
 		this.value = value;
 		this.language = 1;
 		this.installments = 1;
+	}
+
+	/**
+	 * Constructor with required {@code transactionNumber}
+	 * 
+	 * @param transactionNumber Order identification
+	 * @param value             Order value
+	 */
+	public TransactionData(Long transactionNumber) {
+		this(transactionNumber, null);
 	}
 
 	public Long getTransactionNumber() {
