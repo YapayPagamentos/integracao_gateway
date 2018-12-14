@@ -11,10 +11,7 @@ import com.google.gson.annotations.SerializedName;
  * @author Adriano Santos
  *
  */
-public class Transaction {
-
-	private final transient Credential credential;
-	private transient String resourcePath;
+public class Transaction extends RequestModel {
 
 	@SerializedName("codigoEstabelecimento")
 	private String storeCode;
@@ -54,12 +51,12 @@ public class Transaction {
 	 */
 	@Deprecated
 	Transaction() {
-		this.credential = null;
+		super(null);
 	}
 
 	private Transaction(Builder builder) {
-		this.credential = builder.credential;
-		this.resourcePath = builder.resourcePath;
+		super(builder.credential);
+		setResourcePath(builder.resourcePath);
 		this.storeCode = builder.storeCode;
 		this.paymentCode = builder.paymentCode;
 		this.transactionData = builder.transactionData;
@@ -566,11 +563,17 @@ public class Transaction {
 		this.extraFields = extraFields;
 	}
 
-	public Credential getCredential() {
-		return credential;
+	public Long getTransactionNumber() {
+		if (this.transactionData == null) {
+			return null;
+		}
+		return this.transactionData.getTransactionNumber();
 	}
 
-	public String getResourcePath() {
-		return resourcePath;
+	public Long getValue() {
+		if (this.transactionData == null) {
+			return null;
+		}
+		return this.transactionData.getValue();
 	}
 }

@@ -89,55 +89,6 @@ public class RestV3 {
 		userAgent = u;
 	}
 
-	public String transactionAuthorize(Credential credential, Transaction transaction)
-			throws ClientProtocolException, IOException {
-		return postJsonAuth(credential, communicationUrl + "/api/v3/transacao", jsonBuilder.toJson(transaction));
-	}
-
-	public String transactionQuery(Credential credential, Long transactionNumber)
-			throws ClientProtocolException, IOException {
-		return transactionQuery(credential, credential.getStoreCode(), transactionNumber);
-	}
-
-	public String transactionQuery(Credential credential, String storeCode, Long transactionNumber)
-			throws ClientProtocolException, IOException {
-		return getJsonAuth(credential, communicationUrl + "/api/v3/transacao/" + storeCode + "/" + transactionNumber);
-	}
-
-	public String transactionCapture(Credential credential, Long transactionNumber, Long value)
-			throws ClientProtocolException, IOException {
-		return transactionCapture(credential, credential.getStoreCode(), transactionNumber, value);
-	}
-
-	public String transactionCapture(Credential credential, String storeCode, Long transactionNumber, Long value)
-			throws ClientProtocolException, IOException {
-		String valueParameter = "";
-
-		if (value != null && value > 0) {
-			valueParameter = "?valor=" + value.toString();
-		}
-
-		return putJsonAuth(credential, communicationUrl + "/api/v3/transacao/" + storeCode + "/" + transactionNumber
-				+ "/capturar" + valueParameter, null);
-	}
-
-	public String transactionCancel(Credential credential, Long transactionNumber, Long value)
-			throws ClientProtocolException, IOException {
-		return transactionCancel(credential, credential.getStoreCode(), transactionNumber, value);
-	}
-
-	public String transactionCancel(Credential credential, String storeCode, Long transactionNumber, Long value)
-			throws ClientProtocolException, IOException {
-		String valueParameter = "";
-
-		if (value != null && value > 0) {
-			valueParameter = "?valor=" + value.toString();
-		}
-
-		return putJsonAuth(credential, communicationUrl + "/api/v3/transacao/" + storeCode + "/" + transactionNumber
-				+ "/cancelar" + valueParameter, null);
-	}
-
 	public String oneClickRegister(Credential credential, OneClickRegisterData registerData)
 			throws ClientProtocolException, IOException {
 		return postJsonAuth(credential, communicationUrl + "/api/v3/oneclick", jsonBuilder.toJson(registerData));
@@ -184,6 +135,37 @@ public class RestV3 {
 			throws ClientProtocolException, IOException {
 		return putJsonAuth(credential,
 				communicationUrl + "/api/v3/recorrencia/" + storeCode + "/" + recurringPaymentNumber + "/cancelar",
+				null);
+	}
+
+	public String transactionAuthorize(Transaction transaction) throws ClientProtocolException, IOException {
+		return postJsonAuth(transaction.getCredential(), communicationUrl + transaction.getResourcePath(),
+				transaction.toJson());
+	}
+
+	public String transactionQuery(Transaction transaction) throws ClientProtocolException, IOException {
+		return getJsonAuth(transaction.getCredential(), communicationUrl + transaction.getResourcePath()
+				+ transaction.getStoreCode() + "/" + transaction.getTransactionNumber());
+	}
+
+	public String transactionCapture(Transaction transaction) throws ClientProtocolException, IOException {
+		return transactionOperation(transaction, "capturar");
+	}
+
+	public String transactionCancel(Transaction transaction) throws ClientProtocolException, IOException {
+		return transactionOperation(transaction, "cancelar");
+	}
+
+	private String transactionOperation(Transaction transaction, String option)
+			throws ClientProtocolException, IOException {
+		String valueParameter = "";
+		Long value = transaction.getValue();
+		if (value != null && value > 0) {
+			valueParameter = "?valor=" + value.toString();
+		}
+
+		return putJsonAuth(transaction.getCredential(), communicationUrl + transaction.getResourcePath()
+				+ transaction.getStoreCode() + "/" + transaction.getTransactionNumber() + "/" + option + valueParameter,
 				null);
 	}
 
