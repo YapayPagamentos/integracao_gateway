@@ -7,6 +7,7 @@ import static org.apache.commons.lang3.StringUtils.trimToNull;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -36,6 +37,8 @@ import br.com.yapay.gateway.model.Transaction;
  *
  */
 public class RestV3 {
+
+	private static final Charset CHARSET_DEFAULT = Charset.forName("UTF-8");
 
 	private final String communicationUrl;
 	private final Gson jsonBuilder;
@@ -172,10 +175,11 @@ public class RestV3 {
 	private String postJsonAuth(Credential credential, String url, String data)
 			throws ClientProtocolException, IOException {
 		data = defaultString(data);
+
 		HttpPost post = new HttpPost(url);
 
 		post.setEntity(new BufferedHttpEntity(
-				new InputStreamEntity(new ByteArrayInputStream(data.getBytes()), data.length())));
+				new InputStreamEntity(new ByteArrayInputStream(CHARSET_DEFAULT.encode(data).array()))));
 		post.setHeader("Content-Type", "application/json; charset=UTF-8");
 
 		return requestBasicAuth(post, credential);
@@ -187,7 +191,7 @@ public class RestV3 {
 		HttpPut put = new HttpPut(url);
 
 		put.setEntity(new BufferedHttpEntity(
-				new InputStreamEntity(new ByteArrayInputStream(data.getBytes()), data.length())));
+				new InputStreamEntity(new ByteArrayInputStream(CHARSET_DEFAULT.encode(data).array()))));
 		put.setHeader("Content-Type", "application/json; charset=UTF-8");
 
 		return requestBasicAuth(put, credential);
