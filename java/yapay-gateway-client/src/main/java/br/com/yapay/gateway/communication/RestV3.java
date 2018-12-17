@@ -23,10 +23,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
-import com.google.gson.Gson;
-
 import br.com.yapay.gateway.model.Credential;
-import br.com.yapay.gateway.model.OneClickRegisterData;
 import br.com.yapay.gateway.model.RequestModel;
 
 /**
@@ -40,7 +37,6 @@ public class RestV3 {
 	private static final Charset CHARSET_DEFAULT = Charset.forName("UTF-8");
 
 	private final String communicationUrl;
-	private final Gson jsonBuilder;
 	private final String userAgent;
 	private final int connectionTimeout;
 	private final int readTimeout;
@@ -77,7 +73,6 @@ public class RestV3 {
 
 	private RestV3(String url, int connectionTimeout, int readTimeout) {
 		this.communicationUrl = url;
-		this.jsonBuilder = new Gson();
 		this.connectionTimeout = connectionTimeout;
 		this.readTimeout = readTimeout;
 		String u = "YapayGatewayJava";
@@ -91,19 +86,18 @@ public class RestV3 {
 		userAgent = u;
 	}
 
-	public String oneClickRegister(Credential credential, OneClickRegisterData registerData)
-			throws ClientProtocolException, IOException {
-		return postJsonAuth(credential, communicationUrl + "/api/v3/oneclick", jsonBuilder.toJson(registerData));
+	public String oneClickRegister(RequestModel register) throws ClientProtocolException, IOException {
+		return postJsonAuth(register.getCredential(), communicationUrl + register.getResourcePath(), register.toJson());
 	}
 
-	public String oneClickQuery(Credential credential, String token) throws ClientProtocolException, IOException {
-		return getJsonAuth(credential, communicationUrl + "/api/v3/oneclick/" + token);
+	public String oneClickQuery(RequestModel query) throws ClientProtocolException, IOException {
+		return getJsonAuth(query.getCredential(),
+				communicationUrl + query.getResourcePath() + query.getModelReference());
 	}
 
-	public String oneClickRegisterUpdate(Credential credential, String token, OneClickRegisterData registerData)
-			throws ClientProtocolException, IOException {
-		return putJsonAuth(credential, communicationUrl + "/api/v3/oneclick/" + token + "/alterar",
-				jsonBuilder.toJson(registerData));
+	public String oneClickRegisterUpdate(RequestModel update) throws ClientProtocolException, IOException {
+		return putJsonAuth(update.getCredential(),
+				communicationUrl + update.getResourcePath() + update.getModelReference() + "/alterar", update.toJson());
 	}
 
 	public String oneClickAuthorize(RequestModel authorization) throws ClientProtocolException, IOException {
