@@ -2,6 +2,12 @@ package br.com.yapay.gateway.model;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Class containing address info
+ * 
+ * @author Adriano Santos
+ *
+ */
 public class AddressData {
 
 	@SerializedName("logradouro")
@@ -27,6 +33,68 @@ public class AddressData {
 
 	@SerializedName("pais")
 	private String country;
+
+	/**
+	 * @deprecated JSON bind eyes only
+	 */
+	@Deprecated
+	AddressData() {
+	}
+
+	/**
+	 * Overload of
+	 * {@link #AddressData(String, String, String, String, String, String)} without
+	 * {@code district}
+	 * 
+	 * @param street  Street
+	 * @param number  Street number
+	 * @param zipCode Postal identification
+	 * @param city    City
+	 * @param state   State
+	 */
+	public AddressData(String street, String number, String zipCode, String city, String state) {
+		this(street, number, zipCode, null, city, state);
+	}
+
+	/**
+	 * Overload of
+	 * {@link #AddressData(String, String, String, String, String, String, String, String)}
+	 * without {@code complement} and with {@code country} defaulting to 'BRA'
+	 * 
+	 * @param street   Street
+	 * @param number   Street number
+	 * @param zipCode  Postal identification
+	 * @param district District
+	 * @param city     City
+	 * @param state    State
+	 */
+	public AddressData(String street, String number, String zipCode, String district, String city, String state) {
+		this(street, number, null, zipCode, district, city, state, "BRA");
+	}
+
+	/**
+	 * Constructor with all parameters
+	 * 
+	 * @param street     Street
+	 * @param number     Street number
+	 * @param complement Address complement
+	 * @param zipCode    Postal identification
+	 * @param district   District
+	 * @param city       City
+	 * @param state      State
+	 * @param country    Country
+	 */
+	public AddressData(String street, String number, String complement, String zipCode, String district, String city,
+			String state, String country) {
+		this.street = street;
+		this.number = number;
+		this.complement = complement;
+		this.zipCode = zipCode;
+		this.district = district;
+		this.city = city;
+		this.state = state;
+		this.country = country;
+	}
 
 	public String getStreet() {
 		return street;

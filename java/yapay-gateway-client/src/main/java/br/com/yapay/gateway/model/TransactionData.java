@@ -2,6 +2,12 @@ package br.com.yapay.gateway.model;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Transaction detail info
+ * 
+ * @author Adriano Santos
+ *
+ */
 public class TransactionData {
 
 	@SerializedName("numeroTransacao")
@@ -23,7 +29,7 @@ public class TransactionData {
 	private String installmentType;
 
 	@SerializedName("urlCampainha")
-	private String hintUrl;
+	private String notificationUrl;
 
 	@SerializedName("urlResultado")
 	private String resultUrl;
@@ -32,7 +38,7 @@ public class TransactionData {
 	private String unpaidRedirectUrl;
 
 	@SerializedName("idioma")
-	private Integer idiom;
+	private Integer language;
 
 	@SerializedName("ip")
 	private String ip;
@@ -67,8 +73,35 @@ public class TransactionData {
 	@SerializedName("moeda")
 	private String currency;
 
-	@SerializedName("pagamentoRecorrente")
-	private Boolean recurrentPayment;
+	/**
+	 * @deprecated JSON bind eyes only
+	 */
+	@Deprecated
+	TransactionData() {
+	}
+
+	/**
+	 * Constructor with {@code value} for convenience
+	 * 
+	 * @param transactionNumber Order identification
+	 * @param value             Order value
+	 */
+	public TransactionData(Long transactionNumber, Long value) {
+		this.transactionNumber = transactionNumber;
+		this.value = value;
+		this.language = 1;
+		this.installments = 1;
+	}
+
+	/**
+	 * Constructor with required {@code transactionNumber}
+	 * 
+	 * @param transactionNumber Order identification
+	 * @param value             Order value
+	 */
+	public TransactionData(Long transactionNumber) {
+		this(transactionNumber, null);
+	}
 
 	public Long getTransactionNumber() {
 		return transactionNumber;
@@ -118,12 +151,12 @@ public class TransactionData {
 		this.installmentType = installmentType;
 	}
 
-	public String getHintUrl() {
-		return hintUrl;
+	public String getNotificationUrl() {
+		return notificationUrl;
 	}
 
-	public void setHintUrl(String hintUrl) {
-		this.hintUrl = hintUrl;
+	public void setNotificationUrl(String notificationUrl) {
+		this.notificationUrl = notificationUrl;
 	}
 
 	public String getResultUrl() {
@@ -142,12 +175,12 @@ public class TransactionData {
 		this.unpaidRedirectUrl = unpaidRedirectUrl;
 	}
 
-	public Integer getIdiom() {
-		return idiom;
+	public Integer getLanguage() {
+		return language;
 	}
 
-	public void setIdiom(Integer idiom) {
-		this.idiom = idiom;
+	public void setLanguage(Integer language) {
+		this.language = language;
 	}
 
 	public String getIp() {
@@ -236,14 +269,6 @@ public class TransactionData {
 
 	public void setCurrency(String currency) {
 		this.currency = currency;
-	}
-
-	public Boolean getRecurrentPayment() {
-		return recurrentPayment;
-	}
-
-	public void setRecurrentPayment(Boolean recurrentPayment) {
-		this.recurrentPayment = recurrentPayment;
 	}
 
 }
