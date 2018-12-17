@@ -28,4 +28,11 @@ public abstract class RequestModel {
 	public String toJson() {
 		return jsonBuilder.toJson(this);
 	}
+
+	public abstract String getStoreCode();
+
+	public abstract Long getTransactionNumber();
+
+	public abstract Long getValue();
+
 }

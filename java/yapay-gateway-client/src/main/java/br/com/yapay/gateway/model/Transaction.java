@@ -475,19 +475,11 @@ public class Transaction extends RequestModel {
 		return new Builder(credential, paymentCode, transactionNumber, value);
 	}
 
-	public String getStoreCode() {
-		return storeCode;
-	}
-
-	public void setStoreCode(String storeCode) {
-		this.storeCode = storeCode;
-	}
-
 	public Integer getPaymentCode() {
 		return paymentCode;
 	}
 
-	public void setPaymentCode(Integer paymentCode) {
+	void setPaymentCode(Integer paymentCode) {
 		this.paymentCode = paymentCode;
 	}
 
@@ -495,7 +487,7 @@ public class Transaction extends RequestModel {
 		return transactionData;
 	}
 
-	public void setTransactionData(TransactionData transactionData) {
+	void setTransactionData(TransactionData transactionData) {
 		this.transactionData = transactionData;
 	}
 
@@ -503,7 +495,7 @@ public class Transaction extends RequestModel {
 		return checkout;
 	}
 
-	public void setCheckout(CheckoutData checkout) {
+	void setCheckout(CheckoutData checkout) {
 		this.checkout = checkout;
 	}
 
@@ -511,7 +503,7 @@ public class Transaction extends RequestModel {
 		return card;
 	}
 
-	public void setCard(CardData card) {
+	void setCard(CardData card) {
 		this.card = card;
 	}
 
@@ -519,7 +511,7 @@ public class Transaction extends RequestModel {
 		return multipleCards;
 	}
 
-	public void setMultipleCards(List<MultipleCardData> multipleCards) {
+	void setMultipleCards(List<MultipleCardData> multipleCards) {
 		this.multipleCards = multipleCards;
 	}
 
@@ -527,7 +519,7 @@ public class Transaction extends RequestModel {
 		return items;
 	}
 
-	public void setItems(List<ItemData> items) {
+	void setItems(List<ItemData> items) {
 		this.items = items;
 	}
 
@@ -535,7 +527,7 @@ public class Transaction extends RequestModel {
 		return charging;
 	}
 
-	public void setCharging(ChargingData charging) {
+	void setCharging(ChargingData charging) {
 		this.charging = charging;
 	}
 
@@ -543,7 +535,7 @@ public class Transaction extends RequestModel {
 		return delivery;
 	}
 
-	public void setDelivery(DeliveryData delivery) {
+	void setDelivery(DeliveryData delivery) {
 		this.delivery = delivery;
 	}
 
@@ -551,7 +543,7 @@ public class Transaction extends RequestModel {
 		return airline;
 	}
 
-	public void setAirline(AirlineData airline) {
+	void setAirline(AirlineData airline) {
 		this.airline = airline;
 	}
 
@@ -559,10 +551,20 @@ public class Transaction extends RequestModel {
 		return extraFields;
 	}
 
-	public void setExtraFields(List<ExtraField> extraFields) {
+	void setExtraFields(List<ExtraField> extraFields) {
 		this.extraFields = extraFields;
 	}
 
+	@Override
+	public String getStoreCode() {
+		return storeCode;
+	}
+
+	void setStoreCode(String storeCode) {
+		this.storeCode = storeCode;
+	}
+
+	@Override
 	public Long getTransactionNumber() {
 		if (this.transactionData == null) {
 			return null;
@@ -570,6 +572,7 @@ public class Transaction extends RequestModel {
 		return this.transactionData.getTransactionNumber();
 	}
 
+	@Override
 	public Long getValue() {
 		if (this.transactionData == null) {
 			return null;

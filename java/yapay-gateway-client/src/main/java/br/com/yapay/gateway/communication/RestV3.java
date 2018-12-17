@@ -28,6 +28,7 @@ import com.google.gson.Gson;
 import br.com.yapay.gateway.model.Credential;
 import br.com.yapay.gateway.model.OneClickRegisterData;
 import br.com.yapay.gateway.model.RecurringPayment;
+import br.com.yapay.gateway.model.RequestModel;
 import br.com.yapay.gateway.model.Transaction;
 
 /**
@@ -141,34 +142,34 @@ public class RestV3 {
 				null);
 	}
 
-	public String transactionAuthorize(Transaction transaction) throws ClientProtocolException, IOException {
-		return postJsonAuth(transaction.getCredential(), communicationUrl + transaction.getResourcePath(),
-				transaction.toJson());
+	public String transactionAuthorize(RequestModel authorization) throws ClientProtocolException, IOException {
+		return postJsonAuth(authorization.getCredential(), communicationUrl + authorization.getResourcePath(),
+				authorization.toJson());
 	}
 
-	public String transactionQuery(Transaction transaction) throws ClientProtocolException, IOException {
-		return getJsonAuth(transaction.getCredential(), communicationUrl + transaction.getResourcePath()
-				+ transaction.getStoreCode() + "/" + transaction.getTransactionNumber());
+	public String transactionQuery(RequestModel query) throws ClientProtocolException, IOException {
+		return getJsonAuth(query.getCredential(), communicationUrl + query.getResourcePath()
+				+ query.getStoreCode() + "/" + query.getTransactionNumber());
 	}
 
-	public String transactionCapture(Transaction transaction) throws ClientProtocolException, IOException {
-		return transactionOperation(transaction, "capturar");
+	public String transactionCapture(RequestModel capture) throws ClientProtocolException, IOException {
+		return transactionOperation(capture, "capturar");
 	}
 
-	public String transactionCancel(Transaction transaction) throws ClientProtocolException, IOException {
-		return transactionOperation(transaction, "cancelar");
+	public String transactionCancel(RequestModel cancel) throws ClientProtocolException, IOException {
+		return transactionOperation(cancel, "cancelar");
 	}
 
-	private String transactionOperation(Transaction transaction, String option)
+	private String transactionOperation(RequestModel operation, String option)
 			throws ClientProtocolException, IOException {
 		String valueParameter = "";
-		Long value = transaction.getValue();
+		Long value = operation.getValue();
 		if (value != null && value > 0) {
 			valueParameter = "?valor=" + value.toString();
 		}
 
-		return putJsonAuth(transaction.getCredential(), communicationUrl + transaction.getResourcePath()
-				+ transaction.getStoreCode() + "/" + transaction.getTransactionNumber() + "/" + option + valueParameter,
+		return putJsonAuth(operation.getCredential(), communicationUrl + operation.getResourcePath()
+				+ operation.getStoreCode() + "/" + operation.getTransactionNumber() + "/" + option + valueParameter,
 				null);
 	}
 
