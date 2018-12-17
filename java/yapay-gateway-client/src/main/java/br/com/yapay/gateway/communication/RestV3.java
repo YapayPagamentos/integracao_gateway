@@ -179,7 +179,7 @@ public class RestV3 {
 		HttpPost post = new HttpPost(url);
 
 		post.setEntity(new BufferedHttpEntity(
-				new InputStreamEntity(new ByteArrayInputStream(CHARSET_DEFAULT.encode(data).array()))));
+				new InputStreamEntity(new ByteArrayInputStream(data.getBytes(CHARSET_DEFAULT)))));
 		post.setHeader("Content-Type", "application/json; charset=UTF-8");
 
 		return requestBasicAuth(post, credential);
@@ -191,7 +191,7 @@ public class RestV3 {
 		HttpPut put = new HttpPut(url);
 
 		put.setEntity(new BufferedHttpEntity(
-				new InputStreamEntity(new ByteArrayInputStream(CHARSET_DEFAULT.encode(data).array()))));
+				new InputStreamEntity(new ByteArrayInputStream(data.getBytes(CHARSET_DEFAULT)))));
 		put.setHeader("Content-Type", "application/json; charset=UTF-8");
 
 		return requestBasicAuth(put, credential);
