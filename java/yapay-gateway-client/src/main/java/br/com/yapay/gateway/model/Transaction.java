@@ -1,5 +1,7 @@
 package br.com.yapay.gateway.model;
 
+import static org.apache.commons.lang3.StringUtils.isNoneBlank;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +14,8 @@ import com.google.gson.annotations.SerializedName;
  *
  */
 public class Transaction extends RequestModel {
+
+	private transient String tokenOneClick;
 
 	@SerializedName("codigoEstabelecimento")
 	private String storeCode;
@@ -57,6 +61,7 @@ public class Transaction extends RequestModel {
 	private Transaction(Builder builder) {
 		super(builder.credential);
 		setResourcePath(builder.resourcePath);
+		this.tokenOneClick = builder.tokenOneClick;
 		this.storeCode = builder.storeCode;
 		this.paymentCode = builder.paymentCode;
 		this.transactionData = builder.transactionData;
@@ -77,9 +82,12 @@ public class Transaction extends RequestModel {
 	 *
 	 */
 	public static class Builder {
-		private final Credential credential;
-		private String resourcePath;
+		private static final String API_RESOURCE_PATH = "/api/v3/transacao/";
 
+		private final Credential credential;
+
+		private String resourcePath;
+		private String tokenOneClick;
 		private String storeCode;
 		private Integer paymentCode;
 		private TransactionData transactionData;
@@ -102,7 +110,7 @@ public class Transaction extends RequestModel {
 
 		private Builder(Credential credential, Integer paymentCode, Long transactionNumber, Long value) {
 			this.credential = credential;
-			this.resourcePath = "/api/v3/transacao/";
+			this.resourcePath = API_RESOURCE_PATH;
 			this.paymentCode = paymentCode;
 			this.transactionData = new TransactionData(transactionNumber, value);
 			this.storeCode = credential.getStoreCode();
@@ -121,6 +129,18 @@ public class Transaction extends RequestModel {
 		public Builder withPaymentCode(Integer paymentCode) {
 			this.paymentCode = paymentCode;
 			return this;
+		}
+
+		public Builder withTokenOneClick(String tokenOneClick) {
+			this.tokenOneClick = tokenOneClick;
+			if (API_RESOURCE_PATH.equals(this.resourcePath)) {
+				this.resourcePath = "/api/v3/oneclick/";
+			}
+			return this;
+		}
+
+		public Builder withCardCvv(String cvv) {
+			return withCard(new CardData(cvv));
 		}
 
 		public Builder withCard(String cardHolderName, String cardNumber, String expirationDate, String cvv) {
@@ -565,11 +585,15 @@ public class Transaction extends RequestModel {
 	}
 
 	@Override
-	public Long getModelReference() {
+	public String getModelReference() {
+		if (isNoneBlank(this.tokenOneClick)) {
+			return this.tokenOneClick;
+		}
 		if (this.transactionData == null) {
 			return null;
 		}
-		return this.transactionData.getTransactionNumber();
+		return this.transactionData.getTransactionNumber() == null ? null
+				: this.transactionData.getTransactionNumber().toString();
 	}
 
 	@Override

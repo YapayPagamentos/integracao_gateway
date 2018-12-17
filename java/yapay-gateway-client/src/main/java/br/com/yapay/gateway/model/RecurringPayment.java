@@ -377,11 +377,12 @@ public class RecurringPayment extends RequestModel {
 	}
 
 	@Override
-	public Long getModelReference() {
+	public String getModelReference() {
 		if (this.recurringPaymentData == null) {
 			return null;
 		}
-		return this.recurringPaymentData.getRecurringPaymentNumber();
+		return this.recurringPaymentData.getRecurringPaymentNumber() == null ? null
+				: this.recurringPaymentData.getRecurringPaymentNumber().toString();
 	}
 
 	@Override

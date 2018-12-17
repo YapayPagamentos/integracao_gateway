@@ -30,7 +30,17 @@ public class CardData {
 	}
 
 	/**
-	 * Constructor with minimum requested parameters
+	 * Overload of {@link #CardData(String, String, String, String)} for OneClick
+	 * purposes
+	 * 
+	 * @param cvv Card security code
+	 */
+	public CardData(String cvv) {
+		this(null, null, null, cvv);
+	}
+
+	/**
+	 * Constructor with all parameters
 	 * 
 	 * @param cardHolderName Card holder name
 	 * @param cardNumber     Card number

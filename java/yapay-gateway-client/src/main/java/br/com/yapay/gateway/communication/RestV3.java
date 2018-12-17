@@ -28,7 +28,6 @@ import com.google.gson.Gson;
 import br.com.yapay.gateway.model.Credential;
 import br.com.yapay.gateway.model.OneClickRegisterData;
 import br.com.yapay.gateway.model.RequestModel;
-import br.com.yapay.gateway.model.Transaction;
 
 /**
  * Communication with Gateway API
@@ -107,10 +106,10 @@ public class RestV3 {
 				jsonBuilder.toJson(registerData));
 	}
 
-	public String oneClickAuthorize(Credential credential, String token, Transaction transaction)
-			throws ClientProtocolException, IOException {
-		return postJsonAuth(credential, communicationUrl + "/api/v3/oneclick/" + token + "/autorizar",
-				jsonBuilder.toJson(transaction));
+	public String oneClickAuthorize(RequestModel authorization) throws ClientProtocolException, IOException {
+		return postJsonAuth(authorization.getCredential(),
+				communicationUrl + authorization.getResourcePath() + authorization.getModelReference() + "/autorizar",
+				authorization.toJson());
 	}
 
 	public String recurringPaymentRegister(RequestModel registration) throws ClientProtocolException, IOException {
