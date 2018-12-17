@@ -27,7 +27,6 @@ import com.google.gson.Gson;
 
 import br.com.yapay.gateway.model.Credential;
 import br.com.yapay.gateway.model.OneClickRegisterData;
-import br.com.yapay.gateway.model.RecurringPayment;
 import br.com.yapay.gateway.model.RequestModel;
 import br.com.yapay.gateway.model.Transaction;
 
@@ -114,32 +113,19 @@ public class RestV3 {
 				jsonBuilder.toJson(transaction));
 	}
 
-	public String recurringPaymentRegister(Credential credential, RecurringPayment recurringPayment)
-			throws ClientProtocolException, IOException {
-		return postJsonAuth(credential, communicationUrl + "/api/v3/recorrencia", jsonBuilder.toJson(recurringPayment));
+	public String recurringPaymentRegister(RequestModel registration) throws ClientProtocolException, IOException {
+		return postJsonAuth(registration.getCredential(), communicationUrl + registration.getResourcePath(),
+				registration.toJson());
 	}
 
-	public String recurringPaymentQuery(Credential credential, Long recurringPaymentNumber)
-			throws ClientProtocolException, IOException {
-		return recurringPaymentQuery(credential, credential.getStoreCode(), recurringPaymentNumber);
+	public String recurringPaymentQuery(RequestModel query) throws ClientProtocolException, IOException {
+		return getJsonAuth(query.getCredential(),
+				communicationUrl + query.getResourcePath() + query.getStoreCode() + "/" + query.getModelReference());
 	}
 
-	public String recurringPaymentQuery(Credential credential, String storeCode, Long recurringPaymentNumber)
-			throws ClientProtocolException, IOException {
-		return getJsonAuth(credential,
-				communicationUrl + "/api/v3/recorrencia/" + storeCode + "/" + recurringPaymentNumber);
-	}
-
-	public String recurringPaymentCancel(Credential credential, Long recurringPaymentNumber)
-			throws ClientProtocolException, IOException {
-		return recurringPaymentCancel(credential, credential.getStoreCode(), recurringPaymentNumber);
-	}
-
-	public String recurringPaymentCancel(Credential credential, String storeCode, Long recurringPaymentNumber)
-			throws ClientProtocolException, IOException {
-		return putJsonAuth(credential,
-				communicationUrl + "/api/v3/recorrencia/" + storeCode + "/" + recurringPaymentNumber + "/cancelar",
-				null);
+	public String recurringPaymentCancel(RequestModel cancel) throws ClientProtocolException, IOException {
+		return putJsonAuth(cancel.getCredential(), communicationUrl + cancel.getResourcePath() + cancel.getStoreCode()
+				+ "/" + cancel.getModelReference() + "/cancelar", null);
 	}
 
 	public String transactionAuthorize(RequestModel authorization) throws ClientProtocolException, IOException {
@@ -148,8 +134,8 @@ public class RestV3 {
 	}
 
 	public String transactionQuery(RequestModel query) throws ClientProtocolException, IOException {
-		return getJsonAuth(query.getCredential(), communicationUrl + query.getResourcePath()
-				+ query.getStoreCode() + "/" + query.getTransactionNumber());
+		return getJsonAuth(query.getCredential(),
+				communicationUrl + query.getResourcePath() + query.getStoreCode() + "/" + query.getModelReference());
 	}
 
 	public String transactionCapture(RequestModel capture) throws ClientProtocolException, IOException {
@@ -169,8 +155,7 @@ public class RestV3 {
 		}
 
 		return putJsonAuth(operation.getCredential(), communicationUrl + operation.getResourcePath()
-				+ operation.getStoreCode() + "/" + operation.getTransactionNumber() + "/" + option + valueParameter,
-				null);
+				+ operation.getStoreCode() + "/" + operation.getModelReference() + "/" + option + valueParameter, null);
 	}
 
 	private String postJsonAuth(Credential credential, String url, String data)

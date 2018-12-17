@@ -565,7 +565,7 @@ public class Transaction extends RequestModel {
 	}
 
 	@Override
-	public Long getTransactionNumber() {
+	public Long getModelReference() {
 		if (this.transactionData == null) {
 			return null;
 		}

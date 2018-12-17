@@ -31,7 +31,7 @@ public abstract class RequestModel {
 
 	public abstract String getStoreCode();
 
-	public abstract Long getTransactionNumber();
+	public abstract Long getModelReference();
 
 	public abstract Long getValue();
 

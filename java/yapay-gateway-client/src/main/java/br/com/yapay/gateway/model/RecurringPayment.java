@@ -8,9 +8,7 @@ import com.google.gson.annotations.SerializedName;
  * @author Adriano Santos
  *
  */
-public class RecurringPayment {
-
-	private final transient Credential credential;
+public class RecurringPayment extends RequestModel {
 
 	@SerializedName("recorrencia")
 	private RecurringPaymentData recurringPaymentData;
@@ -23,11 +21,12 @@ public class RecurringPayment {
 	 */
 	@Deprecated
 	RecurringPayment() {
-		this.credential = null;
+		super(null);
 	}
 
 	private RecurringPayment(Builder builder) {
-		this.credential = builder.credential;
+		super(builder.credential);
+		setResourcePath(builder.resourcePath);
 		this.recurringPaymentData = builder.getRecurringPaymentData();
 		this.storeCode = builder.storeCode;
 	}
@@ -368,6 +367,7 @@ public class RecurringPayment {
 		this.recurringPaymentData = recurringPaymentData;
 	}
 
+	@Override
 	public String getStoreCode() {
 		return storeCode;
 	}
@@ -376,8 +376,19 @@ public class RecurringPayment {
 		this.storeCode = storeCode;
 	}
 
-	public Credential getCredential() {
-		return credential;
+	@Override
+	public Long getModelReference() {
+		if (this.recurringPaymentData == null) {
+			return null;
+		}
+		return this.recurringPaymentData.getRecurringPaymentNumber();
 	}
 
+	@Override
+	public Long getValue() {
+		if (this.recurringPaymentData == null) {
+			return null;
+		}
+		return this.recurringPaymentData.getValue();
+	}
 }
