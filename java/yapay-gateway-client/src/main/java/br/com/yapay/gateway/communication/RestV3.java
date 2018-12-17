@@ -32,7 +32,7 @@ import br.com.yapay.gateway.model.RequestModel;
  * @author Adriano Santos
  *
  */
-public class RestV3 {
+public class RestV3 implements ApiConnector {
 
 	private static final Charset CHARSET_DEFAULT = Charset.forName("UTF-8");
 
@@ -86,55 +86,66 @@ public class RestV3 {
 		userAgent = u;
 	}
 
+	@Override
 	public String oneClickRegister(RequestModel register) throws ClientProtocolException, IOException {
 		return postJsonAuth(register.getCredential(), communicationUrl + register.getResourcePath(), register.toJson());
 	}
 
+	@Override
 	public String oneClickQuery(RequestModel query) throws ClientProtocolException, IOException {
 		return getJsonAuth(query.getCredential(),
 				communicationUrl + query.getResourcePath() + query.getModelReference());
 	}
 
+	@Override
 	public String oneClickRegisterUpdate(RequestModel update) throws ClientProtocolException, IOException {
 		return putJsonAuth(update.getCredential(),
 				communicationUrl + update.getResourcePath() + update.getModelReference() + "/alterar", update.toJson());
 	}
 
+	@Override
 	public String oneClickAuthorize(RequestModel authorization) throws ClientProtocolException, IOException {
 		return postJsonAuth(authorization.getCredential(),
 				communicationUrl + authorization.getResourcePath() + authorization.getModelReference() + "/autorizar",
 				authorization.toJson());
 	}
 
+	@Override
 	public String recurringPaymentRegister(RequestModel registration) throws ClientProtocolException, IOException {
 		return postJsonAuth(registration.getCredential(), communicationUrl + registration.getResourcePath(),
 				registration.toJson());
 	}
 
+	@Override
 	public String recurringPaymentQuery(RequestModel query) throws ClientProtocolException, IOException {
 		return getJsonAuth(query.getCredential(),
 				communicationUrl + query.getResourcePath() + query.getStoreCode() + "/" + query.getModelReference());
 	}
 
+	@Override
 	public String recurringPaymentCancel(RequestModel cancel) throws ClientProtocolException, IOException {
 		return putJsonAuth(cancel.getCredential(), communicationUrl + cancel.getResourcePath() + cancel.getStoreCode()
 				+ "/" + cancel.getModelReference() + "/cancelar", null);
 	}
 
+	@Override
 	public String transactionAuthorize(RequestModel authorization) throws ClientProtocolException, IOException {
 		return postJsonAuth(authorization.getCredential(), communicationUrl + authorization.getResourcePath(),
 				authorization.toJson());
 	}
 
+	@Override
 	public String transactionQuery(RequestModel query) throws ClientProtocolException, IOException {
 		return getJsonAuth(query.getCredential(),
 				communicationUrl + query.getResourcePath() + query.getStoreCode() + "/" + query.getModelReference());
 	}
 
+	@Override
 	public String transactionCapture(RequestModel capture) throws ClientProtocolException, IOException {
 		return transactionOperation(capture, "capturar");
 	}
 
+	@Override
 	public String transactionCancel(RequestModel cancel) throws ClientProtocolException, IOException {
 		return transactionOperation(cancel, "cancelar");
 	}
