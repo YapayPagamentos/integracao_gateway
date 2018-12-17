@@ -40,6 +40,7 @@ public class RecurringPayment {
 	 */
 	public static class Builder {
 		private final Credential credential;
+		private String resourcePath;
 
 		private String storeCode;
 
@@ -60,12 +61,26 @@ public class RecurringPayment {
 		private RecurringPaymentChargingData chargingData;
 		private RecurringPaymentDeliveryData deliveryData;
 
-		public Builder(Credential credential, Long paymentCode, Long recurringPaymentNumber, Long value) {
+		private Builder(Credential credential, Long recurringPaymentNumber) {
+			this(credential, null, recurringPaymentNumber, null);
+		}
+
+		private Builder(Credential credential, Long recurringPaymentNumber, Long value) {
+			this(credential, null, recurringPaymentNumber, value);
+		}
+
+		private Builder(Credential credential, Long paymentCode, Long recurringPaymentNumber, Long value) {
 			this.credential = credential;
+			this.resourcePath = "/api/v3/recorrencia/";
 			this.paymentCode = paymentCode;
 			this.recurringPaymentNumber = recurringPaymentNumber;
 			this.value = value;
 			this.storeCode = credential.getStoreCode();
+		}
+
+		public Builder withResourcePath(String resourcePath) {
+			this.resourcePath = resourcePath;
+			return this;
 		}
 
 		public Builder withStoreCode(String storeCode) {
@@ -249,11 +264,47 @@ public class RecurringPayment {
 		}
 	}
 
+	/**
+	 * Getting builder with minimum parameters
+	 * 
+	 * @param credential             Authentication info
+	 * @param recurringPaymentNumber Payment identification
+	 * @return Recurring payment builder
+	 */
+	public static Builder getBuilder(Credential credential, Long recurringPaymentNumber) {
+		return new Builder(credential, recurringPaymentNumber);
+	}
+
+	/**
+	 * Getting builder to construct recurring transaction with {@code value}
+	 * 
+	 * @param credential             Authentication info
+	 * @param recurringPaymentNumber Payment identification
+	 * @param value                  Recurrence value
+	 * @return Recurring payment builder
+	 */
+	public static Builder getBuilder(Credential credential, Long recurringPaymentNumber, Long value) {
+		return new Builder(credential, recurringPaymentNumber, value);
+	}
+
+	/**
+	 * Getting builder to construct recurring register
+	 * 
+	 * @param credential             Authentication info
+	 * @param paymentCode            Payment identification
+	 * @param recurringPaymentNumber Recurrence identification
+	 * @param value                  Recurrence value
+	 * @return Recurring payment builder
+	 */
+	public static Builder getBuilder(Credential credential, Long paymentCode, Long recurringPaymentNumber, Long value) {
+		return new Builder(credential, paymentCode, recurringPaymentNumber, value);
+	}
+
 	public RecurringPaymentData getRecurringPaymentData() {
 		return recurringPaymentData;
 	}
 
-	public void setRecurringPaymentData(RecurringPaymentData recurringPaymentData) {
+	void setRecurringPaymentData(RecurringPaymentData recurringPaymentData) {
 		this.recurringPaymentData = recurringPaymentData;
 	}
 
@@ -261,7 +312,7 @@ public class RecurringPayment {
 		return storeCode;
 	}
 
-	public void setStoreCode(String storeCode) {
+	void setStoreCode(String storeCode) {
 		this.storeCode = storeCode;
 	}
 
