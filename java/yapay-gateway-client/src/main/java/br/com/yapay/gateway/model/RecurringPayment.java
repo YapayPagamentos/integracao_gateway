@@ -217,8 +217,68 @@ public class RecurringPayment {
 			return this;
 		}
 
+		public Builder withChargingDataPhone(String ddd, String number) {
+			return withChargingDataPhone(new PhoneData(ddd, number));
+		}
+
+		public Builder withChargingDataPhone(String ddi, String ddd, String number) {
+			return withChargingDataPhone(new PhoneData(ddi, ddd, number));
+		}
+
+		public Builder withChargingDataPhone(PhoneData clientPhone) {
+			if (this.chargingData != null) {
+				this.chargingData.setPhone(clientPhone);
+			}
+			return this;
+		}
+
+		public Builder withDeliveryData(String deliveryName, String deliveryMail) {
+			return withDeliveryData(new RecurringPaymentDeliveryData(deliveryName, deliveryMail));
+		}
+
 		public Builder withDeliveryData(RecurringPaymentDeliveryData deliveryData) {
 			this.deliveryData = deliveryData;
+			return this;
+		}
+
+		public Builder withDeliveryDataAddress(String street, String number, String complement, String zipCode,
+				String district, String city, String state, String country) {
+			if (this.deliveryData != null) {
+				this.deliveryData.setDeliveryAddress(street, number, complement, zipCode, district, city, state,
+						country);
+			}
+			return this;
+		}
+
+		public Builder withDeliveryDataAddress(String street, String number, String zipCode, String district,
+				String city, String state) {
+			if (this.deliveryData != null) {
+				this.deliveryData.setDeliveryAddress(street, number, zipCode, district, city, state);
+			}
+			return this;
+		}
+
+		public Builder withDeliveryDataAddress(AddressData deliveryAddress) {
+			if (deliveryData != null) {
+				return withDeliveryDataAddress(deliveryAddress.getStreet(), deliveryAddress.getNumber(),
+						deliveryAddress.getComplement(), deliveryAddress.getZipCode(), deliveryAddress.getDistrict(),
+						deliveryAddress.getCity(), deliveryAddress.getState(), deliveryAddress.getCountry());
+			}
+			return this;
+		}
+
+		public Builder withDeliveryDataPhone(String ddd, String number) {
+			return withDeliveryDataPhone(new PhoneData(ddd, number));
+		}
+
+		public Builder withDeliveryDataPhone(String ddi, String ddd, String number) {
+			return withDeliveryDataPhone(new PhoneData(ddi, ddd, number));
+		}
+
+		public Builder withDeliveryDataPhone(PhoneData deliveryPhone) {
+			if (this.deliveryData != null) {
+				this.deliveryData.setPhone(deliveryPhone);
+			}
 			return this;
 		}
 
