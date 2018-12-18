@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -15,7 +13,7 @@
 
 	<groupId>br.com.yapay.gateway</groupId>
 	<artifactId>yapay-gateway-client</artifactId>
-	<version>1.0.3-SNAPSHOT</version>
+	<version>1.0.3</version>
 
 	<url>https://github.com/YapayPagamentos/integracao_gateway/tree/master/java/yapay-gateway-client</url>
 
@@ -30,7 +28,8 @@
 		<connection>scm:git:git@github.com:adriano-santos-yapay/integracao_gateway.git</connection>
 		<developerConnection>scm:git:git@github.com:adriano-santos-yapay/integracao_gateway.git</developerConnection>
 		<url>https://github.com/YapayPagamentos/integracao_gateway/tree/master/java/yapay-gateway-client</url>
-	</scm>
+	  <tag>j1.0.3</tag>
+  </scm>
 
 	<organization>
 		<name>Yapay</name>
