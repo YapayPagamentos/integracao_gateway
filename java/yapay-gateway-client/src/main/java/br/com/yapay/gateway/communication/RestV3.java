@@ -7,7 +7,9 @@ import static org.apache.commons.lang3.StringUtils.trimToNull;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.util.Properties;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -76,8 +78,11 @@ public class RestV3 implements ApiConnector {
 		this.connectionTimeout = connectionTimeout;
 		this.readTimeout = readTimeout;
 		String u = "YapayGatewayJava";
-		try {
-			String v = getClass().getPackage().getImplementationVersion();
+		try (InputStream is = getClass()
+				.getResourceAsStream("/META-INF/maven/br.com.yapay.gateway/yapay-gateway-client/pom.properties")) {
+			Properties prop = new Properties();
+			prop.load(is);
+			String v = prop.getProperty("version");
 			if (isNoneBlank(v)) {
 				u += "_" + v;
 			}
