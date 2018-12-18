@@ -97,7 +97,6 @@ public class TransactionData {
 	 * Constructor with required {@code transactionNumber}
 	 * 
 	 * @param transactionNumber Order identification
-	 * @param value             Order value
 	 */
 	public TransactionData(Long transactionNumber) {
 		this(transactionNumber, null);
