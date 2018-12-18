@@ -13,7 +13,7 @@
 
 	<groupId>br.com.gateway.yapay</groupId>
 	<artifactId>yapay-gateway-client</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 
 	<url>https://github.com/YapayPagamentos/integracao_gateway/tree/master/java/yapay-gateway-client</url>
 
