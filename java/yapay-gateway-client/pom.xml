@@ -27,8 +27,8 @@
 	</properties>
 
 	<scm>
-		<connection>scm:git:git@github.com:YapayPagamentos/integracao_gateway.git</connection>
-		<developerConnection>scm:git:git@github.com:YapayPagamentos/integracao_gateway.git</developerConnection>
+		<connection>scm:git:git@github.com:adriano-santos-yapay/integracao_gateway.git</connection>
+		<developerConnection>scm:git:git@github.com:adriano-santos-yapay/integracao_gateway.git</developerConnection>
 		<url>https://github.com/YapayPagamentos/integracao_gateway/tree/master/java/yapay-gateway-client</url>
 	</scm>
 
