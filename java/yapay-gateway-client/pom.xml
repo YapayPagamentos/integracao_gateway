@@ -15,7 +15,7 @@
 
 	<groupId>br.com.yapay.gateway</groupId>
 	<artifactId>yapay-gateway-client</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.3-SNAPSHOT</version>
 
 	<url>https://github.com/YapayPagamentos/integracao_gateway/tree/master/java/yapay-gateway-client</url>
 
@@ -27,8 +27,8 @@
 	</properties>
 
 	<scm>
-		<connection>scm:git:git@github.com:YapayPagamentos/integracao_gateway.git</connection>
-		<developerConnection>scm:git:git@github.com:YapayPagamentos/integracao_gateway.git</developerConnection>
+		<connection>scm:git:git@github.com:adriano-santos-yapay/integracao_gateway.git</connection>
+		<developerConnection>scm:git:git@github.com:adriano-santos-yapay/integracao_gateway.git</developerConnection>
 		<url>https://github.com/YapayPagamentos/integracao_gateway/tree/master/java/yapay-gateway-client</url>
 	</scm>
 
