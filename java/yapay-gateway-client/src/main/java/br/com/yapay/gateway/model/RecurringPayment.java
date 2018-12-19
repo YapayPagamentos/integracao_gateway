@@ -43,7 +43,7 @@ public class RecurringPayment extends RequestModel {
 
 		private String storeCode;
 
-		private Long paymentCode;
+		private Integer paymentCode;
 		private Long recurringPaymentNumber;
 		private Long value;
 		private Integer frequency;
@@ -68,7 +68,7 @@ public class RecurringPayment extends RequestModel {
 			this(credential, null, recurringPaymentNumber, value);
 		}
 
-		private Builder(Credential credential, Long paymentCode, Long recurringPaymentNumber, Long value) {
+		private Builder(Credential credential, Integer paymentCode, Long recurringPaymentNumber, Long value) {
 			this.credential = credential;
 			this.resourcePath = "/api/v3/recorrencia/";
 			this.paymentCode = paymentCode;
@@ -87,7 +87,7 @@ public class RecurringPayment extends RequestModel {
 			return this;
 		}
 
-		public Builder withPaymentCode(Long paymentCode) {
+		public Builder withPaymentCode(Integer paymentCode) {
 			this.paymentCode = paymentCode;
 			return this;
 		}
@@ -156,12 +156,13 @@ public class RecurringPayment extends RequestModel {
 			return this;
 		}
 
-		public Builder withCard(String cardHolderName, String cardNumber, String expirationDate) {
-			return withCard(cardHolderName, cardNumber, expirationDate, null);
+		public Builder withCard(String cardHolderName, String cardNumber, int expirationMonth, int expirationYear) {
+			return withCard(cardHolderName, cardNumber, expirationMonth, expirationYear, null);
 		}
 
-		public Builder withCard(String cardHolderName, String cardNumber, String expirationDate, String cvv) {
-			return withCard(new CardData(cardHolderName, cardNumber, expirationDate, cvv));
+		public Builder withCard(String cardHolderName, String cardNumber, int expirationMonth, int expirationYear,
+				String cvv) {
+			return withCard(new CardData(cardHolderName, cardNumber, expirationMonth, expirationYear, cvv));
 		}
 
 		public Builder withCard(CardData card) {
@@ -355,7 +356,8 @@ public class RecurringPayment extends RequestModel {
 	 * @param value                  Recurrence value
 	 * @return Recurring payment builder
 	 */
-	public static Builder getBuilder(Credential credential, Long paymentCode, Long recurringPaymentNumber, Long value) {
+	public static Builder getBuilder(Credential credential, Integer paymentCode, Long recurringPaymentNumber,
+			Long value) {
 		return new Builder(credential, paymentCode, recurringPaymentNumber, value);
 	}
 

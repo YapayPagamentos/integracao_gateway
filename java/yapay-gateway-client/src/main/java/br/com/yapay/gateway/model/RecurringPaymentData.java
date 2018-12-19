@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
 public class RecurringPaymentData {
 
 	@SerializedName("formaPagamento")
-	private Long paymentCode;
+	private Integer paymentCode;
 
 	@SerializedName("numeroRecorrencia")
 	private Long recurringPaymentNumber;
@@ -61,11 +61,11 @@ public class RecurringPaymentData {
 	@SerializedName("dadosEntrega")
 	private RecurringPaymentDeliveryData deliveryData;
 
-	public Long getPaymentCode() {
+	public Integer getPaymentCode() {
 		return paymentCode;
 	}
 
-	public void setPaymentCode(Long paymentCode) {
+	public void setPaymentCode(Integer paymentCode) {
 		this.paymentCode = paymentCode;
 	}
 

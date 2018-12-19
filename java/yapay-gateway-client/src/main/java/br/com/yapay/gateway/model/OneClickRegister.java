@@ -1,5 +1,7 @@
 package br.com.yapay.gateway.model;
 
+import static org.apache.commons.lang3.StringUtils.leftPad;
+
 import com.google.gson.annotations.SerializedName;
 
 public class OneClickRegister extends RequestModel {
@@ -21,7 +23,7 @@ public class OneClickRegister extends RequestModel {
 	private String buyerEmail;
 
 	@SerializedName("formaPagamento")
-	private Long paymentCode;
+	private Integer paymentCode;
 
 	/**
 	 * @deprecated JSON bind eyes only
@@ -59,13 +61,13 @@ public class OneClickRegister extends RequestModel {
 		private String cardNumber;
 		private String expirationDate;
 		private String buyerEmail;
-		private Long paymentCode;
+		private Integer paymentCode;
 
 		private Builder(Credential credential) {
 			this(credential, null, null);
 		}
 
-		private Builder(Credential credential, String buyerEmail, Long paymentCode) {
+		private Builder(Credential credential, String buyerEmail, Integer paymentCode) {
 			this.credential = credential;
 			this.buyerEmail = buyerEmail;
 			this.paymentCode = paymentCode;
@@ -98,8 +100,11 @@ public class OneClickRegister extends RequestModel {
 			return this;
 		}
 
-		public Builder withExpirationDate(String expirationDate) {
-			this.expirationDate = expirationDate;
+		public Builder withExpirationDate(int expirationMonth, int expirationYear) {
+			if (expirationMonth > 0 && expirationMonth < 13 && expirationYear > 1900) {
+				this.expirationDate = leftPad(String.valueOf(expirationMonth), 2, "0") + "/"
+						+ leftPad(String.valueOf(expirationYear), 4, "0");
+			}
 			return this;
 		}
 
@@ -108,20 +113,20 @@ public class OneClickRegister extends RequestModel {
 			return this;
 		}
 
-		public Builder withPaymentCode(Long paymentCode) {
+		public Builder withPaymentCode(Integer paymentCode) {
 			this.paymentCode = paymentCode;
 			return this;
 		}
 
 		public Builder withCard(CardData card) {
-			return withCard(card.getCardHolderName(), card.getCardNumber(), card.getExpirationDate());
+			this.cardHolderName = card.getCardHolderName();
+			this.cardNumber = card.getCardNumber();
+			this.expirationDate = card.getExpirationDate();
+			return this;
 		}
 
-		public Builder withCard(String cardHolderName, String cardNumber, String expirationDate) {
-			this.cardHolderName = cardHolderName;
-			this.cardNumber = cardNumber;
-			this.expirationDate = expirationDate;
-			return this;
+		public Builder withCard(String cardHolderName, String cardNumber, int expirationMonth, int expirationYear) {
+			return withCard(new CardData(cardHolderName, cardNumber, expirationMonth, expirationYear));
 		}
 
 		/**
@@ -152,7 +157,7 @@ public class OneClickRegister extends RequestModel {
 	 * @param paymentCode Payment identification
 	 * @return Oneclick register builder
 	 */
-	public static Builder getBuilder(Credential credential, String buyerEmail, Long paymentCode) {
+	public static Builder getBuilder(Credential credential, String buyerEmail, Integer paymentCode) {
 		return new Builder(credential, buyerEmail, paymentCode);
 	}
 
@@ -188,11 +193,11 @@ public class OneClickRegister extends RequestModel {
 		this.buyerEmail = buyerEmail;
 	}
 
-	public Long getPaymentCode() {
+	public Integer getPaymentCode() {
 		return paymentCode;
 	}
 
-	void setPaymentCode(Long paymentCode) {
+	void setPaymentCode(Integer paymentCode) {
 		this.paymentCode = paymentCode;
 	}
 

@@ -143,8 +143,9 @@ public class Transaction extends RequestModel {
 			return withCard(new CardData(cvv));
 		}
 
-		public Builder withCard(String cardHolderName, String cardNumber, String expirationDate, String cvv) {
-			return withCard(new CardData(cardHolderName, cardNumber, expirationDate, cvv));
+		public Builder withCard(String cardHolderName, String cardNumber, int expirationMonth, int expirationYear,
+				String cvv) {
+			return withCard(new CardData(cardHolderName, cardNumber, expirationMonth, expirationYear, cvv));
 		}
 
 		public Builder withCard(CardData card) {

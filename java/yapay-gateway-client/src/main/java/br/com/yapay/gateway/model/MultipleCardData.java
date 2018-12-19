@@ -29,15 +29,17 @@ public class MultipleCardData extends CardData {
 	/**
 	 * Constructor with minimum requested parameters for common cards
 	 * 
-	 * @param cardHolderName Card holder name
-	 * @param cardNumber     Card number
-	 * @param expirationDate Card expiration date
-	 * @param cvv            Card security code
+	 * @param cardHolderName  Card holder name
+	 * @param cardNumber      Card number
+	 * @param expirationMonth Card expiration month
+	 * @param expirationYear  Card expiration year
+	 * @param cvv             Card security code
 	 * 
 	 * @see CardData#CardData(String, String, String, String)
 	 */
-	public MultipleCardData(String cardHolderName, String cardNumber, String expirationDate, String cvv) {
-		super(cardHolderName, cardNumber, expirationDate, cvv);
+	public MultipleCardData(String cardHolderName, String cardNumber, int expirationMonth, int expirationYear,
+			String cvv) {
+		super(cardHolderName, cardNumber, expirationMonth, expirationYear, cvv);
 		installments = 1;
 	}
 
