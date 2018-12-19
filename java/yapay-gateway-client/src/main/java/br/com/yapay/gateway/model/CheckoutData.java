@@ -1,5 +1,6 @@
 package br.com.yapay.gateway.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class CheckoutData {
 		this.multipleBillDataList = multipleBillDataList;
 	}
 
-	public void addMultipleBillData(Long value, String dueDate) {
+	public void addMultipleBillData(Long value, LocalDate dueDate) {
 		addMultipleBillData(new TransactionCheckoutMultipleBillData(value, dueDate));
 	}
 

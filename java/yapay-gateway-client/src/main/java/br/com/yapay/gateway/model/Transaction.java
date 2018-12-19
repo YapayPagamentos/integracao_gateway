@@ -2,6 +2,7 @@ package br.com.yapay.gateway.model;
 
 import static org.apache.commons.lang3.StringUtils.isNoneBlank;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -193,7 +194,7 @@ public class Transaction extends RequestModel {
 			return withCharging(new ChargingData(clientName, clientEmail, clientDocument));
 		}
 
-		public Builder withCharging(String clientName, String clientEmail, String clientBirthday, String clientGenre,
+		public Builder withCharging(String clientName, String clientEmail, LocalDate clientBirthday, String clientGenre,
 				String clientDocument, String clientDocumentTwo, AddressData clientAddress,
 				List<PhoneData> clientPhones) {
 			return withCharging(new ChargingData(clientName, clientEmail, clientBirthday, clientGenre, clientDocument,
@@ -241,6 +242,10 @@ public class Transaction extends RequestModel {
 		public Builder withDelivery(DeliveryData delivery) {
 			this.delivery = delivery;
 			return this;
+		}
+
+		public Builder withDelivery(String name, String email, String document) {
+			return withDelivery(new DeliveryData(name, email, document));
 		}
 
 		public Builder withDeliveryAddress(String street, String number, String zipCode, String district, String city,
@@ -327,7 +332,7 @@ public class Transaction extends RequestModel {
 			return this;
 		}
 
-		public Builder addCheckoutMultipleBillData(Long value, String dueDate) {
+		public Builder addCheckoutMultipleBillData(Long value, LocalDate dueDate) {
 			return addCheckoutMultipleBillData(new TransactionCheckoutMultipleBillData(value, dueDate));
 		}
 
@@ -435,7 +440,7 @@ public class Transaction extends RequestModel {
 			return this;
 		}
 
-		public Builder withBillDueDate(String billDueDate) {
+		public Builder withBillDueDate(LocalDate billDueDate) {
 			this.transactionData.setBillDueDate(billDueDate);
 			return this;
 		}

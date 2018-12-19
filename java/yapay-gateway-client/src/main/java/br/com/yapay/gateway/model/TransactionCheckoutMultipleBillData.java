@@ -1,5 +1,8 @@
 package br.com.yapay.gateway.model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -23,9 +26,9 @@ public class TransactionCheckoutMultipleBillData {
 	TransactionCheckoutMultipleBillData() {
 	}
 
-	public TransactionCheckoutMultipleBillData(Long value, String dueDate) {
+	public TransactionCheckoutMultipleBillData(Long value, LocalDate dueDate) {
 		this.value = value;
-		this.dueDate = dueDate;
+		setDueDate(dueDate);
 	}
 
 	public Long getValue() {
@@ -40,8 +43,17 @@ public class TransactionCheckoutMultipleBillData {
 		return dueDate;
 	}
 
-	public void setDueDate(String dueDate) {
+	void setDueDate(String dueDate) {
 		this.dueDate = dueDate;
 	}
 
+	/**
+	 * Setting due date from {@link LocalDate}
+	 * 
+	 * @param dueDate Due date
+	 */
+	public void setDueDate(LocalDate dueDate) {
+		String dueDateStr = dueDate == null ? null : dueDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		setDueDate(dueDateStr);
+	}
 }

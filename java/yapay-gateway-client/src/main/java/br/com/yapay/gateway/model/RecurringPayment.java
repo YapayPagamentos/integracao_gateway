@@ -1,5 +1,7 @@
 package br.com.yapay.gateway.model;
 
+import java.time.LocalDate;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -46,11 +48,11 @@ public class RecurringPayment extends RequestModel {
 		private Integer paymentCode;
 		private Long recurringPaymentNumber;
 		private Long value;
-		private Integer frequency;
+		private Integer frequency = 3;
 		private String notificationUrl;
 		private boolean processImmediately;
-		private Integer billingAmount;
-		private String billingFirstDate;
+		private Integer installments;
+		private LocalDate startDate;
 		private String freeFieldOne;
 		private String freeFieldTwo;
 		private String freeFieldThree;
@@ -121,13 +123,13 @@ public class RecurringPayment extends RequestModel {
 			return this;
 		}
 
-		public Builder withBillingAmount(Integer billingAmount) {
-			this.billingAmount = billingAmount;
+		public Builder withInstallments(Integer installments) {
+			this.installments = installments;
 			return this;
 		}
 
-		public Builder withBillingFirstDate(String billingFirstDate) {
-			this.billingFirstDate = billingFirstDate;
+		public Builder withStartDate(LocalDate startDate) {
+			this.startDate = startDate;
 			return this;
 		}
 
@@ -174,7 +176,7 @@ public class RecurringPayment extends RequestModel {
 			return withChargingData(new RecurringPaymentChargingData(clientName, clientEmail, clientDocument));
 		}
 
-		public Builder withChargingData(String clientName, String clientEmail, String clientBirthday,
+		public Builder withChargingData(String clientName, String clientEmail, LocalDate clientBirthday,
 				String clientGenre, String clientDocument, String clientDocumentTwo, AddressData clientAddress,
 				PhoneData clientPhone) {
 			RecurringPaymentChargingData data = new RecurringPaymentChargingData(clientName, clientEmail,
@@ -293,8 +295,8 @@ public class RecurringPayment extends RequestModel {
 
 		private RecurringPaymentData getRecurringPaymentData() {
 			RecurringPaymentData data = new RecurringPaymentData();
-			data.setBillingAmount(billingAmount);
-			data.setBillingFirstDate(billingFirstDate);
+			data.setInstallments(installments);
+			data.setStartDate(startDate);
 			data.setCard(card);
 			data.setChargingData(chargingData);
 			data.setDeliveryData(deliveryData);

@@ -1,5 +1,8 @@
 package br.com.yapay.gateway.model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -109,7 +112,7 @@ public class RecurringPaymentChargingData {
 	 * @param clientDocumentTwo Client secondary document
 	 * @param phone             Client phone
 	 */
-	public RecurringPaymentChargingData(String clientName, String clientEmail, String clientBirthday,
+	public RecurringPaymentChargingData(String clientName, String clientEmail, LocalDate clientBirthday,
 			String clientGenre, String clientDocument, String clientDocumentTwo, PhoneData phone) {
 		this(1, 1, clientName, clientEmail, clientBirthday, clientGenre, clientDocument, clientDocumentTwo, phone);
 	}
@@ -128,13 +131,13 @@ public class RecurringPaymentChargingData {
 	 * @param phone             Client phone
 	 */
 	public RecurringPaymentChargingData(Integer clientCode, Integer clientType, String clientName, String clientEmail,
-			String clientBirthday, String clientGenre, String clientDocument, String clientDocumentTwo,
+			LocalDate clientBirthday, String clientGenre, String clientDocument, String clientDocumentTwo,
 			PhoneData phone) {
 		this.clientCode = clientCode;
 		this.clientType = clientType;
 		buyerName = clientName;
 		buyerMail = clientEmail;
-		birthday = clientBirthday;
+		setBirthday(clientBirthday);
 		this.clientGenre = clientGenre;
 		document = clientDocument;
 		documentTwo = clientDocumentTwo;
@@ -178,8 +181,18 @@ public class RecurringPaymentChargingData {
 		return birthday;
 	}
 
-	public void setBirthday(String birthday) {
+	void setBirthday(String birthday) {
 		this.birthday = birthday;
+	}
+
+	/**
+	 * Setting birthday from {@link LocalDate}
+	 * 
+	 * @param birthday Client birth date
+	 */
+	public void setBirthday(LocalDate birthday) {
+		String birthdayStr = birthday == null ? null : birthday.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		setBirthday(birthdayStr);
 	}
 
 	public Integer getClientCode() {

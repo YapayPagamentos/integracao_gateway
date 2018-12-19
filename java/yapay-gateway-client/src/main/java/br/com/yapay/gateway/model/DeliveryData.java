@@ -1,5 +1,7 @@
 package br.com.yapay.gateway.model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,11 +86,11 @@ public class DeliveryData {
 	 * @param deliveryAddress Delivery address
 	 * @param deliveryPhones  Delivery phones
 	 */
-	public DeliveryData(String name, String email, String birthday, String genre, String document, String documentTwo,
-			AddressData deliveryAddress, List<PhoneData> deliveryPhones) {
+	public DeliveryData(String name, String email, LocalDate birthday, String genre, String document,
+			String documentTwo, AddressData deliveryAddress, List<PhoneData> deliveryPhones) {
 		this.name = name;
 		mail = email;
-		this.birthday = birthday;
+		setBirthday(birthday);
 		this.genre = genre;
 		this.document = document;
 		this.documentTwo = documentTwo;
@@ -116,8 +118,18 @@ public class DeliveryData {
 		return birthday;
 	}
 
-	public void setBirthday(String birthday) {
+	void setBirthday(String birthday) {
 		this.birthday = birthday;
+	}
+
+	/**
+	 * Setting birthday from {@link LocalDate}
+	 * 
+	 * @param birthday Recipient birth date
+	 */
+	public void setBirthday(LocalDate birthday) {
+		String birthdayStr = birthday == null ? null : birthday.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		setBirthday(birthdayStr);
 	}
 
 	public String getGenre() {

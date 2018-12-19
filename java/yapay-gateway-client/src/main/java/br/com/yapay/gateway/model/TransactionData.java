@@ -1,5 +1,8 @@
 package br.com.yapay.gateway.model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -250,8 +253,19 @@ public class TransactionData {
 		return billDueDate;
 	}
 
-	public void setBillDueDate(String billDueDate) {
+	void setBillDueDate(String billDueDate) {
 		this.billDueDate = billDueDate;
+	}
+
+	/**
+	 * Setting due date from {@link LocalDate}
+	 * 
+	 * @param billDueDate Due date
+	 */
+	public void setBillDueDate(LocalDate billDueDate) {
+		String billDueDateStr = billDueDate == null ? null
+				: billDueDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		setBillDueDate(billDueDateStr);
 	}
 
 	public String getCountry() {
