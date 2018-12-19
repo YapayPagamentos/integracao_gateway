@@ -1,5 +1,6 @@
 package br.com.yapay.gateway.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -20,7 +21,7 @@ public class RecurringPaymentData {
 	private Long recurringPaymentNumber;
 
 	@SerializedName("valor")
-	private Long value;
+	private Long valueLong;
 
 	@SerializedName("modalidade")
 	private Integer modality = 1;
@@ -80,12 +81,16 @@ public class RecurringPaymentData {
 		this.recurringPaymentNumber = recurringPaymentNumber;
 	}
 
-	public Long getValue() {
-		return value;
+	Long getValueLong() {
+		return valueLong;
 	}
 
-	public void setValue(Long value) {
-		this.value = value;
+	void setValueLong(Long value) {
+		this.valueLong = value;
+	}
+
+	public void setValue(BigDecimal value) {
+		this.valueLong = value == null ? null : value.multiply(new BigDecimal(100)).longValue();
 	}
 
 	public Integer getModality() {

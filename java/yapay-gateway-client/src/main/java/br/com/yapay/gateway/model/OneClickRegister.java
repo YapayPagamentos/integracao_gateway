@@ -216,7 +216,7 @@ public class OneClickRegister extends RequestModel {
 	}
 
 	@Override
-	public Long getValue() {
+	public Long getValueLong() {
 		return null;
 	}
 }

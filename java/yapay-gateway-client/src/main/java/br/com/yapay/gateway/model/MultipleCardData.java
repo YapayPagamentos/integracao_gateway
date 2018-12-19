@@ -1,5 +1,7 @@
 package br.com.yapay.gateway.model;
 
+import java.math.BigDecimal;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -17,7 +19,7 @@ public class MultipleCardData extends CardData {
 	private Integer installments;
 
 	@SerializedName("valor")
-	private Long value;
+	private Long valueLong;
 
 	/**
 	 * @deprecated JSON bind eyes only
@@ -59,11 +61,15 @@ public class MultipleCardData extends CardData {
 		this.installments = installments;
 	}
 
-	public Long getValue() {
-		return value;
+	Long getValueLong() {
+		return valueLong;
 	}
 
-	public void setValue(Long value) {
-		this.value = value;
+	void setValueLong(Long value) {
+		this.valueLong = value;
+	}
+
+	public void setValue(BigDecimal value) {
+		this.valueLong = value == null ? null : value.multiply(new BigDecimal(100)).longValue();
 	}
 }

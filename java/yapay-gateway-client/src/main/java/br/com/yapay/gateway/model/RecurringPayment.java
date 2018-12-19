@@ -1,5 +1,6 @@
 package br.com.yapay.gateway.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import com.google.gson.annotations.SerializedName;
@@ -47,7 +48,7 @@ public class RecurringPayment extends RequestModel {
 
 		private Integer paymentCode;
 		private Long recurringPaymentNumber;
-		private Long value;
+		private BigDecimal value;
 		private Integer frequency = 3;
 		private String notificationUrl;
 		private boolean processImmediately;
@@ -66,11 +67,11 @@ public class RecurringPayment extends RequestModel {
 			this(credential, null, recurringPaymentNumber, null);
 		}
 
-		private Builder(Credential credential, Long recurringPaymentNumber, Long value) {
+		private Builder(Credential credential, Long recurringPaymentNumber, BigDecimal value) {
 			this(credential, null, recurringPaymentNumber, value);
 		}
 
-		private Builder(Credential credential, Integer paymentCode, Long recurringPaymentNumber, Long value) {
+		private Builder(Credential credential, Integer paymentCode, Long recurringPaymentNumber, BigDecimal value) {
 			this.credential = credential;
 			this.resourcePath = "/api/v3/recorrencia/";
 			this.paymentCode = paymentCode;
@@ -99,7 +100,7 @@ public class RecurringPayment extends RequestModel {
 			return this;
 		}
 
-		public Builder withValue(Long value) {
+		public Builder withValue(BigDecimal value) {
 			this.value = value;
 			return this;
 		}
@@ -345,7 +346,7 @@ public class RecurringPayment extends RequestModel {
 	 * @param value                  Recurrence value
 	 * @return Recurring payment builder
 	 */
-	public static Builder getBuilder(Credential credential, Long recurringPaymentNumber, Long value) {
+	public static Builder getBuilder(Credential credential, Long recurringPaymentNumber, BigDecimal value) {
 		return new Builder(credential, recurringPaymentNumber, value);
 	}
 
@@ -359,7 +360,7 @@ public class RecurringPayment extends RequestModel {
 	 * @return Recurring payment builder
 	 */
 	public static Builder getBuilder(Credential credential, Integer paymentCode, Long recurringPaymentNumber,
-			Long value) {
+			BigDecimal value) {
 		return new Builder(credential, paymentCode, recurringPaymentNumber, value);
 	}
 
@@ -390,10 +391,10 @@ public class RecurringPayment extends RequestModel {
 	}
 
 	@Override
-	public Long getValue() {
+	public Long getValueLong() {
 		if (this.recurringPaymentData == null) {
 			return null;
 		}
-		return this.recurringPaymentData.getValue();
+		return this.recurringPaymentData.getValueLong();
 	}
 }

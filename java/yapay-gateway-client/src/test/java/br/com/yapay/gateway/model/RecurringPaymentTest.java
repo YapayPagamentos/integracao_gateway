@@ -2,6 +2,7 @@ package br.com.yapay.gateway.model;
 
 import static org.junit.Assert.assertEquals;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -19,7 +20,7 @@ public class RecurringPaymentTest {
 
 	@Test
 	public void testToJson() {
-		RecurringPayment recurring = RecurringPayment.getBuilder(credential, 170, 2L, 130_00L)
+		RecurringPayment recurring = RecurringPayment.getBuilder(credential, 170, 2L, new BigDecimal(130.00))
 				.withNotificationUrl("http://test.com/hook").withProcessImmediately().withInstallments(2)
 				.withStartDate(LocalDate.of(2022, Month.SEPTEMBER, 8))
 				.withCard("TEST BUYER", "4444333322221111", 1, 2023, "123")

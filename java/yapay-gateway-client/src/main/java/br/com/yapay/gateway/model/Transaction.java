@@ -2,6 +2,7 @@ package br.com.yapay.gateway.model;
 
 import static org.apache.commons.lang3.StringUtils.isNoneBlank;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -105,11 +106,11 @@ public class Transaction extends RequestModel {
 			this(credential, null, transactionNumber, null);
 		}
 
-		private Builder(Credential credential, Long transactionNumber, Long value) {
+		private Builder(Credential credential, Long transactionNumber, BigDecimal value) {
 			this(credential, null, transactionNumber, value);
 		}
 
-		private Builder(Credential credential, Integer paymentCode, Long transactionNumber, Long value) {
+		private Builder(Credential credential, Integer paymentCode, Long transactionNumber, BigDecimal value) {
 			this.credential = credential;
 			this.resourcePath = API_RESOURCE_PATH;
 			this.paymentCode = paymentCode;
@@ -172,7 +173,7 @@ public class Transaction extends RequestModel {
 			return this;
 		}
 
-		public Builder addItem(String name, Integer amount, Long value) {
+		public Builder addItem(String name, Integer amount, BigDecimal value) {
 			ItemData item = new ItemData();
 			item.setProductCategory("1");
 			item.setProductCode("1");
@@ -332,7 +333,7 @@ public class Transaction extends RequestModel {
 			return this;
 		}
 
-		public Builder addCheckoutMultipleBillData(Long value, LocalDate dueDate) {
+		public Builder addCheckoutMultipleBillData(BigDecimal value, LocalDate dueDate) {
 			return addCheckoutMultipleBillData(new TransactionCheckoutMultipleBillData(value, dueDate));
 		}
 
@@ -360,7 +361,7 @@ public class Transaction extends RequestModel {
 			return this;
 		}
 
-		public Builder withValue(Long value) {
+		public Builder withValue(BigDecimal value) {
 			this.transactionData.setValue(value);
 			return this;
 		}
@@ -484,7 +485,7 @@ public class Transaction extends RequestModel {
 	 * @param value             Order value
 	 * @return Transaction builder
 	 */
-	public static Builder getBuilder(Credential credential, Long transactionNumber, Long value) {
+	public static Builder getBuilder(Credential credential, Long transactionNumber, BigDecimal value) {
 		return new Builder(credential, transactionNumber, value);
 	}
 
@@ -497,7 +498,8 @@ public class Transaction extends RequestModel {
 	 * @param value             Order value
 	 * @return Transaction builder
 	 */
-	public static Builder getBuilder(Credential credential, Integer paymentCode, Long transactionNumber, Long value) {
+	public static Builder getBuilder(Credential credential, Integer paymentCode, Long transactionNumber,
+			BigDecimal value) {
 		return new Builder(credential, paymentCode, transactionNumber, value);
 	}
 
@@ -603,10 +605,10 @@ public class Transaction extends RequestModel {
 	}
 
 	@Override
-	public Long getValue() {
+	public Long getValueLong() {
 		if (this.transactionData == null) {
 			return null;
 		}
-		return this.transactionData.getValue();
+		return this.transactionData.getValueLong();
 	}
 }

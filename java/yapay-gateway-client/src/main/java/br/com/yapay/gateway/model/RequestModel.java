@@ -33,6 +33,6 @@ public abstract class RequestModel {
 
 	public abstract String getModelReference();
 
-	public abstract Long getValue();
+	public abstract Long getValueLong();
 
 }

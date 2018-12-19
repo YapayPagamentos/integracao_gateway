@@ -2,6 +2,8 @@ package br.com.yapay.gateway.model;
 
 import static org.junit.Assert.assertEquals;
 
+import java.math.BigDecimal;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,7 +18,8 @@ public class TransactionTest {
 
 	@Test
 	public void testToJsonRegularPunctualAuthorization() {
-		Transaction authorization = Transaction.getBuilder(credential, 170, 333L, 60_60L).addItem("Umbrella", 3, 20_00L)
+		Transaction authorization = Transaction.getBuilder(credential, 170, 333L, new BigDecimal(60.60))
+				.addItem("Umbrella", 3, new BigDecimal(20.00))
 				.withCharging("Test Buyer", "common@email.com", "91234567890")
 				.withChargingAddress("R. Itapaiúna", "2434", "05707-001", "Jardim Morumbi", "São Paulo", "SP")
 				.addChargingPhone("11", "35440500").withCard("TEST BUYER", "4444333322221111", 12, 2022, "123").build();

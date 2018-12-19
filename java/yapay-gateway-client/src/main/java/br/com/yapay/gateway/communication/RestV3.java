@@ -159,7 +159,7 @@ public class RestV3 implements ApiConnector {
 	private ApiResponse transactionOperation(RequestModel operation, String option)
 			throws ClientProtocolException, IOException {
 		String valueParameter = "";
-		Long value = operation.getValue();
+		Long value = operation.getValueLong();
 		if (value != null && value > 0) {
 			valueParameter = "?valor=" + value.toString();
 		}

@@ -1,5 +1,6 @@
 package br.com.yapay.gateway.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -15,9 +16,9 @@ public class ApiResponseContent {
 	@SerializedName("codigoFormaPagamento")
 	private Long paymentCode;
 	@SerializedName("valor")
-	private Long value;
+	private Long valueLong;
 	@SerializedName("valorDesconto")
-	private Long discountValue;
+	private Long discountValueLong;
 	@SerializedName("parcelas")
 	private Integer installments;
 	@SerializedName("multiploCartao")
@@ -94,7 +95,7 @@ public class ApiResponseContent {
 		@SerializedName("codigoFormaPagamento")
 		private Integer paymentCode;
 		@SerializedName("valor")
-		private Long value;
+		private Long valueLong;
 		@SerializedName("numeroCobrancaTotal")
 		private Integer totalCharges;
 		@SerializedName("numeroCobrancaRestantes")
@@ -141,12 +142,17 @@ public class ApiResponseContent {
 			this.paymentCode = paymentCode;
 		}
 
-		Long getValue() {
-			return value;
+		Long getValueLong() {
+			return valueLong;
 		}
 
-		void setValue(Long value) {
-			this.value = value;
+		BigDecimal getValue() {
+			return valueLong == null ? BigDecimal.ZERO
+					: new BigDecimal(valueLong).divide(new BigDecimal(100)).setScale(2, BigDecimal.ROUND_HALF_UP);
+		}
+
+		void setValueLong(Long value) {
+			this.valueLong = value;
 		}
 
 		Integer getTotalCharges() {
@@ -250,12 +256,22 @@ public class ApiResponseContent {
 		return paymentCode;
 	}
 
-	public Long getValue() {
-		return value;
+	Long getValueLong() {
+		return valueLong;
 	}
 
-	public Long getDiscountValue() {
-		return discountValue;
+	public BigDecimal getValue() {
+		return valueLong == null ? BigDecimal.ZERO
+				: new BigDecimal(valueLong).divide(new BigDecimal(100)).setScale(2, BigDecimal.ROUND_HALF_UP);
+	}
+
+	Long getDiscountValueLong() {
+		return discountValueLong;
+	}
+
+	public BigDecimal getDiscountValue() {
+		return discountValueLong == null ? BigDecimal.ZERO
+				: new BigDecimal(discountValueLong).divide(new BigDecimal(100)).setScale(2, BigDecimal.ROUND_HALF_UP);
 	}
 
 	public Integer getInstallments() {
@@ -368,12 +384,12 @@ public class ApiResponseContent {
 		this.paymentCode = paymentCode;
 	}
 
-	void setValue(Long value) {
-		this.value = value;
+	void setValueLong(Long valueLong) {
+		this.valueLong = valueLong;
 	}
 
-	void setDiscountValue(Long discountValue) {
-		this.discountValue = discountValue;
+	void setDiscountValueLong(Long discountValueLong) {
+		this.discountValueLong = discountValueLong;
 	}
 
 	void setInstallments(Integer installments) {
@@ -481,11 +497,11 @@ public class ApiResponseContent {
 		return this.recurrentPayment.paymentCode;
 	}
 
-	public Long getRecurringValue() {
+	public BigDecimal getRecurringValue() {
 		if (this.recurrentPayment == null) {
 			return null;
 		}
-		return this.recurrentPayment.value;
+		return this.recurrentPayment.getValue();
 	}
 
 	public Integer getRecurringTotalCharges() {

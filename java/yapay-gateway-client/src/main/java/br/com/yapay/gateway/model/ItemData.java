@@ -1,5 +1,7 @@
 package br.com.yapay.gateway.model;
 
+import java.math.BigDecimal;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -23,7 +25,7 @@ public class ItemData {
 	private Integer productAmount;
 
 	@SerializedName("valorUnitarioProduto")
-	private Long productUnitaryValue;
+	private Long productUnitaryValueLong;
 
 	@SerializedName("nomeCategoria")
 	private String categoryName;
@@ -60,12 +62,17 @@ public class ItemData {
 		this.productAmount = productAmount;
 	}
 
-	public Long getProductUnitaryValue() {
-		return productUnitaryValue;
+	Long getProductUnitaryValueLong() {
+		return productUnitaryValueLong;
 	}
 
-	public void setProductUnitaryValue(Long productUnitaryValue) {
-		this.productUnitaryValue = productUnitaryValue;
+	void setProductUnitaryValueLong(Long productUnitaryValue) {
+		this.productUnitaryValueLong = productUnitaryValue;
+	}
+
+	public void setProductUnitaryValue(BigDecimal productUnitaryValue) {
+		this.productUnitaryValueLong = productUnitaryValue == null ? null
+				: productUnitaryValue.multiply(new BigDecimal(100)).longValue();
 	}
 
 	public String getCategoryName() {
