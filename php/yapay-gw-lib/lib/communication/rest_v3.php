@@ -92,6 +92,7 @@
 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $requestType);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
 			curl_setopt($ch, CURLOPT_USERPWD, $credential->user . ":" . $credential->password);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
 			return $ch;
 		}
 
