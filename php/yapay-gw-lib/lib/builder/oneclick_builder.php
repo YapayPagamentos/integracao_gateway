@@ -1,6 +1,6 @@
 <?php 
 	
-	require_once "models/oneclick_register_data.php";
+	require_once "../yapay-gw-lib/lib/models/oneclick_register_data.php";
 
 	class OneclickBuilder {
 
