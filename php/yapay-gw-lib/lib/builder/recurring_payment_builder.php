@@ -1,12 +1,12 @@
 <?php 
 
-	require_once "models/recurring_payment.php";
-	require_once "models/recurring_payment_data.php";
-	require_once "models/recurring_payment_charging_data.php";
-	require_once "models/recurring_payment_shipping_data.php";
-	require_once "models/transaction_phone_data.php";
-	require_once "models/transaction_card_data.php";
-	require_once "models/transaction_debit_data.php";
+	require_once "../yapay-gw-lib/lib/models/recurring_payment.php";
+	require_once "../yapay-gw-lib/lib/models/recurring_payment_data.php";
+	require_once "../yapay-gw-lib/lib/models/recurring_payment_charging_data.php";
+	require_once "../yapay-gw-lib/lib/models/recurring_payment_shipping_data.php";
+	require_once "../yapay-gw-lib/lib/models/transaction_phone_data.php";
+	require_once "../yapay-gw-lib/lib/models/transaction_card_data.php";
+	require_once "../yapay-gw-lib/lib/models/transaction_debit_data.php";
 	
 	class RecurringPaymentBuilder {
 		

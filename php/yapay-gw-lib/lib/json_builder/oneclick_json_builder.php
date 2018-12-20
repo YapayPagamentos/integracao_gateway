@@ -1,6 +1,6 @@
 <?php 
 
-	require_once "json_representation/oneclick_register_data_json.php";
+	require_once "../yapay-gw-lib/lib/json_representation/oneclick_register_data_json.php";
 
 	class OneClickJsonBuilder{
 		

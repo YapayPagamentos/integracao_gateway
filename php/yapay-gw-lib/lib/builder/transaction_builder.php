@@ -1,14 +1,14 @@
 <?php 
 
-	require_once "models/transaction.php";
-	require_once "models/transaction_data.php";
-	require_once "models/transaction_card_data.php";
-	require_once "models/transaction_item_data.php";
-	require_once "models/transaction_charging_data.php";
-	require_once "models/transaction_phone_data.php";
-	require_once "models/transaction_extra_field.php";
-	require_once "models/transaction_address_data.php";
-	require_once "models/transaction_delivery_data.php";
+	require_once "../yapay-gw-lib/lib/models/transaction.php";
+	require_once "../yapay-gw-lib/lib/models/transaction_data.php";
+	require_once "../yapay-gw-lib/lib/models/transaction_card_data.php";
+	require_once "../yapay-gw-lib/lib/models/transaction_item_data.php";
+	require_once "../yapay-gw-lib/lib/models/transaction_charging_data.php";
+	require_once "../yapay-gw-lib/lib/models/transaction_phone_data.php";
+	require_once "../yapay-gw-lib/lib/models/transaction_extra_field.php";
+	require_once "../yapay-gw-lib/lib/models/transaction_address_data.php";
+	require_once "../yapay-gw-lib/lib/models/transaction_delivery_data.php";
 	
 	class TransactionBuilder {
 		
