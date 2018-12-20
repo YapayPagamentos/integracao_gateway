@@ -66,7 +66,7 @@ public class ChargingData {
 
 	/**
 	 * Overload of
-	 * {@link #ChargingData(String, String, String, String, String, String, AddressData, List)}
+	 * {@link #ChargingData(String, String, LocalDate, String, String, String, AddressData, List)}
 	 * without {@code birthday}, {@code genre} and {@code documentTwo}
 	 * 
 	 * @param clientName     Client name
@@ -82,7 +82,7 @@ public class ChargingData {
 
 	/**
 	 * Overload of
-	 * {@link #ChargingData(Integer, Integer, String, String, String, String, String, String, AddressData, List)}
+	 * {@link #ChargingData(Integer, Integer, String, String, LocalDate, String, String, String, AddressData, List)}
 	 * with {@code clientCode} and {@code clientType} defaulting to 1
 	 * 
 	 * @param clientName        Client name

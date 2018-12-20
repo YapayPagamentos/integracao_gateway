@@ -60,7 +60,7 @@ public class DeliveryData {
 
 	/**
 	 * Overload of
-	 * {@link #DeliveryData(String, String, String, String, String, String, AddressData, List)}
+	 * {@link #DeliveryData(String, String, LocalDate, String, String, String, AddressData, List)}
 	 * without {@code birthday}, {@code genre} and {@code documentTwo}
 	 * 
 	 * @param name            Recipient name

@@ -37,7 +37,7 @@ public class MultipleCardData extends CardData {
 	 * @param expirationYear  Card expiration year
 	 * @param cvv             Card security code
 	 * 
-	 * @see CardData#CardData(String, String, String, String)
+	 * @see CardData#CardData(String, String, int, int, String)
 	 */
 	public MultipleCardData(String cardHolderName, String cardNumber, int expirationMonth, int expirationYear,
 			String cvv) {

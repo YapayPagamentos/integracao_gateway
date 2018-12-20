@@ -86,7 +86,7 @@ public class RecurringPaymentChargingData {
 
 	/**
 	 * Overload of
-	 * {@link #RecurringPaymentChargingData(String, String, String, String, String, String, PhoneData)}
+	 * {@link #RecurringPaymentChargingData(String, String, LocalDate, String, String, String, PhoneData)}
 	 * without {@code clientBirthday}, {@code clientGenre} and
 	 * {@code clientDocumentTwo}
 	 * 
@@ -101,7 +101,7 @@ public class RecurringPaymentChargingData {
 
 	/**
 	 * Overload of
-	 * {@link #RecurringPaymentChargingData(Integer, Integer, String, String, String, String, String, String, PhoneData)}
+	 * {@link #RecurringPaymentChargingData(Integer, Integer, String, String, LocalDate, String, String, String, PhoneData)}
 	 * with {@code clientCode} and {@code clientType} defaulting to 1
 	 * 
 	 * @param clientName        Client name
