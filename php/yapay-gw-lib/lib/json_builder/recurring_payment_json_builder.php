@@ -1,7 +1,7 @@
 <?php
 
-	require_once "json_representation/recurring_payment_json.php";
-	require_once "json_representation/recurring_payment_data_json.php";
+	require_once "../yapay-gw-lib/lib/json_representation/recurring_payment_json.php";
+	require_once "../yapay-gw-lib/lib/json_representation/recurring_payment_data_json.php";
 
 	class RecurringPaymentJsonBuilder{
 		
