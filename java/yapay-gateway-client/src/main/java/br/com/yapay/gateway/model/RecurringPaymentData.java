@@ -1,5 +1,9 @@
 package br.com.yapay.gateway.model;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -11,19 +15,19 @@ import com.google.gson.annotations.SerializedName;
 public class RecurringPaymentData {
 
 	@SerializedName("formaPagamento")
-	private Long paymentCode;
+	private Integer paymentCode;
 
 	@SerializedName("numeroRecorrencia")
 	private Long recurringPaymentNumber;
 
 	@SerializedName("valor")
-	private Long value;
+	private Long valueLong;
 
 	@SerializedName("modalidade")
 	private Integer modality = 1;
 
 	@SerializedName("periodicidade")
-	private Integer frequency;
+	private Integer frequency = 3;
 
 	@SerializedName("urlNotificacao")
 	private String notificationUrl;
@@ -32,10 +36,10 @@ public class RecurringPaymentData {
 	private Boolean processImmediately;
 
 	@SerializedName("quantidadeCobrancas")
-	private Integer billingAmount = 0;
+	private Integer installments = 0;
 
 	@SerializedName("dataPrimeiraCobranca")
-	private String billingFirstDate;
+	private String startDate;
 
 	@SerializedName("campoLivre1")
 	private String freeFieldOne;
@@ -61,11 +65,11 @@ public class RecurringPaymentData {
 	@SerializedName("dadosEntrega")
 	private RecurringPaymentDeliveryData deliveryData;
 
-	public Long getPaymentCode() {
+	public Integer getPaymentCode() {
 		return paymentCode;
 	}
 
-	public void setPaymentCode(Long paymentCode) {
+	public void setPaymentCode(Integer paymentCode) {
 		this.paymentCode = paymentCode;
 	}
 
@@ -77,12 +81,16 @@ public class RecurringPaymentData {
 		this.recurringPaymentNumber = recurringPaymentNumber;
 	}
 
-	public Long getValue() {
-		return value;
+	Long getValueLong() {
+		return valueLong;
 	}
 
-	public void setValue(Long value) {
-		this.value = value;
+	void setValueLong(Long value) {
+		this.valueLong = value;
+	}
+
+	public void setValue(BigDecimal value) {
+		this.valueLong = value == null ? null : value.multiply(new BigDecimal(100)).longValue();
 	}
 
 	public Integer getModality() {
@@ -117,20 +125,30 @@ public class RecurringPaymentData {
 		this.processImmediately = processImmediately;
 	}
 
-	public Integer getBillingAmount() {
-		return billingAmount;
+	public Integer getInstallments() {
+		return installments;
 	}
 
-	public void setBillingAmount(Integer billingAmount) {
-		this.billingAmount = billingAmount;
+	public void setInstallments(Integer installments) {
+		this.installments = installments;
 	}
 
-	public String getBillingFirstDate() {
-		return billingFirstDate;
+	public String getStartDate() {
+		return startDate;
 	}
 
-	public void setBillingFirstDate(String billingFirstDate) {
-		this.billingFirstDate = billingFirstDate;
+	void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	/**
+	 * Setting start date from {@link LocalDate}
+	 * 
+	 * @param startDate Start date
+	 */
+	public void setStartDate(LocalDate startDate) {
+		String startDateStr = startDate == null ? null : startDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		setStartDate(startDateStr);
 	}
 
 	public String getFreeFieldOne() {

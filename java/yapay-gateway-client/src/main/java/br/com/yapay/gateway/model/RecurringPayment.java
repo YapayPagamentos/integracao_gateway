@@ -1,5 +1,8 @@
 package br.com.yapay.gateway.model;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -43,14 +46,14 @@ public class RecurringPayment extends RequestModel {
 
 		private String storeCode;
 
-		private Long paymentCode;
+		private Integer paymentCode;
 		private Long recurringPaymentNumber;
-		private Long value;
-		private Integer frequency;
+		private BigDecimal value;
+		private Integer frequency = 3;
 		private String notificationUrl;
 		private boolean processImmediately;
-		private Integer billingAmount;
-		private String billingFirstDate;
+		private Integer installments;
+		private LocalDate startDate;
 		private String freeFieldOne;
 		private String freeFieldTwo;
 		private String freeFieldThree;
@@ -64,11 +67,11 @@ public class RecurringPayment extends RequestModel {
 			this(credential, null, recurringPaymentNumber, null);
 		}
 
-		private Builder(Credential credential, Long recurringPaymentNumber, Long value) {
+		private Builder(Credential credential, Long recurringPaymentNumber, BigDecimal value) {
 			this(credential, null, recurringPaymentNumber, value);
 		}
 
-		private Builder(Credential credential, Long paymentCode, Long recurringPaymentNumber, Long value) {
+		private Builder(Credential credential, Integer paymentCode, Long recurringPaymentNumber, BigDecimal value) {
 			this.credential = credential;
 			this.resourcePath = "/api/v3/recorrencia/";
 			this.paymentCode = paymentCode;
@@ -87,7 +90,7 @@ public class RecurringPayment extends RequestModel {
 			return this;
 		}
 
-		public Builder withPaymentCode(Long paymentCode) {
+		public Builder withPaymentCode(Integer paymentCode) {
 			this.paymentCode = paymentCode;
 			return this;
 		}
@@ -97,7 +100,7 @@ public class RecurringPayment extends RequestModel {
 			return this;
 		}
 
-		public Builder withValue(Long value) {
+		public Builder withValue(BigDecimal value) {
 			this.value = value;
 			return this;
 		}
@@ -121,13 +124,13 @@ public class RecurringPayment extends RequestModel {
 			return this;
 		}
 
-		public Builder withBillingAmount(Integer billingAmount) {
-			this.billingAmount = billingAmount;
+		public Builder withInstallments(Integer installments) {
+			this.installments = installments;
 			return this;
 		}
 
-		public Builder withBillingFirstDate(String billingFirstDate) {
-			this.billingFirstDate = billingFirstDate;
+		public Builder withStartDate(LocalDate startDate) {
+			this.startDate = startDate;
 			return this;
 		}
 
@@ -156,12 +159,13 @@ public class RecurringPayment extends RequestModel {
 			return this;
 		}
 
-		public Builder withCard(String cardHolderName, String cardNumber, String expirationDate) {
-			return withCard(cardHolderName, cardNumber, expirationDate, null);
+		public Builder withCard(String cardHolderName, String cardNumber, int expirationMonth, int expirationYear) {
+			return withCard(cardHolderName, cardNumber, expirationMonth, expirationYear, null);
 		}
 
-		public Builder withCard(String cardHolderName, String cardNumber, String expirationDate, String cvv) {
-			return withCard(new CardData(cardHolderName, cardNumber, expirationDate, cvv));
+		public Builder withCard(String cardHolderName, String cardNumber, int expirationMonth, int expirationYear,
+				String cvv) {
+			return withCard(new CardData(cardHolderName, cardNumber, expirationMonth, expirationYear, cvv));
 		}
 
 		public Builder withCard(CardData card) {
@@ -173,7 +177,7 @@ public class RecurringPayment extends RequestModel {
 			return withChargingData(new RecurringPaymentChargingData(clientName, clientEmail, clientDocument));
 		}
 
-		public Builder withChargingData(String clientName, String clientEmail, String clientBirthday,
+		public Builder withChargingData(String clientName, String clientEmail, LocalDate clientBirthday,
 				String clientGenre, String clientDocument, String clientDocumentTwo, AddressData clientAddress,
 				PhoneData clientPhone) {
 			RecurringPaymentChargingData data = new RecurringPaymentChargingData(clientName, clientEmail,
@@ -292,8 +296,8 @@ public class RecurringPayment extends RequestModel {
 
 		private RecurringPaymentData getRecurringPaymentData() {
 			RecurringPaymentData data = new RecurringPaymentData();
-			data.setBillingAmount(billingAmount);
-			data.setBillingFirstDate(billingFirstDate);
+			data.setInstallments(installments);
+			data.setStartDate(startDate);
 			data.setCard(card);
 			data.setChargingData(chargingData);
 			data.setDeliveryData(deliveryData);
@@ -342,7 +346,7 @@ public class RecurringPayment extends RequestModel {
 	 * @param value                  Recurrence value
 	 * @return Recurring payment builder
 	 */
-	public static Builder getBuilder(Credential credential, Long recurringPaymentNumber, Long value) {
+	public static Builder getBuilder(Credential credential, Long recurringPaymentNumber, BigDecimal value) {
 		return new Builder(credential, recurringPaymentNumber, value);
 	}
 
@@ -355,7 +359,8 @@ public class RecurringPayment extends RequestModel {
 	 * @param value                  Recurrence value
 	 * @return Recurring payment builder
 	 */
-	public static Builder getBuilder(Credential credential, Long paymentCode, Long recurringPaymentNumber, Long value) {
+	public static Builder getBuilder(Credential credential, Integer paymentCode, Long recurringPaymentNumber,
+			BigDecimal value) {
 		return new Builder(credential, paymentCode, recurringPaymentNumber, value);
 	}
 
@@ -386,10 +391,10 @@ public class RecurringPayment extends RequestModel {
 	}
 
 	@Override
-	public Long getValue() {
+	public Long getValueLong() {
 		if (this.recurringPaymentData == null) {
 			return null;
 		}
-		return this.recurringPaymentData.getValue();
+		return this.recurringPaymentData.getValueLong();
 	}
 }

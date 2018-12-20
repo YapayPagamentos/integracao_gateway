@@ -1,5 +1,7 @@
 package br.com.yapay.gateway.model;
 
+import static org.apache.commons.lang3.StringUtils.leftPad;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -30,27 +32,42 @@ public class CardData {
 	}
 
 	/**
-	 * Overload of {@link #CardData(String, String, String, String)} for OneClick
+	 * Overload of {@link #CardData(String, String, int,int, String)} for OneClick
 	 * purposes
 	 * 
 	 * @param cvv Card security code
 	 */
 	public CardData(String cvv) {
-		this(null, null, null, cvv);
+		this(null, null, 0, 0, cvv);
+	}
+
+	/**
+	 * Overload of {@link #CardData(String, String, int,int, String)} without
+	 * {@code cvv}
+	 * 
+	 * @param cardHolderName  Card holder name
+	 * @param cardNumber      Card number
+	 * @param expirationMonth Card expiration month
+	 * @param expirationYear  Card expiration year
+	 */
+
+	public CardData(String cardHolderName, String cardNumber, int expirationMonth, int expirationYear) {
+		this(cardHolderName, cardNumber, expirationMonth, expirationYear, null);
 	}
 
 	/**
 	 * Constructor with all parameters
 	 * 
-	 * @param cardHolderName Card holder name
-	 * @param cardNumber     Card number
-	 * @param expirationDate Card expiration date
-	 * @param cvv            Card security code
+	 * @param cardHolderName  Card holder name
+	 * @param cardNumber      Card number
+	 * @param expirationMonth Card expiration month
+	 * @param expirationYear  Card expiration year
+	 * @param cvv             Card security code
 	 */
-	public CardData(String cardHolderName, String cardNumber, String expirationDate, String cvv) {
+	public CardData(String cardHolderName, String cardNumber, int expirationMonth, int expirationYear, String cvv) {
 		this.cardHolderName = cardHolderName;
 		this.cardNumber = cardNumber;
-		this.expirationDate = expirationDate;
+		setExpirationDate(expirationMonth, expirationYear);
 		this.cvv = cvv;
 	}
 
@@ -82,8 +99,20 @@ public class CardData {
 		return expirationDate;
 	}
 
-	public void setExpirationDate(String expirationDate) {
+	void setExpirationDate(String expirationDate) {
 		this.expirationDate = expirationDate;
 	}
 
+	/**
+	 * Setting {@code expirationDate} as MM/yyyy
+	 *
+	 * @param expirationMonth Card expiration month
+	 * @param expirationYear  Card expiration year
+	 */
+	public void setExpirationDate(int expirationMonth, int expirationYear) {
+		if (expirationMonth > 0 && expirationMonth < 13 && expirationYear > 1900) {
+			setExpirationDate(leftPad(String.valueOf(expirationMonth), 2, "0") + "/"
+					+ leftPad(String.valueOf(expirationYear), 4, "0"));
+		}
+	}
 }

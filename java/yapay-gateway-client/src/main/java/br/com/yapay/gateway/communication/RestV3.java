@@ -25,6 +25,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
+import br.com.yapay.gateway.model.ApiResponse;
 import br.com.yapay.gateway.model.Credential;
 import br.com.yapay.gateway.model.RequestModel;
 
@@ -92,73 +93,73 @@ public class RestV3 implements ApiConnector {
 	}
 
 	@Override
-	public String oneClickRegister(RequestModel register) throws ClientProtocolException, IOException {
+	public ApiResponse oneClickRegister(RequestModel register) throws ClientProtocolException, IOException {
 		return postJsonAuth(register.getCredential(), communicationUrl + register.getResourcePath(), register.toJson());
 	}
 
 	@Override
-	public String oneClickQuery(RequestModel query) throws ClientProtocolException, IOException {
+	public ApiResponse oneClickQuery(RequestModel query) throws ClientProtocolException, IOException {
 		return getJsonAuth(query.getCredential(),
 				communicationUrl + query.getResourcePath() + query.getModelReference());
 	}
 
 	@Override
-	public String oneClickRegisterUpdate(RequestModel update) throws ClientProtocolException, IOException {
+	public ApiResponse oneClickRegisterUpdate(RequestModel update) throws ClientProtocolException, IOException {
 		return putJsonAuth(update.getCredential(),
 				communicationUrl + update.getResourcePath() + update.getModelReference() + "/alterar", update.toJson());
 	}
 
 	@Override
-	public String oneClickAuthorize(RequestModel authorization) throws ClientProtocolException, IOException {
+	public ApiResponse oneClickAuthorize(RequestModel authorization) throws ClientProtocolException, IOException {
 		return postJsonAuth(authorization.getCredential(),
 				communicationUrl + authorization.getResourcePath() + authorization.getModelReference() + "/autorizar",
 				authorization.toJson());
 	}
 
 	@Override
-	public String recurringPaymentRegister(RequestModel registration) throws ClientProtocolException, IOException {
+	public ApiResponse recurringPaymentRegister(RequestModel registration) throws ClientProtocolException, IOException {
 		return postJsonAuth(registration.getCredential(), communicationUrl + registration.getResourcePath(),
 				registration.toJson());
 	}
 
 	@Override
-	public String recurringPaymentQuery(RequestModel query) throws ClientProtocolException, IOException {
+	public ApiResponse recurringPaymentQuery(RequestModel query) throws ClientProtocolException, IOException {
 		return getJsonAuth(query.getCredential(),
 				communicationUrl + query.getResourcePath() + query.getStoreCode() + "/" + query.getModelReference());
 	}
 
 	@Override
-	public String recurringPaymentCancel(RequestModel cancel) throws ClientProtocolException, IOException {
+	public ApiResponse recurringPaymentCancel(RequestModel cancel) throws ClientProtocolException, IOException {
 		return putJsonAuth(cancel.getCredential(), communicationUrl + cancel.getResourcePath() + cancel.getStoreCode()
 				+ "/" + cancel.getModelReference() + "/cancelar", null);
 	}
 
 	@Override
-	public String transactionAuthorize(RequestModel authorization) throws ClientProtocolException, IOException {
+	public ApiResponse transactionAuthorize(RequestModel authorization) throws ClientProtocolException, IOException {
 		return postJsonAuth(authorization.getCredential(), communicationUrl + authorization.getResourcePath(),
 				authorization.toJson());
 	}
 
 	@Override
-	public String transactionQuery(RequestModel query) throws ClientProtocolException, IOException {
+	public ApiResponse transactionQuery(RequestModel query) throws ClientProtocolException, IOException {
 		return getJsonAuth(query.getCredential(),
 				communicationUrl + query.getResourcePath() + query.getStoreCode() + "/" + query.getModelReference());
 	}
 
 	@Override
-	public String transactionCapture(RequestModel capture) throws ClientProtocolException, IOException {
+	public ApiResponse transactionCapture(RequestModel capture) throws ClientProtocolException, IOException {
 		return transactionOperation(capture, "capturar");
 	}
 
 	@Override
-	public String transactionCancel(RequestModel cancel) throws ClientProtocolException, IOException {
+	public ApiResponse transactionCancel(RequestModel cancel) throws ClientProtocolException, IOException {
 		return transactionOperation(cancel, "cancelar");
 	}
 
-	private String transactionOperation(RequestModel operation, String option)
+	private ApiResponse transactionOperation(RequestModel operation, String option)
 			throws ClientProtocolException, IOException {
 		String valueParameter = "";
-		Long value = operation.getValue();
+		Long value = operation.getValueLong();
 		if (value != null && value > 0) {
 			valueParameter = "?valor=" + value.toString();
 		}
@@ -167,7 +168,7 @@ public class RestV3 implements ApiConnector {
 				+ operation.getStoreCode() + "/" + operation.getModelReference() + "/" + option + valueParameter, null);
 	}
 
-	private String postJsonAuth(Credential credential, String url, String data)
+	private ApiResponse postJsonAuth(Credential credential, String url, String data)
 			throws ClientProtocolException, IOException {
 		data = defaultString(data);
 
@@ -180,7 +181,7 @@ public class RestV3 implements ApiConnector {
 		return requestBasicAuth(post, credential);
 	}
 
-	private String putJsonAuth(Credential credential, String url, String data)
+	private ApiResponse putJsonAuth(Credential credential, String url, String data)
 			throws ClientProtocolException, IOException {
 		data = defaultString(data);
 		HttpPut put = new HttpPut(url);
@@ -192,13 +193,13 @@ public class RestV3 implements ApiConnector {
 		return requestBasicAuth(put, credential);
 	}
 
-	private String getJsonAuth(Credential credential, String url) throws ClientProtocolException, IOException {
+	private ApiResponse getJsonAuth(Credential credential, String url) throws ClientProtocolException, IOException {
 		HttpGet get = new HttpGet(url);
 
 		return requestBasicAuth(get, credential);
 	}
 
-	private String requestBasicAuth(HttpUriRequest request, Credential credential)
+	private ApiResponse requestBasicAuth(HttpUriRequest request, Credential credential)
 			throws ClientProtocolException, IOException {
 		String encoded = String.valueOf(encodeBase64String(
 				(trimToNull(credential.getUser()) + ":" + trimToNull(credential.getPassword())).getBytes()));
@@ -207,8 +208,8 @@ public class RestV3 implements ApiConnector {
 		return requestHttpClient(request);
 	}
 
-	private String requestHttpClient(HttpUriRequest request) throws ClientProtocolException, IOException {
-		String result = null;
+	private ApiResponse requestHttpClient(HttpUriRequest request) throws ClientProtocolException, IOException {
+		ApiResponse result = null;
 
 		request.addHeader("User-Agent", userAgent);
 		request.addHeader("Accept", "application/json");
@@ -222,9 +223,19 @@ public class RestV3 implements ApiConnector {
 		return result;
 	}
 
-	private String executeRequestHttpClient(HttpClient client, HttpUriRequest request)
+	private ApiResponse executeRequestHttpClient(HttpClient client, HttpUriRequest request)
 			throws ClientProtocolException, IOException {
 		HttpResponse response = client.execute(request);
-		return response.getEntity() == null ? null : EntityUtils.toString(response.getEntity());
+		ApiResponse apiResponse = new ApiResponse();
+		if (response == null) {
+			return apiResponse;
+		}
+		if (response.getStatusLine() != null) {
+			apiResponse.setHttpStatus(response.getStatusLine().getStatusCode());
+		}
+		if (response.getEntity() != null) {
+			apiResponse.setRawResponseContent(EntityUtils.toString(response.getEntity()));
+		}
+		return apiResponse;
 	}
 }

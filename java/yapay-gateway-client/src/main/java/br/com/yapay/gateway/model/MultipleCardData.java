@@ -1,5 +1,7 @@
 package br.com.yapay.gateway.model;
 
+import java.math.BigDecimal;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -17,7 +19,7 @@ public class MultipleCardData extends CardData {
 	private Integer installments;
 
 	@SerializedName("valor")
-	private Long value;
+	private Long valueLong;
 
 	/**
 	 * @deprecated JSON bind eyes only
@@ -29,15 +31,17 @@ public class MultipleCardData extends CardData {
 	/**
 	 * Constructor with minimum requested parameters for common cards
 	 * 
-	 * @param cardHolderName Card holder name
-	 * @param cardNumber     Card number
-	 * @param expirationDate Card expiration date
-	 * @param cvv            Card security code
+	 * @param cardHolderName  Card holder name
+	 * @param cardNumber      Card number
+	 * @param expirationMonth Card expiration month
+	 * @param expirationYear  Card expiration year
+	 * @param cvv             Card security code
 	 * 
 	 * @see CardData#CardData(String, String, String, String)
 	 */
-	public MultipleCardData(String cardHolderName, String cardNumber, String expirationDate, String cvv) {
-		super(cardHolderName, cardNumber, expirationDate, cvv);
+	public MultipleCardData(String cardHolderName, String cardNumber, int expirationMonth, int expirationYear,
+			String cvv) {
+		super(cardHolderName, cardNumber, expirationMonth, expirationYear, cvv);
 		installments = 1;
 	}
 
@@ -57,11 +61,15 @@ public class MultipleCardData extends CardData {
 		this.installments = installments;
 	}
 
-	public Long getValue() {
-		return value;
+	Long getValueLong() {
+		return valueLong;
 	}
 
-	public void setValue(Long value) {
-		this.value = value;
+	void setValueLong(Long value) {
+		this.valueLong = value;
+	}
+
+	public void setValue(BigDecimal value) {
+		this.valueLong = value == null ? null : value.multiply(new BigDecimal(100)).longValue();
 	}
 }

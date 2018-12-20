@@ -1,5 +1,7 @@
 package br.com.yapay.gateway.model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,7 +94,7 @@ public class ChargingData {
 	 * @param clientAddress     Charging address
 	 * @param clientPhones      Charging phones
 	 */
-	public ChargingData(String clientName, String clientEmail, String clientBirthday, String clientGenre,
+	public ChargingData(String clientName, String clientEmail, LocalDate clientBirthday, String clientGenre,
 			String clientDocument, String clientDocumentTwo, AddressData clientAddress, List<PhoneData> clientPhones) {
 		this(1, 1, clientName, clientEmail, clientBirthday, clientGenre, clientDocument, clientDocumentTwo,
 				clientAddress, clientPhones);
@@ -113,13 +115,13 @@ public class ChargingData {
 	 * @param clientPhones      Charging phones
 	 */
 	public ChargingData(Integer clientCode, Integer clientType, String clientName, String clientEmail,
-			String clientBirthday, String clientGenre, String clientDocument, String clientDocumentTwo,
+			LocalDate clientBirthday, String clientGenre, String clientDocument, String clientDocumentTwo,
 			AddressData clientAddress, List<PhoneData> clientPhones) {
 		this.clientCode = clientCode;
 		this.clientType = clientType;
 		this.clientName = clientName;
 		this.clientEmail = clientEmail;
-		this.clientBirthday = clientBirthday;
+		setClientBirthday(clientBirthday);
 		this.clientGenre = clientGenre;
 		this.clientDocument = clientDocument;
 		this.clientDocumentTwo = clientDocumentTwo;
@@ -163,8 +165,19 @@ public class ChargingData {
 		return clientBirthday;
 	}
 
-	public void setClientBirthday(String clientBirthday) {
+	void setClientBirthday(String clientBirthday) {
 		this.clientBirthday = clientBirthday;
+	}
+
+	/**
+	 * Setting birthday from {@link LocalDate}
+	 * 
+	 * @param clientBirthday Client birth date
+	 */
+	public void setClientBirthday(LocalDate clientBirthday) {
+		String clientBirthdayStr = clientBirthday == null ? null
+				: clientBirthday.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		setClientBirthday(clientBirthdayStr);
 	}
 
 	public String getClientGenre() {

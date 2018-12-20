@@ -1,5 +1,9 @@
 package br.com.yapay.gateway.model;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -11,7 +15,7 @@ import com.google.gson.annotations.SerializedName;
 public class TransactionCheckoutMultipleBillData {
 
 	@SerializedName("valor")
-	private Long value;
+	private Long valueLong;
 
 	@SerializedName("vencimento")
 	private String dueDate;
@@ -23,25 +27,38 @@ public class TransactionCheckoutMultipleBillData {
 	TransactionCheckoutMultipleBillData() {
 	}
 
-	public TransactionCheckoutMultipleBillData(Long value, String dueDate) {
-		this.value = value;
-		this.dueDate = dueDate;
+	public TransactionCheckoutMultipleBillData(BigDecimal value, LocalDate dueDate) {
+		setValue(value);
+		setDueDate(dueDate);
 	}
 
-	public Long getValue() {
-		return value;
+	Long getValueLong() {
+		return valueLong;
 	}
 
-	public void setValue(Long value) {
-		this.value = value;
+	void setValueLong(Long value) {
+		this.valueLong = value;
+	}
+
+	public void setValue(BigDecimal value) {
+		this.valueLong = value == null ? null : value.multiply(new BigDecimal(100)).longValue();
 	}
 
 	public String getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(String dueDate) {
+	void setDueDate(String dueDate) {
 		this.dueDate = dueDate;
 	}
 
+	/**
+	 * Setting due date from {@link LocalDate}
+	 * 
+	 * @param dueDate Due date
+	 */
+	public void setDueDate(LocalDate dueDate) {
+		String dueDateStr = dueDate == null ? null : dueDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		setDueDate(dueDateStr);
+	}
 }
