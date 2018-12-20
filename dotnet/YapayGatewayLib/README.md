@@ -1,6 +1,6 @@
 Usage:
 
-Set yapay-gw-lib folder in root of your project
+Install this dependency through NuGet.
 
 Import your required builder and credentials Class.
 
