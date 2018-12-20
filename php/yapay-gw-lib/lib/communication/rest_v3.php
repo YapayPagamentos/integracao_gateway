@@ -90,7 +90,7 @@
 			$ch = curl_init($url);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $requestType);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 			curl_setopt($ch, CURLOPT_USERPWD, $credential->user . ":" . $credential->password);
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
 			return $ch;
