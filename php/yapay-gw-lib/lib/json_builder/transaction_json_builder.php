@@ -3,6 +3,7 @@
 	require_once "../yapay-gw-lib/lib/json_representation/transaction_json.php";
 	require_once "../yapay-gw-lib/lib/json_representation/transaction_data_json.php";
 	require_once "../yapay-gw-lib/lib/json_representation/transaction_card_data_json.php";
+	require_once "../yapay-gw-lib/lib/json_representation/transaction_charging_data_json.php";
 	require_once "../yapay-gw-lib/lib/json_representation/transaction_debit_data_json.php";
 	require_once "../yapay-gw-lib/lib/json_representation/transaction_item_data_json.php";
 	require_once "../yapay-gw-lib/lib/json_representation/transaction_extra_field_json.php";
@@ -13,6 +14,7 @@
 		public function newTransaction($transaction){
 			$jsonTransaction = new TransactionJson($transaction);
 			$jsonTransaction->transacao = $this->newTransactionData($transaction->transactionData);
+			$jsonTransaction->dadosCobranca = $this->newTransactionChargingData($transaction->transactionChargingData);
 			$jsonTransaction->dadosCartao = $this->newTransactionCardData($transaction->transactionCardData);
 			$jsonTransaction->dadosDebito = $this->newTransactionDebitData($transaction->transactionDebitData);
 			$jsonTransaction->itensDoPedido = $this->newTransactionItemData($transaction->transactionItemData);
@@ -25,6 +27,12 @@
 			$jsonTransactionData = new TransactionDataJson($transactionData);
 
 			return $jsonTransactionData;
+		}
+
+		public function newTransactionChargingData($transactionChargingData){
+			$jsonTransactionChargingData = new TransactionChargingDataJson($transactionChargingData);
+
+			return $jsonTransactionChargingData;
 		}
 
 		public function newTransactionCardData($transactionCardData){
