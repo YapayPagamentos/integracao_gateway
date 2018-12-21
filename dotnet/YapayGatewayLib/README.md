@@ -1,6 +1,6 @@
 Usage:
 
-Install this dependency through NuGet.
+Install this dependency through NuGet https://www.nuget.org/packages/YapayGatewayLib.
 
 Import your required builder and credentials Class.
 
