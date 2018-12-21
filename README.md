@@ -1,4 +1,4 @@
-##Clients and integration libraries for Yapay Gateway
+## Clients and integration libraries for Yapay Gateway
 
 These libraries were developed to facilitate the development of our customers.
 The customer has the freedom to import into their projects, use them as they are or make changes to suit their business.
