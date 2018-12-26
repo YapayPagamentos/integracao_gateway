@@ -22,7 +22,8 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+After install the gem in your project, you can invocate our builders to create your required objects.
+Use communication class to communicate with us.
 
 ## Development
 
