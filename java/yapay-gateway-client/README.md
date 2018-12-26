@@ -36,14 +36,14 @@ Credential credential = new Credential(storeLogin, storePassword, storeCode);
 
 Long orderId = 9L;
 Transaction transaction = Transaction.getBuilder(credential, orderId)
-                                .withPaymentCode(170)
-                                .withValue(BigDecimal.TEN)
-                                .withCard("CARD HOLDER NAME", "4444333322221111", 12, 2022, "123")
-                                .withCharging("Buyer Name", "buyer@email.com", "123.456.789-00")
-                                .withChargingAddress("R Itapaiuna", "2434", "05707-001", "Jardim Morumbi", "Sao Paulo", "SP")
-                                .addChargingPhone("11", "55551234")
-                                .addItem("Hot Wheels", 10, BigDecimal.ONE)
-                                .build();
+                         .withPaymentCode(170)
+                         .withValue(BigDecimal.TEN)
+                         .withCard("CARD HOLDER NAME", "4444333322221111", 12, 2022, "123")
+                         .withCharging("Buyer Name", "buyer@email.com", "123.456.789-00")
+                         .withChargingAddress("R Itapaiuna", "2434", "05707-001", "Jardim Morumbi", "Sao Paulo", "SP")
+                         .addChargingPhone("11", "55551234")
+                         .addItem("Hot Wheels", 10, BigDecimal.ONE)
+                         .build();
 
 ApiConnector apiConn = new RestV3(GatewayUrl.SANDBOX);
 
