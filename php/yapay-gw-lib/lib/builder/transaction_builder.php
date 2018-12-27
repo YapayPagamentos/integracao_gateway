@@ -28,7 +28,7 @@
 			$this->$transaction->transactionData->installments = $installments;
 		}
 
-		public function withSingleCreditCard($cardHolderName, $cardNumber, $cvv, $expirationDate){
+		public function withSingleCard($cardHolderName, $cardNumber, $cvv, $expirationDate){
 			$this->transaction->transactionCardData = new TransactionCardData();
 			$this->transaction->transactionCardData->cardHolderName = $cardHolderName;
 			$this->transaction->transactionCardData->cardNumber = $cardNumber;

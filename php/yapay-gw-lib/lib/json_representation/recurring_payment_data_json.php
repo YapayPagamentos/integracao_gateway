@@ -18,7 +18,6 @@
 	    public $campoLivre5;
 	    public $dadosCobranca;
 	    public $dadosCartao;
-	    public $dadosDebito;
 	    public $dadosEntrega;
 
 	    public function __construct($recurringPaymentData) {
@@ -39,7 +38,6 @@
 		    $this->campoLivre5 = $recurringPaymentData->freeFieldFive;
 		    $this->dadosCobranca = $recurringPaymentData->recurringChargingData;
 		    $this->dadosCartao = $recurringPaymentData->recurringCardData;
-		    $this->dadosDebito = $recurringPaymentData->recurringDebitData;
 		    $this->dadosEntrega = $recurringPaymentData->recurringShippingData;
     	}
 	}

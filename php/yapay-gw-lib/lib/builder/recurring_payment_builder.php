@@ -6,7 +6,6 @@
 	require_once "../yapay-gw-lib/lib/models/recurring_payment_shipping_data.php";
 	require_once "../yapay-gw-lib/lib/models/transaction_phone_data.php";
 	require_once "../yapay-gw-lib/lib/models/transaction_card_data.php";
-	require_once "../yapay-gw-lib/lib/models/transaction_debit_data.php";
 	
 	class RecurringPaymentBuilder {
 		
@@ -81,7 +80,7 @@
 		    }
 		}
 
-		public function withCreditCard($creditCardData){
+		public function withCard($creditCardData){
 			$this->recurringPayment->recurringPaymentData->recurringCardData = new TransactionCardData();
 			$this->recurringPayment->recurringPaymentData->recurringCardData->cardHolderName = $creditCardData->cardHolderName;
 			$this->recurringPayment->recurringPaymentData->recurringCardData->cardNumber = $creditCardData->cardNumber;
@@ -92,14 +91,6 @@
 			$this->recurringPayment->recurringPaymentData->recurringCardData->value = $creditCardData->value;
 		}
 
-		public function withDebitCard($debitCardData){
-			$this->recurringPayment->recurringPaymentData->recurringDebitData = new TransactionDebitData();
-			$this->recurringPayment->recurringPaymentData->recurringDebitData->agency = $debitCardData->agency
-		    $this->recurringPayment->recurringPaymentData->recurringDebitData->agencyDigit = $debitCardData->agencyDigit
-		    $this->recurringPayment->recurringPaymentData->recurringDebitData->accountNumber = $debitCardData->accountNumber
-		    $this->recurringPayment->recurringPaymentData->recurringDebitData->accountNumberDigit = $debitCardData->accountNumberDigit
-		    $this->recurringPayment->recurringPaymentData->recurringDebitData->accountType = $debitCardData->accountType
-		}
 
 		public function withDelivery($recurringShippingData){
 			$this->recurringPayment->recurringPaymentData->recurringShippingData = new RecurringShippingData();

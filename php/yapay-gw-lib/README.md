@@ -12,7 +12,7 @@ After the creation of your required object, use one of us communication class to
 ```php
 	$builder = new TransactionBuilder();
 	$builder->newTransaction(youStorecode, paymentMethodCode, transactionNumber, transactionValor);
-	$builder->withSingleCreditCard(cardHolderName, creditCardNumber, cvv, expirationDate);
+	$builder->withSingleCard(cardHolderName, creditCardNumber, cvv, expirationDate);
 
 
 	$chargingData = new TransactionChargingData();

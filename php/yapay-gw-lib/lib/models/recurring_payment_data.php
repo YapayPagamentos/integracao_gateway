@@ -18,7 +18,6 @@
 	    public $freeFieldFive;
 	    public $recurringChargingData;
 	    public $recurringCardData;
-	    public $recurringDebitData;
 	    public $recurringShippingData;
 	}
 

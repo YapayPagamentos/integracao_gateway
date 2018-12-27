@@ -7,7 +7,6 @@
 	    public $checkout;
 	    public $dadosCartao;
 	    public $dadosMultiplosCartoes;
-	    public $dadosDebito;
 	    public $itensDoPedido;
 	    public $dadosCobranca;
 	    public $dadosEntrega;
@@ -21,7 +20,6 @@
 		    $this->checkout = $transaction->transactionCheckoutData;
 		    $this->dadosCartao = $transaction->transactionCardData;
 		    $this->dadosMultiplosCartoes = $transaction->transactionMultipleCardData;
-		    $this->dadosDebito = $transaction->transactionDebitData;
 		    $this->itensDoPedido = $transaction->transactionItemData;
 		    $this->dadosCobranca = $transaction->transactionChargingData;
 		    $this->dadosEntrega = $transaction->transactionDeliveryData;
