@@ -9,7 +9,6 @@ class Transaction
     attr_accessor :transaction_item_data
     attr_accessor :transaction_charging_data
     attr_accessor :transaction_delivery_data
-    attr_accessor :transaction_airline_data
     attr_accessor :transaction_extra_fields
 
     def as_json(options = {})
@@ -23,7 +22,6 @@ class Transaction
                 :itensDoPedido => transaction_item_data,
                 :dadosCobranca => transaction_charging_data,
                 :dadosEntrega => transaction_delivery_data,
-                :dadosAirline => transaction_airline_data,
                 :camposExtras => transaction_extra_fields
             }
         json.delete_if { |k, v| v.nil? }
