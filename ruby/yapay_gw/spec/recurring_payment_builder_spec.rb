@@ -76,27 +76,11 @@ RSpec.describe Builder::RecurringPaymentBuilder do
         credit_card.installments = 2
         credit_card.value = 123
 
-        @recurring_payment = Builder::RecurringPaymentBuilder.with_credit_card credit_card
+        @recurring_payment = Builder::RecurringPaymentBuilder.with_card credit_card
 
         expect(@recurring_payment.recurring_payment_data.recurring_card_data.expiration_date).to eq "12/2020"
         expect(@recurring_payment.recurring_payment_data.recurring_card_data.cvv).to eq 1234
         expect(@recurring_payment.recurring_payment_data.recurring_card_data.value).to eq 123
-    end
-
-    it "Or insert the debit card informations" do
-        debit_card = TransactionDebitData.new
-        debit_card.agency = "SP"
-        debit_card.agency_digit = "123"
-        debit_card.account_number = "45678"
-        debit_card.account_number_digit = "7"
-        debit_card.account_type = "PF"
-
-        @recurring_payment = Builder::RecurringPaymentBuilder.with_debit_card debit_card
-
-        expect(@recurring_payment.recurring_payment_data.recurring_debit_data.agency).to eq "SP"
-        expect(@recurring_payment.recurring_payment_data.recurring_debit_data.account_type).to eq "PF"
-        expect(@recurring_payment.recurring_payment_data.recurring_debit_data.account_number_digit).to eq "7"
-
     end
 
     it "Insert shipping informations" do

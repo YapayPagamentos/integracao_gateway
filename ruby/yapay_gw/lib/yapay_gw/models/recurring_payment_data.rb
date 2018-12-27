@@ -16,7 +16,6 @@ class RecurringPaymentData
     attr_accessor :free_field_five
     attr_accessor :recurring_charging_data
     attr_accessor :recurring_card_data
-    attr_accessor :recurring_debit_data
     attr_accessor :recurring_shipping_data
 
     def as_json(options = {})
@@ -37,7 +36,6 @@ class RecurringPaymentData
                 :campoLivre5 => free_field_five,
                 :dadosCobranca => recurring_charging_data,
                 :dadosCartao => recurring_card_data,
-                :dadosDebito => recurring_debit_data,
                 :dadosEntrega => recurring_shipping_data
         }
         json.delete_if { |k, v| v.nil? }

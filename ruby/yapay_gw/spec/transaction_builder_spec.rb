@@ -29,7 +29,7 @@ RSpec.describe Builder::TransactionBuilder do
     end
 
     it "You should be able to set the single payment card information with the builder" do
-        @transaction = Builder::TransactionBuilder.with_single_credit_card("IVAN SIMIONATO", 1234567890, 1234, "10/2020")
+        @transaction = Builder::TransactionBuilder.with_single_card("IVAN SIMIONATO", 1234567890, 1234, "10/2020")
         expect(@transaction.transaction_card_data).not_to be nil
         expect(@transaction.transaction_card_data).to be_an(TransactionCardData)
         expect(@transaction.transaction_card_data.card_holder_name).to eq "IVAN SIMIONATO"

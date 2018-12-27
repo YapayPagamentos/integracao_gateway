@@ -26,7 +26,7 @@ module Builder
             @transaction
         end
 
-        def self.with_single_credit_card(card_holder_name, card_number, cvv, expiration_date)
+        def self.with_single_card(card_holder_name, card_number, cvv, expiration_date)
             @transaction.transaction_card_data = TransactionCardData.new
             @transaction.transaction_card_data.card_holder_name = card_holder_name
             @transaction.transaction_card_data.card_number = card_number

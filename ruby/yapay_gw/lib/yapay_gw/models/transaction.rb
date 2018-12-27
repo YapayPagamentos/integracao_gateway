@@ -5,7 +5,6 @@ class Transaction
     attr_accessor :transaction_checkout_data
     attr_accessor :transaction_card_data
     attr_accessor :transaction_multiple_card_data
-    attr_accessor :transaction_debit_data
     attr_accessor :transaction_item_data
     attr_accessor :transaction_charging_data
     attr_accessor :transaction_delivery_data
@@ -18,7 +17,6 @@ class Transaction
                 :checkout => transaction_checkout_data,
                 :dadosCartao => transaction_card_data,
                 :dadosMultiplosCartoes => transaction_multiple_card_data,
-                :dadosDebito => transaction_debit_data,
                 :itensDoPedido => transaction_item_data,
                 :dadosCobranca => transaction_charging_data,
                 :dadosEntrega => transaction_delivery_data,

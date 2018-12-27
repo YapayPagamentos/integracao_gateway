@@ -4,7 +4,6 @@ require_relative '../models/recurring_charging_data'
 require_relative '../models/recurring_shipping_data'
 require_relative '../models/transaction_phone_data'
 require_relative '../models/transaction_card_data'
-require_relative '../models/transaction_debit_data'
 
 module Builder
     class RecurringPaymentBuilder
@@ -79,7 +78,7 @@ module Builder
             @recurring_payment
         end
 
-        def self.with_credit_card(credit_card_data)
+        def self.with_card(credit_card_data)
             @recurring_payment.recurring_payment_data.recurring_card_data = TransactionCardData.new
             @recurring_payment.recurring_payment_data.recurring_card_data.card_holder_name = credit_card_data.card_holder_name
             @recurring_payment.recurring_payment_data.recurring_card_data.card_number = credit_card_data.card_number
@@ -91,15 +90,6 @@ module Builder
             @recurring_payment
         end
 
-        def self.with_debit_card(debit_card_data)
-            @recurring_payment.recurring_payment_data.recurring_debit_data = TransactionDebitData.new
-            @recurring_payment.recurring_payment_data.recurring_debit_data.agency = debit_card_data.agency
-            @recurring_payment.recurring_payment_data.recurring_debit_data.agency_digit = debit_card_data.agency_digit
-            @recurring_payment.recurring_payment_data.recurring_debit_data.account_number = debit_card_data.account_number
-            @recurring_payment.recurring_payment_data.recurring_debit_data.account_number_digit = debit_card_data.account_number_digit
-            @recurring_payment.recurring_payment_data.recurring_debit_data.account_type = debit_card_data.account_type
-            @recurring_payment
-        end
 
         def self.with_delivery(shipping_data)
             @recurring_payment.recurring_payment_data.recurring_shipping_data = RecurringShippingData.new
