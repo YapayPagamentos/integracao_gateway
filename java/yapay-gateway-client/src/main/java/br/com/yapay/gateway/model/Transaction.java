@@ -46,9 +46,6 @@ public class Transaction extends RequestModel {
 	@SerializedName("dadosEntrega")
 	private DeliveryData delivery;
 
-	@SerializedName("dadosAirline")
-	private AirlineData airline;
-
 	@SerializedName("camposExtras")
 	private List<ExtraField> extraFields;
 
@@ -73,7 +70,6 @@ public class Transaction extends RequestModel {
 		this.items = builder.items;
 		this.charging = builder.charging;
 		this.delivery = builder.delivery;
-		this.airline = builder.airline;
 		this.extraFields = builder.extraFields;
 	}
 
@@ -99,7 +95,6 @@ public class Transaction extends RequestModel {
 		private List<ItemData> items;
 		private ChargingData charging;
 		private DeliveryData delivery;
-		private AirlineData airline;
 		private List<ExtraField> extraFields;
 
 		private Builder(Credential credential, Long transactionNumber) {
@@ -279,11 +274,6 @@ public class Transaction extends RequestModel {
 			if (this.delivery != null) {
 				this.delivery.addDeliveryPhone(deliveryPhone);
 			}
-			return this;
-		}
-
-		public Builder withAirline(AirlineData airline) {
-			this.airline = airline;
 			return this;
 		}
 
@@ -565,14 +555,6 @@ public class Transaction extends RequestModel {
 
 	void setDelivery(DeliveryData delivery) {
 		this.delivery = delivery;
-	}
-
-	public AirlineData getAirline() {
-		return airline;
-	}
-
-	void setAirline(AirlineData airline) {
-		this.airline = airline;
 	}
 
 	public List<ExtraField> getExtraFields() {
