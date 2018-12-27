@@ -11,7 +11,6 @@
 	    public $itensDoPedido;
 	    public $dadosCobranca;
 	    public $dadosEntrega;
-	    public $dadosAirline;
 	    public $camposExtras;
 
 
@@ -26,7 +25,6 @@
 		    $this->itensDoPedido = $transaction->transactionItemData;
 		    $this->dadosCobranca = $transaction->transactionChargingData;
 		    $this->dadosEntrega = $transaction->transactionDeliveryData;
-		    $this->dadosAirline = $transaction->transactionAirlineData;
 		    $this->camposExtras = $transaction->transactionExtraFields;
     	}
 	}

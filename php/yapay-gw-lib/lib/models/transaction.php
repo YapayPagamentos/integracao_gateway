@@ -11,7 +11,6 @@
 	    public $transactionItemData;
 	    public $transactionChargingData;
 	    public $transactionDeliveryData;
-	    public $transactionAirlineData;
 	    public $transactionExtraFields;
 	}
 
