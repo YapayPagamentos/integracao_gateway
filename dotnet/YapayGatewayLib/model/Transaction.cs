@@ -19,13 +19,10 @@ namespace YapayGatewayLib.Model
        public CheckoutData checkout { get; set; }
 
        [JsonProperty(PropertyName = "dadosCartao")]
-       public CreditCardData creditCard { get; set; }
+       public CardData card { get; set; }
 
        [JsonProperty(PropertyName = "dadosMultiplosCartoes")]
-       public List<CreditCardData> multipleCard { get; set; }
-
-       [JsonProperty(PropertyName = "dadosDebito")]
-       public DebitCardData debitCard { get; set; }
+       public List<CardData> multipleCard { get; set; }
 
        [JsonProperty(PropertyName = "itensDoPedido")]
        public List<ItemData> items { get; set; }
@@ -35,9 +32,6 @@ namespace YapayGatewayLib.Model
 
        [JsonProperty(PropertyName = "dadosEntrega")]
        public DeliveryData delivery { get; set; }
-
-       [JsonProperty(PropertyName = "dadosAirline")]
-       public AirlineData airline { get; set; }
 
        [JsonProperty(PropertyName = "camposExtras")]
        public List<ExtraField> extraFields { get; set; }

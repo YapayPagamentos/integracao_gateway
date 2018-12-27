@@ -51,10 +51,7 @@ namespace YapayGatewayLib.Model
        public string freeFieldFive { get; set; }
 
        [JsonProperty(PropertyName = "dadosCartao")]
-       public CreditCardData creditCard { get; set; }
-
-       [JsonProperty(PropertyName = "dadosDebito")]
-       public DebitCardData debitCard { get; set; }
+       public CardData card { get; set; }
 
        [JsonProperty(PropertyName = "dadosCobranca")]
        public RecurringPaymentChargingData chargingData { get; set; }

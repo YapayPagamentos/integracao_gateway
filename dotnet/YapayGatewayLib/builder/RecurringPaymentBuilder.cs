@@ -58,27 +58,18 @@ namespace YapayGatewayLib.Builder
             recurringPayment.recurringPaymentData.freeFieldFive = freeFieldFive;
         }
 
-        public static void WithCreditCard(CreditCardData creditCardData)
+        public static void WithCard(CardData creditCardData)
         {
-            recurringPayment.recurringPaymentData.creditCard = new CreditCardData();
-            recurringPayment.recurringPaymentData.creditCard.cardHolderName = creditCardData.cardHolderName;
-            recurringPayment.recurringPaymentData.creditCard.cardNumber = creditCardData.cardNumber;
-            recurringPayment.recurringPaymentData.creditCard.cvv = creditCardData.cvv;
-            recurringPayment.recurringPaymentData.creditCard.expirationDate = creditCardData.expirationDate;
-            recurringPayment.recurringPaymentData.creditCard.installments = creditCardData.installments;
-            recurringPayment.recurringPaymentData.creditCard.paymentCode = creditCardData.paymentCode;
-            recurringPayment.recurringPaymentData.creditCard.value = creditCardData.value;
+            recurringPayment.recurringPaymentData.card = new CardData();
+            recurringPayment.recurringPaymentData.card.cardHolderName = creditCardData.cardHolderName;
+            recurringPayment.recurringPaymentData.card.cardNumber = creditCardData.cardNumber;
+            recurringPayment.recurringPaymentData.card.cvv = creditCardData.cvv;
+            recurringPayment.recurringPaymentData.card.expirationDate = creditCardData.expirationDate;
+            recurringPayment.recurringPaymentData.card.installments = creditCardData.installments;
+            recurringPayment.recurringPaymentData.card.paymentCode = creditCardData.paymentCode;
+            recurringPayment.recurringPaymentData.card.value = creditCardData.value;
         }
 
-        public static void WithDebitCard(DebitCardData debitCardData)
-        {
-            recurringPayment.recurringPaymentData.debitCard = new DebitCardData();
-            recurringPayment.recurringPaymentData.debitCard.accountNumber = debitCardData.accountNumber;
-            recurringPayment.recurringPaymentData.debitCard.accountNumberDigit = debitCardData.accountNumberDigit;
-            recurringPayment.recurringPaymentData.debitCard.accountType = debitCardData.accountType;
-            recurringPayment.recurringPaymentData.debitCard.agency = debitCardData.agency;
-            recurringPayment.recurringPaymentData.debitCard.agencyDigit = debitCardData.agencyDigit;
-        }
 
         public static void WithDelivery(RecurringPaymentDeliveryData deliveryData)
         {

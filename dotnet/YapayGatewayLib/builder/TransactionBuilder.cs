@@ -33,24 +33,15 @@ namespace YapayGatewayLib.Builder
             transaction.transactionData.installments = installments;
         }
 
-        public static void WithSingleCreditCard(string cardHolderName, string cardNumber, string cvv, string expirationDate)
+        public static void WithSingleCard(string cardHolderName, string cardNumber, string cvv, string expirationDate)
         {
-            transaction.creditCard = new CreditCardData();
-            transaction.creditCard.cardHolderName = cardHolderName;
-            transaction.creditCard.cardNumber = cardNumber;
-            transaction.creditCard.cvv = cvv;
-            transaction.creditCard.expirationDate = expirationDate;
+            transaction.card = new CardData();
+            transaction.card.cardHolderName = cardHolderName;
+            transaction.card.cardNumber = cardNumber;
+            transaction.card.cvv = cvv;
+            transaction.card.expirationDate = expirationDate;
         }
 
-        public static void WithSingleDebitCard(string agency, string agencyDigit, string accountNumber, string accountNumberDigit, string accountType)
-        {
-            transaction.debitCard = new DebitCardData();
-            transaction.debitCard.agency = agency;
-            transaction.debitCard.agencyDigit = agencyDigit;
-            transaction.debitCard.accountNumber = accountNumber;
-            transaction.debitCard.accountNumberDigit = accountNumberDigit;
-            transaction.debitCard.accountType = accountType;
-        }
 
         public static void WithItems(List<ItemData> listOfItems)
         {

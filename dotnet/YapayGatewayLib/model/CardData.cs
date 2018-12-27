@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace YapayGatewayLib.Model
 {
-    public class CreditCardData
+    public class CardData
     {
        [JsonProperty(PropertyName = "nomePortador")]
        public string cardHolderName { get; set; }

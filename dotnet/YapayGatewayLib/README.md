@@ -14,7 +14,7 @@ Credential credential = new Credential();
            credential.password = "yourPassword";
 
 TransactionBuilder.NewTransaction(youStoreCode, paymentCode, transactionNumber, transactionValue);
-TransactionBuilder.WithSingleCreditCard(cardHoldername, cardNumber, cvv, expirationDate);
+TransactionBuilder.WithSingleCard(cardHoldername, cardNumber, cvv, expirationDate);
 TransactionBuilder.WithCharging(chargingData);
 
 Transaction transaction = TransactionBuilder.build();
