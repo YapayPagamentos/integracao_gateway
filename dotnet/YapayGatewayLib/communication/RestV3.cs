@@ -113,6 +113,7 @@ namespace YapayGatewayLib.Communication
             var byteArray = Encoding.ASCII.GetBytes(credential.user + ":" + credential.password);
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+            client.DefaultRequestHeaders.UserAgent.ParseAdd("Gateway Yapay dotnet lib");
             return client;
         }
     }
