@@ -93,6 +93,7 @@
 			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 			curl_setopt($ch, CURLOPT_USERPWD, $credential->user . ":" . $credential->password);
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
+			curl_setopt($ch, CURLOPT_USERAGENT,'Gateway Yapay PHP Lib');
 			return $ch;
 		}
 
