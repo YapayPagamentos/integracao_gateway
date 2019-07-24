@@ -16,10 +16,10 @@ After the creation of your required object, use one of us communication class to
 
 
 	$chargingData = new TransactionChargingData();
-	$chargingDta->clientName = "";
-	$chargingDta->clientDocument = "";
+	$chargingData->clientName = "";
+	$chargingData->clientDocument = "";
 
-	$builder->withChargingData($chargingDta);
+	$builder->withChargingData($chargingData);
 
 	$communication = new RestV3("https://sandbox.gateway.yapay.com.br/checkout");
 
