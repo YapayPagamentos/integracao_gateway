@@ -1,14 +1,15 @@
 <?php 
 
-require_once "../yapay-gw-lib/lib/models/transaction.php";
-require_once "../yapay-gw-lib/lib/models/transaction_address_data.php";
-require_once "../yapay-gw-lib/lib/models/transaction_card_data.php";
-require_once "../yapay-gw-lib/lib/models/transaction_charging_data.php";
-require_once "../yapay-gw-lib/lib/models/transaction_data.php";
-require_once "../yapay-gw-lib/lib/models/transaction_delivery_data.php";
-require_once "../yapay-gw-lib/lib/models/transaction_extra_field.php";
-require_once "../yapay-gw-lib/lib/models/transaction_item_data.php";
-require_once "../yapay-gw-lib/lib/models/transaction_phone_data.php";
+require_once "./yapay-gw-lib/lib/models/transaction.php";
+require_once "./yapay-gw-lib/lib/models/transaction_address_data.php";
+require_once "./yapay-gw-lib/lib/models/transaction_card_data.php";
+require_once "./yapay-gw-lib/lib/models/transaction_charging_data.php";
+require_once "./yapay-gw-lib/lib/models/transaction_data.php";
+require_once "./yapay-gw-lib/lib/models/transaction_delivery_data.php";
+require_once "./yapay-gw-lib/lib/models/transaction_extra_field.php";
+require_once "./yapay-gw-lib/lib/models/transaction_item_data.php";
+require_once "./yapay-gw-lib/lib/models/transaction_phone_data.php";
+require_once "./yapay-gw-lib/lib/models/transaction_checkout_data.php";
 
 class TransactionBuilder {
     
@@ -34,7 +35,13 @@ class TransactionBuilder {
 
     public function withResultUrl($url) {
 	$this->transaction->transactionData->resultUrl = $url;
-    }
+	}
+	
+	public function withCheckout($process, $paymentType) {
+		$this->transaction->transactionCheckoutData = new TransactionCheckoutData();
+		$this->transaction->transactionCheckoutData->process = $process;
+		$this->transaction->transactionCheckoutData->paymentType = $paymentType;
+	}
 
     public function withBillDueDate($dueDate) {
 	$this->transaction->transactionData->billDueDate = $dueDate;

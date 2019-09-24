@@ -1,12 +1,13 @@
 <?php 
 
-require_once "../yapay-gw-lib/lib/json_representation/transaction_json.php";
-require_once "../yapay-gw-lib/lib/json_representation/transaction_data_json.php";
-require_once "../yapay-gw-lib/lib/json_representation/transaction_card_data_json.php";
-require_once "../yapay-gw-lib/lib/json_representation/transaction_charging_data_json.php";
-require_once "../yapay-gw-lib/lib/json_representation/transaction_delivery_data_json.php";
-require_once "../yapay-gw-lib/lib/json_representation/transaction_item_data_json.php";
-require_once "../yapay-gw-lib/lib/json_representation/transaction_extra_field_json.php";
+require_once "./yapay-gw-lib/lib/json_representation/transaction_json.php";
+require_once "./yapay-gw-lib/lib/json_representation/transaction_data_json.php";
+require_once "./yapay-gw-lib/lib/json_representation/transaction_card_data_json.php";
+require_once "./yapay-gw-lib/lib/json_representation/transaction_charging_data_json.php";
+require_once "./yapay-gw-lib/lib/json_representation/transaction_delivery_data_json.php";
+require_once "./yapay-gw-lib/lib/json_representation/transaction_item_data_json.php";
+require_once "./yapay-gw-lib/lib/json_representation/transaction_extra_field_json.php";
+require_once "./yapay-gw-lib/lib/json_representation/transaction_checkout_data_json.php";
 
 class TransactionJsonBuilder{
     
@@ -19,7 +20,8 @@ class TransactionJsonBuilder{
 	$jsonTransaction->dadosCartao = $this->newTransactionCardData($transaction->transactionCardData);
 	$jsonTransaction->itensDoPedido = $this->newTransactionItemData($transaction->transactionItemData);
 	$jsonTransaction->camposExtras = $this->newTransactionExtraFields($transaction->transactionExtraFields);
-
+	$jsonTransaction->checkout = $this->newTransactionCheckoutData($transaction->transactionCheckoutData);
+	
 	return $jsonTransaction;
     }
 
@@ -33,7 +35,13 @@ class TransactionJsonBuilder{
 	$jsonTransactionChargingData = new TransactionChargingDataJson($transactionChargingData);
 
 	return $jsonTransactionChargingData;
-    }
+	}
+	
+	public function newTransactionCheckoutData($transactionCheckoutData){
+	$jsonTransactionCheckoutData = new TransactionCheckoutDataJson($transactionCheckoutData);
+
+	return $jsonTransactionCheckoutData;
+	}
 
     public function newTransactionDeliveryData($transactionDeliveryData){
 	$jsonTransactionDeliveryData = new TransactionDeliveryDataJson($transactionDeliveryData);
